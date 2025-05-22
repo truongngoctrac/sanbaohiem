@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">Chi Tiết Sản Phẩm - BảoHiểmPRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb;
+      }
+
+      .tab-button.active {
+        border-bottom-width: 3px;
+        border-color: #4f46e5; /* Indigo 600 */
+        color: #4f46e5;
+        font-weight: 600;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .premium-calculator-input label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151; /* Gray 700 */
+      }
+
+      .premium-calculator-input input,
+      .premium-calculator-input select {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.375rem; /* rounded-md */
+        border: 1px solid #d1d5db; /* Gray 300 */
+        margin-bottom: 1rem;
+      }
+      .btn {
+        padding: 0.625rem 1.25rem; /* py-2.5 px-5 */
+        border-radius: 0.5rem; /* rounded-lg */
+        font-weight: 500; /* medium */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca; /* Indigo 700 */
+      }
+      .btn-secondary {
+        background-color: #10b981; /* Emerald 500 */
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #059669; /* Emerald 600 */
+      }
+      .btn-outline {
+        background-color: transparent;
+        color: #4f46e5;
+        border: 1px solid #4f46e5;
+      }
+      .btn-outline:hover {
+        background-color: #e0e7ff; /* Indigo 100 */
+      }
+      .section-title {
+        font-size: 1.5rem; /* text-2xl */
+        font-weight: 600; /* semibold */
+        color: #1f2937; /* Gray 800 */
+        margin-bottom: 1rem; /* mb-4 */
+        padding-bottom: 0.5rem; /* pb-2 */
+        border-bottom: 2px solid #e5e7eb; /* border-gray-200 */
+      }
+      .benefit-item i {
+        color: #10b981; /* Emerald 500 */
+      }
+      .exclusion-item i {
+        color: #ef4444; /* Red 500 */
+      }
+      .faq-item summary {
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .testimonial-card {
+        background-color: #fff;
+        border: 1px solid #e5e7eb;
+      }
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Darker text */
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6; /* Lighter gray for hover */
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/indigo/white?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html#services"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navServices"
+            >Dịch Vụ</a
+          >
+          <a
+            href="index.html#individuals"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navIndividuals"
+            >Cá Nhân</a
+          >
+          <a
+            href="index.html#businesses"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navBusinesses"
+            >Doanh Nghiệp</a
+          >
+          <a
+            href="product-comparison-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navCompareProducts"
+            >So Sánh Sản Phẩm</a
+          >
+        </nav>
+        <div class="language-switcher flex items-center space-x-2">
+          <button
+            data-lang="vi"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            VIE
+          </button>
+          <button
+            data-lang="en"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            ENG
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <section
+        id="productBasicInfo"
+        class="mb-10 p-6 md:p-8 bg-white rounded-xl shadow-lg"
+      >
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8 items-center">
+          <div class="md:col-span-1">
+            <img
+              id="productImage"
+              src="https://placehold.co/400x300/60a5fa/ffffff?text=Sản+Phẩm+BH"
+              alt="Hình ảnh sản phẩm"
+              class="rounded-lg shadow-md w-full object-cover"
+              data-translate-alt-key="altProductImage"
+            />
+          </div>
+          <div class="md:col-span-2">
+            <h1
+              id="productName"
+              class="text-3xl md:text-4xl font-bold text-indigo-700 mb-3"
+              data-translate-key="productDetailNameP1"
+            >
+              Tên Sản Phẩm Bảo Hiểm
+            </h1>
+            <p
+              id="productShortDescription"
+              class="text-gray-600 mb-4 text-lg"
+              data-translate-key="productDetailShortDescP1"
+            >
+              Mô tả ngắn gọn về sản phẩm, nêu bật giá trị cốt lõi và đối tượng
+              phù hợp.
+            </p>
+            <div id="productTags" class="flex flex-wrap gap-3 mb-6">
+              <span
+                class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium"
+                data-translate-key="tagComprehensiveProtection"
+                >Bảo Vệ Toàn Diện</span
+              >
+              <span
+                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium"
+                data-translate-key="tagPreferentialFees"
+                >Phí Ưu Đãi</span
+              >
+              <span
+                class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium"
+                data-translate-key="tagQuickProcedure"
+                >Thủ Tục Nhanh</span
+              >
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <button id="saveProductBtn" class="btn btn-outline">
+                <i class="fas fa-heart mr-2"></i
+                ><span data-translate-key="btnSaveProduct">Lưu Sản Phẩm</span>
+              </button>
+              <button id="downloadPdfBtn" class="btn btn-outline">
+                <i class="fas fa-file-pdf mr-2"></i
+                ><span data-translate-key="btnDownloadPdf">Tải PDF</span>
+              </button>
+              <button id="shareProductBtn" class="btn btn-outline">
+                <i class="fas fa-share-alt mr-2"></i
+                ><span data-translate-key="btnShareProduct">Chia Sẻ</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-10">
+        <div class="border-b border-gray-300 mb-6">
+          <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+            <button
+              data-tab="details"
+              class="tab-button active text-gray-600 hover:text-indigo-600 py-3 px-5 text-center font-medium text-base"
+            >
+              <i class="fas fa-info-circle mr-2"></i
+              ><span data-translate-key="tabProductDetails"
+                >Chi Tiết Sản Phẩm</span
+              >
+            </button>
+            <button
+              data-tab="calculator"
+              class="tab-button text-gray-600 hover:text-indigo-600 py-3 px-5 text-center font-medium text-base"
+            >
+              <i class="fas fa-calculator mr-2"></i
+              ><span data-translate-key="tabPremiumCalculator"
+                >Tính Phí Bảo Hiểm</span
+              >
+            </button>
+            <button
+              data-tab="reviews"
+              class="tab-button text-gray-600 hover:text-indigo-600 py-3 px-5 text-center font-medium text-base"
+            >
+              <i class="fas fa-comments mr-2"></i
+              ><span data-translate-key="tabReviewsFAQ"
+                >Đánh Giá & Hỏi Đáp</span
+              >
+            </button>
+            <button
+              data-tab="compare"
+              class="tab-button text-gray-600 hover:text-indigo-600 py-3 px-5 text-center font-medium text-base"
+            >
+              <i class="fas fa-balance-scale mr-2"></i
+              ><span data-translate-key="tabCompareSimilar"
+                >So Sánh Tương Tự</span
+              >
+            </button>
+          </nav>
+        </div>
+
+        <div
+          id="detailsContent"
+          class="tab-content active p-6 bg-white rounded-xl shadow-lg"
+        >
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3
+                class="section-title"
+                data-translate-key="titleDetailedDescription"
+              >
+                Mô Tả Chi Tiết
+              </h3>
+              <p
+                id="productLongDescription"
+                class="text-gray-700 leading-relaxed mb-4"
+                data-translate-key="productDetailLongDescP1"
+              >
+                Nội dung mô tả chi tiết về sản phẩm bảo hiểm này. Bao gồm các
+                thông tin về mục đích, phạm vi bảo hiểm, và những lợi ích chính
+                mà sản phẩm mang lại cho khách hàng. Sản phẩm này được thiết kế
+                để đáp ứng nhu cầu bảo vệ tài chính cho cá nhân và gia đình
+                trước những rủi ro không lường trước trong cuộc sống.
+              </p>
+            </div>
+            <div>
+              <h3 class="section-title" data-translate-key="titleEligibility">
+                Điều Kiện Tham Gia
+              </h3>
+              <ul
+                id="eligibilityCriteria"
+                class="list-disc list-inside text-gray-700 space-y-2"
+              ></ul>
+            </div>
+          </div>
+          <div class="mt-8">
+            <h3 class="section-title" data-translate-key="titleMainBenefits">
+              Quyền Lợi Chính
+            </h3>
+            <ul
+              id="mainBenefits"
+              class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-gray-700"
+            ></ul>
+          </div>
+          <div class="mt-8">
+            <h3 class="section-title" data-translate-key="titleMainExclusions">
+              Điều Khoản Loại Trừ Chính
+            </h3>
+            <ul
+              id="mainExclusions"
+              class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-gray-700"
+            ></ul>
+          </div>
+        </div>
+
+        <div
+          id="calculatorContent"
+          class="tab-content p-6 bg-white rounded-xl shadow-lg"
+        >
+          <h3
+            class="section-title mb-6"
+            data-translate-key="titleEstimatePremium"
+          >
+            Ước Tính Phí Bảo Hiểm
+          </h3>
+          <div class="flex justify-center border-b border-gray-200 mb-6">
+            <button
+              data-calculator-type="individual"
+              class="calculator-tab-button active tab-button py-2 px-4 text-gray-600 hover:text-indigo-600 focus:outline-none"
+              data-translate-key="tabForIndividuals"
+            >
+              Dành Cho Cá Nhân
+            </button>
+            <button
+              data-calculator-type="business"
+              class="calculator-tab-button tab-button py-2 px-4 text-gray-600 hover:text-indigo-600 focus:outline-none"
+              data-translate-key="tabForBusinesses"
+            >
+              Dành Cho Doanh Nghiệp
+            </button>
+          </div>
+
+          <div id="individualCalculator" class="calculator-type-content">
+            <p
+              class="text-gray-600 mb-4"
+              data-translate-key="descIndividualCalculator"
+            >
+              Nhập thông tin của bạn để ước tính phí bảo hiểm.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 premium-calculator-input">
+              <div>
+                <label for="individualAge" data-translate-key="labelAge"
+                  >Độ tuổi:</label
+                >
+                <input
+                  type="number"
+                  id="individualAge"
+                  data-translate-placeholder-key="placeholderAge"
+                  placeholder="Ví dụ: 30"
+                />
+              </div>
+              <div>
+                <label for="individualGender" data-translate-key="labelGender"
+                  >Giới tính:</label
+                >
+                <select id="individualGender">
+                  <option value="male" data-translate-key="optionMale">
+                    Nam
+                  </option>
+                  <option value="female" data-translate-key="optionFemale">
+                    Nữ
+                  </option>
+                  <option value="other" data-translate-key="optionOther">
+                    Khác
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="coverageAmountIndividual"
+                  data-translate-key="labelCoverageAmount"
+                  >Số tiền bảo hiểm mong muốn:</label
+                >
+                <input
+                  type="text"
+                  id="coverageAmountIndividual"
+                  data-translate-placeholder-key="placeholderCoverageAmount"
+                  placeholder="Ví dụ: 500,000,000 VNĐ"
+                />
+              </div>
+              <div>
+                <label
+                  for="healthStatusIndividual"
+                  data-translate-key="labelHealthStatus"
+                  >Tình trạng sức khỏe:</label
+                >
+                <select id="healthStatusIndividual">
+                  <option value="good" data-translate-key="optionHealthGood">
+                    Tốt, không có bệnh nền
+                  </option>
+                  <option
+                    value="average"
+                    data-translate-key="optionHealthAverage"
+                  >
+                    Trung bình, có bệnh nhẹ
+                  </option>
+                  <option
+                    value="pre_existing"
+                    data-translate-key="optionHealthPreExisting"
+                  >
+                    Có bệnh nền cần khai báo
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-6 text-center">
+              <button
+                id="calculateIndividualPremiumBtn"
+                class="btn btn-primary text-lg"
+              >
+                <i class="fas fa-play-circle mr-2"></i
+                ><span data-translate-key="btnCalculateNow">Tính Phí Ngay</span>
+              </button>
+            </div>
+            <div
+              id="individualPremiumResult"
+              class="mt-6 p-4 bg-indigo-50 rounded-lg text-center hidden"
+            >
+              <p
+                class="text-gray-700"
+                data-translate-key="textEstimatedPremiumIs"
+              >
+                Phí bảo hiểm ước tính của bạn là:
+              </p>
+              <p
+                class="text-2xl font-bold text-indigo-600"
+                id="individualEstimatedPremium"
+              >
+                12,345,678 VNĐ/năm
+              </p>
+              <p
+                class="text-xs text-gray-500 mt-1"
+                data-translate-key="textEstimateNote"
+              >
+                (Đây là ước tính, phí chính thức sẽ được thông báo sau khi thẩm
+                định)
+              </p>
+            </div>
+            <div class="mt-8 text-center space-x-3">
+              <button id="applyNowIndividualBtn" class="btn btn-secondary">
+                <i class="fas fa-file-signature mr-2"></i
+                ><span data-translate-key="btnApplyNow">Đăng Ký Ngay</span>
+              </button>
+              <button id="scheduleConsultationBtn" class="btn btn-outline">
+                <i class="fas fa-calendar-alt mr-2"></i
+                ><span data-translate-key="btnScheduleConsultation"
+                  >Đặt Lịch Tư Vấn</span
+                >
+              </button>
+            </div>
+          </div>
+
+          <div id="businessCalculator" class="calculator-type-content hidden">
+            <p
+              class="text-gray-600 mb-4"
+              data-translate-key="descBusinessCalculator"
+            >
+              Nhập thông tin doanh nghiệp của bạn để ước tính phí.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 premium-calculator-input">
+              <div>
+                <label for="industryType" data-translate-key="labelIndustryType"
+                  >Ngành nghề kinh doanh:</label
+                >
+                <input
+                  type="text"
+                  id="industryType"
+                  data-translate-placeholder-key="placeholderIndustryType"
+                  placeholder="Ví dụ: Công nghệ thông tin"
+                />
+              </div>
+              <div>
+                <label
+                  for="employeeCount"
+                  data-translate-key="labelEmployeeCount"
+                  >Số lượng nhân viên:</label
+                >
+                <input
+                  type="number"
+                  id="employeeCount"
+                  data-translate-placeholder-key="placeholderEmployeeCount"
+                  placeholder="Ví dụ: 50"
+                />
+              </div>
+              <div>
+                <label
+                  for="coverageAmountBusiness"
+                  data-translate-key="labelCoverageAmountTotal"
+                  >Số tiền bảo hiểm mong muốn (tổng):</label
+                >
+                <input
+                  type="text"
+                  id="coverageAmountBusiness"
+                  data-translate-placeholder-key="placeholderCoverageAmountTotal"
+                  placeholder="Ví dụ: 10,000,000,000 VNĐ"
+                />
+              </div>
+              <div>
+                <label
+                  for="businessRiskProfile"
+                  data-translate-key="labelRiskProfile"
+                  >Mức độ rủi ro ngành (tự đánh giá):</label
+                >
+                <select id="businessRiskProfile">
+                  <option value="low" data-translate-key="optionRiskLow">
+                    Thấp
+                  </option>
+                  <option value="medium" data-translate-key="optionRiskMedium">
+                    Trung bình
+                  </option>
+                  <option value="high" data-translate-key="optionRiskHigh">
+                    Cao
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-6 text-center">
+              <button
+                id="calculateBusinessPremiumBtn"
+                class="btn btn-primary text-lg"
+              >
+                <i class="fas fa-play-circle mr-2"></i
+                ><span data-translate-key="btnCalculateEstimate"
+                  >Tính Phí (Ước Tính)</span
+                >
+              </button>
+            </div>
+            <div
+              id="businessPremiumResult"
+              class="mt-6 p-4 bg-sky-50 rounded-lg text-center hidden"
+            >
+              <p
+                class="text-gray-700"
+                data-translate-key="textEstimatedBusinessPremiumIs"
+              >
+                Phí bảo hiểm ước tính cho doanh nghiệp:
+              </p>
+              <p
+                class="text-2xl font-bold text-sky-600"
+                id="businessEstimatedPremium"
+              >
+                123,456,789 VNĐ/năm
+              </p>
+              <p
+                class="text-xs text-gray-500 mt-1"
+                data-translate-key="textBusinessEstimateNote"
+              >
+                (Đây là ước tính ban đầu, vui lòng liên hệ để nhận báo giá chi
+                tiết)
+              </p>
+            </div>
+            <div class="mt-8 text-center">
+              <button id="requestCustomQuoteBtn" class="btn btn-secondary">
+                <i class="fas fa-file-invoice-dollar mr-2"></i
+                ><span data-translate-key="btnRequestDetailedQuote"
+                  >Yêu Cầu Báo Giá Chi Tiết</span
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="reviewsContent"
+          class="tab-content p-6 bg-white rounded-xl shadow-lg"
+        >
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3
+                class="section-title"
+                data-translate-key="titleCustomerReviews"
+              >
+                Đánh Giá Từ Khách Hàng
+              </h3>
+              <div class="space-y-6">
+                <div class="testimonial-card p-4 rounded-lg">
+                  <div class="flex items-center mb-2">
+                    <img
+                      src="https://placehold.co/40x40/e0e0e0/333?text=A"
+                      class="w-10 h-10 rounded-full mr-3"
+                      alt="Reviewer Avatar"
+                      data-translate-alt-key="altReviewerA"
+                    />
+                    <div>
+                      <p class="font-semibold text-gray-800">Nguyễn Văn A</p>
+                      <div class="text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="far fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    class="text-gray-600 text-sm italic"
+                    data-translate-key="reviewText1"
+                  >
+                    "Sản phẩm rất tốt, thủ tục nhanh gọn. Tôi cảm thấy an tâm
+                    hơn nhiều từ khi tham gia."
+                  </p>
+                </div>
+                <div class="testimonial-card p-4 rounded-lg">
+                  <div class="flex items-center mb-2">
+                    <img
+                      src="https://placehold.co/40x40/e0e0e0/333?text=B"
+                      class="w-10 h-10 rounded-full mr-3"
+                      alt="Reviewer Avatar"
+                      data-translate-alt-key="altReviewerB"
+                    />
+                    <div>
+                      <p class="font-semibold text-gray-800">Trần Thị B</p>
+                      <div class="text-yellow-400">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    class="text-gray-600 text-sm italic"
+                    data-translate-key="reviewText2"
+                  >
+                    "Dịch vụ khách hàng tuyệt vời, tư vấn viên rất nhiệt tình và
+                    giải đáp mọi thắc mắc của tôi."
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 class="section-title" data-translate-key="titleFAQ">
+                Câu Hỏi Thường Gặp (FAQ)
+              </h3>
+              <div class="space-y-3">
+                <details class="faq-item bg-gray-50 p-3 rounded-md">
+                  <summary
+                    class="text-gray-700 hover:text-indigo-600"
+                    data-translate-key="faq1Question"
+                  >
+                    Thời gian chờ áp dụng cho sản phẩm này là bao lâu?
+                  </summary>
+                  <p
+                    class="text-gray-600 text-sm mt-2 pl-4"
+                    data-translate-key="faq1Answer"
+                  >
+                    Thời gian chờ thông thường là 30 ngày đối với bệnh thông
+                    thường và 90 ngày đối với bệnh đặc biệt/hiểm nghèo. Vui lòng
+                    tham khảo chi tiết trong hợp đồng.
+                  </p>
+                </details>
+                <details class="faq-item bg-gray-50 p-3 rounded-md">
+                  <summary
+                    class="text-gray-700 hover:text-indigo-600"
+                    data-translate-key="faq2Question"
+                  >
+                    Tôi có thể thay đổi số tiền bảo hiểm sau khi đã tham gia
+                    không?
+                  </summary>
+                  <p
+                    class="text-gray-600 text-sm mt-2 pl-4"
+                    data-translate-key="faq2Answer"
+                  >
+                    Có, tùy thuộc vào quy định của sản phẩm, bạn có thể yêu cầu
+                    điều chỉnh số tiền bảo hiểm vào ngày kỷ niệm hợp đồng. Điều
+                    này có thể ảnh hưởng đến phí bảo hiểm.
+                  </p>
+                </details>
+                <details class="faq-item bg-gray-50 p-3 rounded-md">
+                  <summary
+                    class="text-gray-700 hover:text-indigo-600"
+                    data-translate-key="faq3Question"
+                  >
+                    Quy trình yêu cầu bồi thường như thế nào?
+                  </summary>
+                  <p
+                    class="text-gray-600 text-sm mt-2 pl-4"
+                    data-translate-key="faq3Answer"
+                  >
+                    Bạn cần thông báo sự kiện bảo hiểm sớm nhất có thể, hoàn
+                    thiện hồ sơ yêu cầu bồi thường theo hướng dẫn và nộp cho
+                    công ty. Chúng tôi sẽ xử lý trong thời gian quy định.
+                  </p>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="compareContent"
+          class="tab-content p-6 bg-white rounded-xl shadow-lg"
+        >
+          <h3
+            class="section-title"
+            data-translate-key="titleCompareSimilarProducts"
+          >
+            So Sánh Với Các Sản Phẩm Tương Tự
+          </h3>
+          <p
+            class="text-gray-600 mb-4"
+            data-translate-key="descCompareSimilarProducts"
+          >
+            Xem sản phẩm này đứng như thế nào khi đặt cạnh các lựa chọn khác
+            trên thị trường.
+          </p>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div
+              class="border p-4 rounded-lg bg-gray-50 hover:shadow-md transition-shadow"
+            >
+              <h4
+                class="font-semibold text-indigo-600"
+                data-translate-key="similarProductA"
+              >
+                Sản Phẩm A (Tương Tự)
+              </h4>
+              <p
+                class="text-sm text-gray-500"
+                data-translate-key="similarProductAPrice"
+              >
+                Phí: 14,000,000 VNĐ/năm
+              </p>
+              <p
+                class="text-sm text-gray-500"
+                data-translate-key="similarProductABenefits"
+              >
+                Quyền lợi chính: Bảo vệ tử vong, tai nạn.
+              </p>
+              <a
+                href="product-comparison-page.html?compare=p1,pA"
+                class="text-sm text-indigo-500 hover:underline mt-2 inline-block"
+                data-translate-key="btnCompareDetails"
+                >So sánh chi tiết &rarr;</a
+              >
+            </div>
+            <div
+              class="border p-4 rounded-lg bg-gray-50 hover:shadow-md transition-shadow"
+            >
+              <h4
+                class="font-semibold text-indigo-600"
+                data-translate-key="similarProductB"
+              >
+                Sản Phẩm B (Cao Cấp Hơn)
+              </h4>
+              <p
+                class="text-sm text-gray-500"
+                data-translate-key="similarProductBPrice"
+              >
+                Phí: 18,000,000 VNĐ/năm
+              </p>
+              <p
+                class="text-sm text-gray-500"
+                data-translate-key="similarProductBBenefits"
+              >
+                Quyền lợi chính: Bảo vệ toàn diện, đầu tư.
+              </p>
+              <a
+                href="product-comparison-page.html?compare=p1,pB"
+                class="text-sm text-indigo-500 hover:underline mt-2 inline-block"
+                data-translate-key="btnCompareDetails"
+                >So sánh chi tiết &rarr;</a
+              >
+            </div>
+          </div>
+          <div class="mt-6 text-center">
+            <a href="product-comparison-page.html" class="btn btn-primary">
+              <i class="fas fa-exchange-alt mr-2"></i
+              ><span data-translate-key="btnGoToGeneralComparison"
+                >Đến Trang So Sánh Tổng Quát</span
+              >
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+        <p class="text-xs mt-2">
+          <a
+            href="#"
+            class="hover:text-indigo-400"
+            data-translate-key="footerPrivacyPolicy"
+            >Chính sách bảo mật</a
+          >
+          |
+          <a
+            href="#"
+            class="hover:text-indigo-400"
+            data-translate-key="footerTermsOfUse"
+            >Điều khoản sử dụng</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Chi Tiết Sản Phẩm - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          navServices: "Dịch Vụ",
+          navIndividuals: "Cá Nhân",
+          navBusinesses: "Doanh Nghiệp",
+          navCompareProducts: "So Sánh Sản Phẩm",
+          altProductImage: "Hình ảnh sản phẩm",
+          tagComprehensiveProtection: "Bảo Vệ Toàn Diện",
+          tagPreferentialFees: "Phí Ưu Đãi",
+          tagQuickProcedure: "Thủ Tục Nhanh",
+          btnSaveProduct: "Lưu Sản Phẩm",
+          btnDownloadPdf: "Tải PDF",
+          btnShareProduct: "Chia Sẻ",
+          tabProductDetails: "Chi Tiết Sản Phẩm",
+          tabPremiumCalculator: "Tính Phí Bảo Hiểm",
+          tabReviewsFAQ: "Đánh Giá & Hỏi Đáp",
+          tabCompareSimilar: "So Sánh Tương Tự",
+          titleDetailedDescription: "Mô Tả Chi Tiết",
+          titleEligibility: "Điều Kiện Tham Gia",
+          titleMainBenefits: "Quyền Lợi Chính",
+          titleMainExclusions: "Điều Khoản Loại Trừ Chính",
+          titleEstimatePremium: "Ước Tính Phí Bảo Hiểm",
+          tabForIndividuals: "Dành Cho Cá Nhân",
+          tabForBusinesses: "Dành Cho Doanh Nghiệp",
+          descIndividualCalculator:
+            "Nhập thông tin của bạn để ước tính phí bảo hiểm.",
+          labelAge: "Độ tuổi:",
+          placeholderAge: "Ví dụ: 30",
+          labelGender: "Giới tính:",
+          optionMale: "Nam",
+          optionFemale: "Nữ",
+          optionOther: "Khác",
+          labelCoverageAmount: "Số tiền bảo hiểm mong muốn:",
+          placeholderCoverageAmount: "Ví dụ: 500,000,000 VNĐ",
+          labelHealthStatus: "Tình trạng sức khỏe:",
+          optionHealthGood: "Tốt, không có bệnh nền",
+          optionHealthAverage: "Trung bình, có bệnh nhẹ",
+          optionHealthPreExisting: "Có bệnh nền cần khai báo",
+          btnCalculateNow: "Tính Phí Ngay",
+          textEstimatedPremiumIs: "Phí bảo hiểm ước tính của bạn là:",
+          textEstimateNote:
+            "(Đây là ước tính, phí chính thức sẽ được thông báo sau khi thẩm định)",
+          btnApplyNow: "Đăng Ký Ngay",
+          btnScheduleConsultation: "Đặt Lịch Tư Vấn",
+          descBusinessCalculator:
+            "Nhập thông tin doanh nghiệp của bạn để ước tính phí.",
+          labelIndustryType: "Ngành nghề kinh doanh:",
+          placeholderIndustryType: "Ví dụ: Công nghệ thông tin",
+          labelEmployeeCount: "Số lượng nhân viên:",
+          placeholderEmployeeCount: "Ví dụ: 50",
+          labelCoverageAmountTotal: "Số tiền bảo hiểm mong muốn (tổng):",
+          placeholderCoverageAmountTotal: "Ví dụ: 10,000,000,000 VNĐ",
+          labelRiskProfile: "Mức độ rủi ro ngành (tự đánh giá):",
+          optionRiskLow: "Thấp",
+          optionRiskMedium: "Trung bình",
+          optionRiskHigh: "Cao",
+          btnCalculateEstimate: "Tính Phí (Ước Tính)",
+          textEstimatedBusinessPremiumIs:
+            "Phí bảo hiểm ước tính cho doanh nghiệp:",
+          textBusinessEstimateNote:
+            "(Đây là ước tính ban đầu, vui lòng liên hệ để nhận báo giá chi tiết)",
+          btnRequestDetailedQuote: "Yêu Cầu Báo Giá Chi Tiết",
+          titleCustomerReviews: "Đánh Giá Từ Khách Hàng",
+          altReviewerA: "Ảnh đại diện người đánh giá A",
+          reviewText1:
+            '"Sản phẩm rất tốt, thủ tục nhanh gọn. Tôi cảm thấy an tâm hơn nhiều từ khi tham gia."',
+          altReviewerB: "Ảnh đại diện người đánh giá B",
+          reviewText2:
+            '"Dịch vụ khách hàng tuyệt vời, tư vấn viên rất nhiệt tình và giải đáp mọi thắc mắc của tôi."',
+          titleFAQ: "Câu Hỏi Thường Gặp (FAQ)",
+          faq1Question: "Thời gian chờ áp dụng cho sản phẩm này là bao lâu?",
+          faq1Answer:
+            "Thời gian chờ thông thường là 30 ngày đối với bệnh thông thường và 90 ngày đối với bệnh đặc biệt/hiểm nghèo. Vui lòng tham khảo chi tiết trong hợp đồng.",
+          faq2Question:
+            "Tôi có thể thay đổi số tiền bảo hiểm sau khi đã tham gia không?",
+          faq2Answer:
+            "Có, tùy thuộc vào quy định của sản phẩm, bạn có thể yêu cầu điều chỉnh số tiền bảo hiểm vào ngày kỷ niệm hợp đồng. Điều này có thể ảnh hưởng đến phí bảo hiểm.",
+          faq3Question: "Quy trình yêu cầu bồi thường như thế nào?",
+          faq3Answer:
+            "Bạn cần thông báo sự kiện bảo hiểm sớm nhất có thể, hoàn thiện hồ sơ yêu cầu bồi thường theo hướng dẫn và nộp cho công ty. Chúng tôi sẽ xử lý trong thời gian quy định.",
+          titleCompareSimilarProducts: "So Sánh Với Các Sản Phẩm Tương Tự",
+          descCompareSimilarProducts:
+            "Xem sản phẩm này đứng như thế nào khi đặt cạnh các lựa chọn khác trên thị trường.",
+          similarProductA: "Sản Phẩm A (Tương Tự)",
+          similarProductAPrice: "Phí: 14,000,000 VNĐ/năm",
+          similarProductABenefits: "Quyền lợi chính: Bảo vệ tử vong, tai nạn.",
+          similarProductB: "Sản Phẩm B (Cao Cấp Hơn)",
+          similarProductBPrice: "Phí: 18,000,000 VNĐ/năm",
+          similarProductBBenefits: "Quyền lợi chính: Bảo vệ toàn diện, đầu tư.",
+          btnCompareDetails: "So sánh chi tiết &rarr;",
+          btnGoToGeneralComparison: "Đến Trang So Sánh Tổng Quát",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          footerPrivacyPolicy: "Chính sách bảo mật",
+          footerTermsOfUse: "Điều khoản sử dụng",
+          // Product specific data keys
+          productDetailNameP1: "Bảo An Toàn Diện Plus",
+          productDetailShortDescP1:
+            "Giải pháp bảo vệ tài chính ưu việt cho bạn và gia đình trước mọi rủi ro trong cuộc sống, kết hợp quyền lợi chăm sóc sức khỏe và tích lũy hiệu quả.",
+          productDetailLongDescP1:
+            "Bảo An Toàn Diện Plus là sản phẩm bảo hiểm nhân thọ kết hợp bảo vệ và đầu tư, mang đến sự an tâm trọn vẹn. Với các quyền lợi vượt trội về bảo vệ sinh mạng, hỗ trợ y tế khi ốm đau, bệnh tật, và cơ hội gia tăng tài sản thông qua hoạt động đầu tư của quỹ liên kết chung, đây là lựa chọn thông minh cho tương lai vững chắc.",
+          productDetailBenefit1P1:
+            "Bảo vệ tử vong hoặc thương tật toàn bộ vĩnh viễn lên đến 200% số tiền bảo hiểm.",
+          productDetailBenefit2P1:
+            "Hỗ trợ chi phí nằm viện nội trú, phẫu thuật, và điều trị tại phòng chăm sóc đặc biệt.",
+          productDetailBenefit3P1:
+            "Quyền lợi bảo hiểm cho 35 bệnh hiểm nghèo phổ biến, chi trả nhiều lần.",
+          productDetailBenefit4P1:
+            "Quyền lợi duy trì hợp đồng và thưởng gia tăng giá trị tài khoản.",
+          productDetailBenefit5P1:
+            "Linh hoạt đóng phí và rút tiền từ giá trị tài khoản hợp đồng.",
+          productDetailExclusion1P1:
+            "Tự tử trong vòng 24 tháng kể từ ngày hiệu lực hợp đồng hoặc ngày khôi phục hiệu lực gần nhất.",
+          productDetailExclusion2P1:
+            "Hành vi cố ý vi phạm pháp luật của Người được bảo hiểm hoặc Bên mua bảo hiểm.",
+          productDetailExclusion3P1:
+            "Nhiễm HIV/AIDS (trừ trường hợp do nghề nghiệp hoặc truyền máu).",
+          productDetailExclusion4P1:
+            "Sử dụng ma túy, chất kích thích trái phép.",
+          productDetailExclusion5P1:
+            "Chiến tranh, nội chiến, khủng bố (trừ trường hợp có thỏa thuận riêng).",
+          productDetailEligibility1P1:
+            "Tuổi tham gia: từ 30 ngày tuổi đến 65 tuổi.",
+          productDetailEligibility2P1: "Thời hạn hợp đồng: đến 99 tuổi.",
+          productDetailEligibility3P1: "Bên mua bảo hiểm: từ 18 tuổi trở lên.",
+          productDetailEligibility4P1:
+            "Đáp ứng các điều kiện thẩm định sức khỏe của công ty.",
+          // JS Alerts
+          alertEnterAge: "Vui lòng nhập độ tuổi.",
+          alertEnterEmployeeCount: "Vui lòng nhập số lượng nhân viên.",
+          alertProductSaved:
+            "Sản phẩm đã được lưu vào danh sách yêu thích (Tính năng đang phát triển).",
+          alertDownloadPdf:
+            "Chức năng tải PDF thông tin sản phẩm đang được phát triển.",
+          alertShareProduct: "Chức năng chia sẻ sản phẩm đang được phát triển.",
+          alertApplyNow:
+            "Chuyển đến trang đăng ký sản phẩm (Tính năng đang phát triển).",
+          alertScheduleConsultation:
+            "Chuyển đến trang đặt lịch tư vấn (Tính năng đang phát triển).",
+          alertRequestQuote:
+            "Yêu cầu báo giá chi tiết đã được gửi (Tính năng đang phát triển).",
+        },
+        en: {
+          pageTitle: "Product Details - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          navServices: "Services",
+          navIndividuals: "For Individuals",
+          navBusinesses: "For Businesses",
+          navCompareProducts: "Compare Products",
+          altProductImage: "Product Image",
+          tagComprehensiveProtection: "Comprehensive Protection",
+          tagPreferentialFees: "Preferential Fees",
+          tagQuickProcedure: "Quick Procedure",
+          btnSaveProduct: "Save Product",
+          btnDownloadPdf: "Download PDF",
+          btnShareProduct: "Share Product",
+          tabProductDetails: "Product Details",
+          tabPremiumCalculator: "Premium Calculator",
+          tabReviewsFAQ: "Reviews & FAQ",
+          tabCompareSimilar: "Compare Similar",
+          titleDetailedDescription: "Detailed Description",
+          titleEligibility: "Eligibility Criteria",
+          titleMainBenefits: "Main Benefits",
+          titleMainExclusions: "Main Exclusions",
+          titleEstimatePremium: "Estimate Premium",
+          tabForIndividuals: "For Individuals",
+          tabForBusinesses: "For Businesses",
+          descIndividualCalculator:
+            "Enter your information to estimate the premium.",
+          labelAge: "Age:",
+          placeholderAge: "E.g.: 30",
+          labelGender: "Gender:",
+          optionMale: "Male",
+          optionFemale: "Female",
+          optionOther: "Other",
+          labelCoverageAmount: "Desired Coverage Amount:",
+          placeholderCoverageAmount: "E.g.: 500,000,000 VND",
+          labelHealthStatus: "Health Status:",
+          optionHealthGood: "Good, no pre-existing conditions",
+          optionHealthAverage: "Average, minor conditions",
+          optionHealthPreExisting: "Pre-existing conditions to declare",
+          btnCalculateNow: "Calculate Now",
+          textEstimatedPremiumIs: "Your estimated premium is:",
+          textEstimateNote:
+            "(This is an estimate, the official premium will be confirmed after underwriting)",
+          btnApplyNow: "Apply Now",
+          btnScheduleConsultation: "Schedule Consultation",
+          descBusinessCalculator:
+            "Enter your business information to estimate the premium.",
+          labelIndustryType: "Industry:",
+          placeholderIndustryType: "E.g.: Information Technology",
+          labelEmployeeCount: "Number of Employees:",
+          placeholderEmployeeCount: "E.g.: 50",
+          labelCoverageAmountTotal: "Desired Total Coverage Amount:",
+          placeholderCoverageAmountTotal: "E.g.: 10,000,000,000 VND",
+          labelRiskProfile: "Industry Risk Profile (self-assessed):",
+          optionRiskLow: "Low",
+          optionRiskMedium: "Medium",
+          optionRiskHigh: "High",
+          btnCalculateEstimate: "Calculate (Estimate)",
+          textEstimatedBusinessPremiumIs: "Estimated premium for business:",
+          textBusinessEstimateNote:
+            "(This is an initial estimate, please contact us for a detailed quote)",
+          btnRequestDetailedQuote: "Request Detailed Quote",
+          titleCustomerReviews: "Customer Reviews",
+          altReviewerA: "Reviewer A Avatar",
+          reviewText1:
+            '"Great product, quick procedure. I feel much more secure since joining."',
+          altReviewerB: "Reviewer B Avatar",
+          reviewText2:
+            '"Excellent customer service, the consultant was very enthusiastic and answered all my questions."',
+          titleFAQ: "Frequently Asked Questions (FAQ)",
+          faq1Question: "What is the waiting period for this product?",
+          faq1Answer:
+            "The typical waiting period is 30 days for common illnesses and 90 days for special/critical illnesses. Please refer to the contract for details.",
+          faq2Question: "Can I change the sum assured after enrollment?",
+          faq2Answer:
+            "Yes, depending on the product's regulations, you can request to adjust the sum assured on the contract anniversary. This may affect the premium.",
+          faq3Question: "What is the claim process?",
+          faq3Answer:
+            "You need to report the insured event as soon as possible, complete the claim form as instructed, and submit it to the company. We will process it within the specified time.",
+          titleCompareSimilarProducts: "Compare With Similar Products",
+          descCompareSimilarProducts:
+            "See how this product stands against other options in the market.",
+          similarProductA: "Product A (Similar)",
+          similarProductAPrice: "Premium: 14,000,000 VND/year",
+          similarProductABenefits: "Main benefits: Death protection, accident.",
+          similarProductB: "Product B (Premium)",
+          similarProductBPrice: "Premium: 18,000,000 VND/year",
+          similarProductBBenefits:
+            "Main benefits: Comprehensive protection, investment.",
+          btnCompareDetails: "Compare Details &rarr;",
+          btnGoToGeneralComparison: "Go To General Comparison Page",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          footerPrivacyPolicy: "Privacy Policy",
+          footerTermsOfUse: "Terms of Use",
+          // Product specific data keys
+          productDetailNameP1: "Comprehensive Security Plus",
+          productDetailShortDescP1:
+            "An excellent financial protection solution for you and your family against all life risks, combining health care benefits and effective accumulation.",
+          productDetailLongDescP1:
+            "Comprehensive Security Plus is a life insurance product combining protection and investment, offering complete peace of mind. With outstanding benefits for life protection, medical support for illness and disease, and opportunities to increase assets through the investment activities of the universal life fund, this is a smart choice for a secure future.",
+          productDetailBenefit1P1:
+            "Protection against death or total permanent disability up to 200% of the sum assured.",
+          productDetailBenefit2P1:
+            "Support for inpatient hospitalization, surgery, and treatment in intensive care.",
+          productDetailBenefit3P1:
+            "Insurance benefits for 35 common critical illnesses, with multiple payouts.",
+          productDetailBenefit4P1:
+            "Policy persistency bonuses and account value enhancement rewards.",
+          productDetailBenefit5P1:
+            "Flexible premium payments and withdrawals from the policy account value.",
+          productDetailExclusion1P1:
+            "Suicide within 24 months from the policy effective date or the latest reinstatement date.",
+          productDetailExclusion2P1:
+            "Intentional violation of the law by the Insured or Policyholder.",
+          productDetailExclusion3P1:
+            "HIV/AIDS infection (except due to occupational exposure or blood transfusion).",
+          productDetailExclusion4P1: "Use of illegal drugs or stimulants.",
+          productDetailExclusion5P1:
+            "War, civil war, terrorism (unless separately agreed).",
+          productDetailEligibility1P1:
+            "Entry age: from 30 days old to 65 years old.",
+          productDetailEligibility2P1: "Policy term: up to age 99.",
+          productDetailEligibility3P1: "Policyholder: 18 years old and above.",
+          productDetailEligibility4P1:
+            "Meet the company's health underwriting requirements.",
+          // JS Alerts
+          alertEnterAge: "Please enter age.",
+          alertEnterEmployeeCount: "Please enter number of employees.",
+          alertProductSaved:
+            "Product saved to favorites (Feature in development).",
+          alertDownloadPdf:
+            "Download PDF product information feature is in development.",
+          alertShareProduct: "Share product feature is in development.",
+          alertApplyNow:
+            "Redirecting to product registration page (Feature in development).",
+          alertScheduleConsultation:
+            "Redirecting to consultation scheduling page (Feature in development).",
+          alertRequestQuote:
+            "Detailed quote request has been sent (Feature in development).",
+        },
+      };
+
+      let currentLang = "vi"; // Default language
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_ProductDetail_Lang", lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              (el.type === "submit" || el.type === "button")
+            ) {
+              el.value = translatedText;
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H1" ||
+                el.tagName === "H3" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE" ||
+                el.tagName === "SUMMARY") &&
+              (translatedText.includes("&") ||
+                translatedText.includes("<i class"))
+            ) {
+              // For elements that might contain icons or HTML entities
+              if (el.innerHTML.includes("<i")) {
+                // Check if there's an icon
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translatedText.replace(/<i class="[^"]+"><\/i>/, "").trim();
+              } else {
+                el.innerHTML = translatedText;
+              }
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Update dynamic product data
+        populateProductData(lang);
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key; // Fallback to key if not found
+      }
+
+      const currentProductData = {
+        // Renamed to avoid conflict with currentProduct variable name
+        id: "p1",
+        nameKey: "productDetailNameP1",
+        shortDescriptionKey: "productDetailShortDescP1",
+        longDescriptionKey: "productDetailLongDescP1",
+        image: "https://placehold.co/400x300/34d399/ffffff?text=Bảo+An+Plus",
+        price: 15000000,
+        coverageLimit: 1000000000,
+        keyBenefitKeys: [
+          // Array of keys
+          "productDetailBenefit1P1",
+          "productDetailBenefit2P1",
+          "productDetailBenefit3P1",
+          "productDetailBenefit4P1",
+          "productDetailBenefit5P1",
+        ],
+        exclusionKeys: [
+          // Array of keys
+          "productDetailExclusion1P1",
+          "productDetailExclusion2P1",
+          "productDetailExclusion3P1",
+          "productDetailExclusion4P1",
+          "productDetailExclusion5P1",
+        ],
+        eligibilityKeys: [
+          // Array of keys
+          "productDetailEligibility1P1",
+          "productDetailEligibility2P1",
+          "productDetailEligibility3P1",
+          "productDetailEligibility4P1",
+        ],
+        rating: 4.5,
+      };
+
+      function populateProductData(lang) {
+        document.getElementById("productName").textContent = getTranslatedText(
+          currentProductData.nameKey,
+          lang
+        );
+        document.getElementById("productShortDescription").textContent =
+          getTranslatedText(currentProductData.shortDescriptionKey, lang);
+        document.getElementById("productLongDescription").textContent =
+          getTranslatedText(currentProductData.longDescriptionKey, lang);
+
+        document.getElementById("productImage").src = currentProductData.image;
+        document.getElementById("productImage").alt = getTranslatedText(
+          currentProductData.nameKey,
+          lang
+        ); // Use product name for alt
+
+        const mainBenefitsList = document.getElementById("mainBenefits");
+        mainBenefitsList.innerHTML = "";
+        currentProductData.keyBenefitKeys.forEach((key) => {
+          const li = document.createElement("li");
+          li.className = "benefit-item flex items-start";
+          li.innerHTML = `<i class="fas fa-check-circle mt-1 mr-3"></i><span>${getTranslatedText(
+            key,
+            lang
+          )}</span>`;
+          mainBenefitsList.appendChild(li);
+        });
+
+        const mainExclusionsList = document.getElementById("mainExclusions");
+        mainExclusionsList.innerHTML = "";
+        currentProductData.exclusionKeys.forEach((key) => {
+          const li = document.createElement("li");
+          li.className = "exclusion-item flex items-start";
+          li.innerHTML = `<i class="fas fa-times-circle mt-1 mr-3"></i><span>${getTranslatedText(
+            key,
+            lang
+          )}</span>`;
+          mainExclusionsList.appendChild(li);
+        });
+
+        const eligibilityList = document.getElementById("eligibilityCriteria");
+        eligibilityList.innerHTML = "";
+        currentProductData.eligibilityKeys.forEach((key) => {
+          const li = document.createElement("li");
+          li.textContent = getTranslatedText(key, lang);
+          eligibilityList.appendChild(li);
+        });
+      }
+
+      // Tab switching logic
+      const tabButtons = document.querySelectorAll(".tab-button[data-tab]");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          const targetTab = button.getAttribute("data-tab");
+          tabContents.forEach((content) => {
+            content.classList.toggle(
+              "active",
+              content.id === `${targetTab}Content`
+            );
+          });
+        });
+      });
+
+      const calculatorTabButtons = document.querySelectorAll(
+        ".calculator-tab-button[data-calculator-type]"
+      );
+      const calculatorTypeContents = document.querySelectorAll(
+        ".calculator-type-content"
+      );
+
+      calculatorTabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          calculatorTabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          const targetType = button.getAttribute("data-calculator-type");
+          calculatorTypeContents.forEach((content) => {
+            content.classList.toggle(
+              "hidden",
+              content.id !== `${targetType}Calculator`
+            );
+          });
+        });
+      });
+
+      document
+        .getElementById("calculateIndividualPremiumBtn")
+        ?.addEventListener("click", () => {
+          const age = document.getElementById("individualAge").value;
+          if (!age) {
+            alert(getTranslatedText("alertEnterAge"));
+            return;
+          }
+          document.getElementById(
+            "individualEstimatedPremium"
+          ).textContent = `${(
+            Math.random() * 10000000 +
+            5000000
+          ).toLocaleString("vi-VN")} VNĐ/năm`;
+          document
+            .getElementById("individualPremiumResult")
+            .classList.remove("hidden");
+        });
+      document
+        .getElementById("calculateBusinessPremiumBtn")
+        ?.addEventListener("click", () => {
+          const employees = document.getElementById("employeeCount").value;
+          if (!employees) {
+            alert(getTranslatedText("alertEnterEmployeeCount"));
+            return;
+          }
+          document.getElementById("businessEstimatedPremium").textContent = `${(
+            Math.random() * 100000000 +
+            50000000
+          ).toLocaleString("vi-VN")} VNĐ/năm`;
+          document
+            .getElementById("businessPremiumResult")
+            .classList.remove("hidden");
+        });
+
+      document
+        .getElementById("saveProductBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertProductSaved"))
+        );
+      document
+        .getElementById("downloadPdfBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertDownloadPdf"))
+        );
+      document
+        .getElementById("shareProductBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertShareProduct"))
+        );
+      document
+        .getElementById("applyNowIndividualBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertApplyNow"))
+        );
+      document
+        .getElementById("scheduleConsultationBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertScheduleConsultation"))
+        );
+      document
+        .getElementById("requestCustomQuoteBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertRequestQuote"))
+        );
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial language load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_ProductDetail_Lang") || "vi";
+        setLanguage(savedLang); // This will also call populateProductData
+      });
+    </script>
+  </body>
+</html>

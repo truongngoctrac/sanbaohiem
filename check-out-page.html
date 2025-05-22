@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">Thanh Toán - BảoHiểmPRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb; /* Gray 50 */
+      }
+
+      .progress-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
+
+      .progress-step-circle {
+        width: 2.5rem; /* w-10 */
+        height: 2.5rem; /* h-10 */
+        border-radius: 9999px; /* rounded-full */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600; /* semibold */
+        z-index: 10;
+        transition: all 0.3s ease;
+      }
+
+      .progress-step-line {
+        position: absolute;
+        top: 1.25rem; /* h-10 / 2 */
+        left: 50%;
+        width: 100%;
+        height: 2px;
+        background-color: #d1d5db; /* Gray 300 */
+        z-index: 5;
+      }
+      .progress-step:first-child .progress-step-line {
+        left: 50%;
+        width: 50%;
+      }
+      .progress-step:last-child .progress-step-line {
+        width: 50%;
+      }
+
+      .progress-step.active .progress-step-circle {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+        border-color: #4f46e5;
+      }
+      .progress-step.completed .progress-step-circle {
+        background-color: #10b981; /* Emerald 500 */
+        color: white;
+        border-color: #10b981;
+      }
+      .progress-step.pending .progress-step-circle {
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #6b7280; /* Gray 500 */
+        border: 2px solid #d1d5db; /* Gray 300 */
+      }
+      .progress-step.active .progress-step-line-fill,
+      .progress-step.completed .progress-step-line-fill {
+        background-color: #4f46e5; /* Indigo 600 */
+      }
+
+      .form-input,
+      .form-select {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.375rem; /* rounded-md */
+        border: 1px solid #d1d5db; /* Gray 300 */
+        margin-bottom: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .form-input:focus,
+      .form-select:focus {
+        border-color: #4f46e5; /* Indigo 600 */
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        outline: none;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151; /* Gray 700 */
+      }
+      .payment-method-option {
+        border: 1px solid #e5e7eb; /* Gray 200 */
+        border-radius: 0.5rem; /* rounded-lg */
+        padding: 1rem;
+        cursor: pointer;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .payment-method-option:hover {
+        border-color: #a5b4fc; /* Indigo 300 */
+      }
+      .payment-method-option.selected {
+        border-color: #4f46e5; /* Indigo 600 */
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        background-color: #eef2ff; /* Indigo 50 */
+      }
+      .btn {
+        padding: 0.75rem 1.5rem; /* py-3 px-6 */
+        border-radius: 0.5rem; /* rounded-lg */
+        font-weight: 600; /* semibold */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca; /* Indigo 700 */
+      }
+      .btn-secondary {
+        background-color: #6b7280; /* Gray 500 */
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #4b5563; /* Gray 600 */
+      }
+      .section-title {
+        font-size: 1.25rem; /* text-xl */
+        font-weight: 600; /* semibold */
+        color: #1f2937; /* Gray 800 */
+        margin-bottom: 1rem; /* mb-4 */
+      }
+      .customer-type-tab.active {
+        border-color: #4f46e5;
+        color: #4f46e5;
+        background-color: #eef2ff;
+      }
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Darker text */
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6; /* Lighter gray for hover */
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/indigo/white?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html#services"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navServices"
+            >Dịch Vụ</a
+          >
+          <a
+            href="product-detail-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navProductDetail"
+            >Chi Tiết Sản Phẩm</a
+          >
+          <a
+            href="product-comparison-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navCompare"
+            >So Sánh</a
+          >
+        </nav>
+        <div class="language-switcher flex items-center space-x-2">
+          <button
+            data-lang="vi"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            VIE
+          </button>
+          <button
+            data-lang="en"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            ENG
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <h1
+        class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center"
+        data-translate-key="mainTitle"
+      >
+        Hoàn Tất Thanh Toán
+      </h1>
+
+      <section id="progressBar" class="mb-10">
+        <div class="flex justify-between items-start max-w-2xl mx-auto">
+          <div class="progress-step active" data-step="1">
+            <div class="progress-step-circle">1</div>
+            <p class="text-sm mt-1 text-center" data-translate-key="stepInfo">
+              Thông Tin
+            </p>
+            <div class="progress-step-line"></div>
+          </div>
+          <div class="progress-step pending" data-step="2">
+            <div class="progress-step-circle">2</div>
+            <p
+              class="text-sm mt-1 text-center"
+              data-translate-key="stepPayment"
+            >
+              Thanh Toán
+            </p>
+            <div class="progress-step-line"></div>
+          </div>
+          <div class="progress-step pending" data-step="3">
+            <div class="progress-step-circle">3</div>
+            <p
+              class="text-sm mt-1 text-center"
+              data-translate-key="stepComplete"
+            >
+              Hoàn Tất
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-8">
+          <section
+            id="customerInfoStep"
+            class="p-6 bg-white rounded-xl shadow-lg"
+          >
+            <h2 class="section-title" data-translate-key="titleCustomerInfo">
+              Thông Tin Khách Hàng
+            </h2>
+            <div class="mb-6">
+              <div
+                class="flex border border-gray-300 rounded-lg overflow-hidden"
+              >
+                <button
+                  id="individualCustomerTab"
+                  class="customer-type-tab flex-1 py-2 px-4 text-center font-medium border-r border-gray-300 active"
+                >
+                  <i class="fas fa-user mr-2"></i
+                  ><span data-translate-key="tabIndividual">Cá Nhân</span>
+                </button>
+                <button
+                  id="businessCustomerTab"
+                  class="customer-type-tab flex-1 py-2 px-4 text-center font-medium"
+                >
+                  <i class="fas fa-briefcase mr-2"></i
+                  ><span data-translate-key="tabBusiness">Doanh Nghiệp</span>
+                </button>
+              </div>
+            </div>
+
+            <form id="individualCustomerForm" class="space-y-4">
+              <div>
+                <label
+                  for="individualFullName"
+                  class="form-label"
+                  data-translate-key="labelFullName"
+                  >Họ và Tên:</label
+                >
+                <input
+                  type="text"
+                  id="individualFullName"
+                  name="individualFullName"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderFullName"
+                  placeholder="Nguyễn Văn A"
+                  required
+                />
+              </div>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="individualEmail"
+                    class="form-label"
+                    data-translate-key="labelEmail"
+                    >Email:</label
+                  >
+                  <input
+                    type="email"
+                    id="individualEmail"
+                    name="individualEmail"
+                    class="form-input"
+                    data-translate-placeholder-key="placeholderEmail"
+                    placeholder="email@example.com"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="individualPhone"
+                    class="form-label"
+                    data-translate-key="labelPhone"
+                    >Số Điện Thoại:</label
+                  >
+                  <input
+                    type="tel"
+                    id="individualPhone"
+                    name="individualPhone"
+                    class="form-input"
+                    data-translate-placeholder-key="placeholderPhone"
+                    placeholder="090xxxxxxx"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="individualAddress"
+                  class="form-label"
+                  data-translate-key="labelAddress"
+                  >Địa Chỉ:</label
+                >
+                <input
+                  type="text"
+                  id="individualAddress"
+                  name="individualAddress"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderAddress"
+                  placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="individualDob"
+                  class="form-label"
+                  data-translate-key="labelDob"
+                  >Ngày Sinh:</label
+                >
+                <input
+                  type="date"
+                  id="individualDob"
+                  name="individualDob"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="individualIdNumber"
+                  class="form-label"
+                  data-translate-key="labelIdNumber"
+                  >Số CMND/CCCD:</label
+                >
+                <input
+                  type="text"
+                  id="individualIdNumber"
+                  name="individualIdNumber"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderIdNumber"
+                  placeholder="XXXXXXXXXXXX"
+                  required
+                />
+              </div>
+              <div class="pt-4 text-right">
+                <button
+                  type="button"
+                  id="nextToPaymentBtnIndividual"
+                  class="btn btn-primary"
+                >
+                  <span data-translate-key="btnContinuePayment"
+                    >Tiếp Tục Thanh Toán</span
+                  >
+                  <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+              </div>
+            </form>
+
+            <form id="businessCustomerForm" class="space-y-4 hidden">
+              <div>
+                <label
+                  for="businessName"
+                  class="form-label"
+                  data-translate-key="labelBusinessName"
+                  >Tên Doanh Nghiệp:</label
+                >
+                <input
+                  type="text"
+                  id="businessName"
+                  name="businessName"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderBusinessName"
+                  placeholder="Công ty TNHH ABC"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="businessTaxCode"
+                  class="form-label"
+                  data-translate-key="labelTaxCode"
+                  >Mã Số Thuế:</label
+                >
+                <input
+                  type="text"
+                  id="businessTaxCode"
+                  name="businessTaxCode"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderTaxCode"
+                  placeholder="XXXXXXXXXX"
+                  required
+                />
+              </div>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="businessContactPerson"
+                    class="form-label"
+                    data-translate-key="labelContactPerson"
+                    >Người Liên Hệ:</label
+                  >
+                  <input
+                    type="text"
+                    id="businessContactPerson"
+                    name="businessContactPerson"
+                    class="form-input"
+                    data-translate-placeholder-key="placeholderContactPerson"
+                    placeholder="Trần Văn B"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="businessContactEmail"
+                    class="form-label"
+                    data-translate-key="labelContactEmail"
+                    >Email Liên Hệ:</label
+                  >
+                  <input
+                    type="email"
+                    id="businessContactEmail"
+                    name="businessContactEmail"
+                    class="form-input"
+                    data-translate-placeholder-key="placeholderContactEmail"
+                    placeholder="contact@company.com"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="businessAddress"
+                  class="form-label"
+                  data-translate-key="labelBusinessAddress"
+                  >Địa Chỉ Đăng Ký Kinh Doanh:</label
+                >
+                <input
+                  type="text"
+                  id="businessAddress"
+                  name="businessAddress"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderBusinessAddress"
+                  placeholder="Địa chỉ công ty"
+                  required
+                />
+              </div>
+              <div class="pt-4 text-right">
+                <button
+                  type="button"
+                  id="nextToPaymentBtnBusiness"
+                  class="btn btn-primary"
+                >
+                  <span data-translate-key="btnContinuePayment"
+                    >Tiếp Tục Thanh Toán</span
+                  >
+                  <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section
+            id="paymentDetailsStep"
+            class="p-6 bg-white rounded-xl shadow-lg hidden"
+          >
+            <div class="flex justify-between items-center mb-4">
+              <h2
+                class="section-title"
+                data-translate-key="titlePaymentDetails"
+              >
+                Chi Tiết Thanh Toán
+              </h2>
+              <button
+                type="button"
+                id="backToInfoBtn"
+                class="text-sm text-indigo-600 hover:underline"
+              >
+                <i class="fas fa-arrow-left mr-1"></i>
+                <span data-translate-key="btnBackToInfo"
+                  >Quay lại thông tin</span
+                >
+              </button>
+            </div>
+
+            <div class="space-y-4 mb-6">
+              <div
+                id="paymentMethodBank"
+                class="payment-method-option"
+                data-method="bank_transfer"
+              >
+                <div class="flex items-center">
+                  <i class="fas fa-university fa-2x text-indigo-500 mr-4"></i>
+                  <div>
+                    <h4
+                      class="font-semibold"
+                      data-translate-key="paymentMethodBank"
+                    >
+                      Chuyển Khoản Ngân Hàng
+                    </h4>
+                    <p
+                      class="text-sm text-gray-500"
+                      data-translate-key="paymentMethodBankDesc"
+                    >
+                      Thực hiện chuyển khoản trực tiếp đến tài khoản của chúng
+                      tôi.
+                    </p>
+                  </div>
+                  <i
+                    class="fas fa-check-circle text-indigo-600 ml-auto opacity-0 selected-icon"
+                  ></i>
+                </div>
+              </div>
+              <div
+                id="paymentMethodCard"
+                class="payment-method-option"
+                data-method="credit_card"
+              >
+                <div class="flex items-center">
+                  <i class="fas fa-credit-card fa-2x text-blue-500 mr-4"></i>
+                  <div>
+                    <h4
+                      class="font-semibold"
+                      data-translate-key="paymentMethodCard"
+                    >
+                      Thẻ Tín Dụng/Ghi Nợ
+                    </h4>
+                    <p
+                      class="text-sm text-gray-500"
+                      data-translate-key="paymentMethodCardDesc"
+                    >
+                      Hỗ trợ Visa, Mastercard, JCB.
+                    </p>
+                  </div>
+                  <i
+                    class="fas fa-check-circle text-indigo-600 ml-auto opacity-0 selected-icon"
+                  ></i>
+                </div>
+              </div>
+              <div
+                id="paymentMethodEwallet"
+                class="payment-method-option"
+                data-method="ewallet"
+              >
+                <div class="flex items-center">
+                  <i class="fas fa-wallet fa-2x text-green-500 mr-4"></i>
+                  <div>
+                    <h4
+                      class="font-semibold"
+                      data-translate-key="paymentMethodEwallet"
+                    >
+                      Ví Điện Tử
+                    </h4>
+                    <p
+                      class="text-sm text-gray-500"
+                      data-translate-key="paymentMethodEwalletDesc"
+                    >
+                      Thanh toán qua MoMo, ZaloPay, VNPay.
+                    </p>
+                  </div>
+                  <i
+                    class="fas fa-check-circle text-indigo-600 ml-auto opacity-0 selected-icon"
+                  ></i>
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="bankTransferInfo"
+              class="payment-details-form hidden mt-4 p-4 bg-gray-100 rounded-lg"
+            >
+              <h4
+                class="font-semibold mb-2"
+                data-translate-key="titleBankTransferInfo"
+              >
+                Thông tin chuyển khoản:
+              </h4>
+              <p>
+                <strong data-translate-key="textBankName">Ngân hàng:</strong>
+                Ngân hàng ABC (Chi nhánh XYZ)
+              </p>
+              <p>
+                <strong data-translate-key="textAccountNumber"
+                  >Số tài khoản:</strong
+                >
+                1234567890
+              </p>
+              <p>
+                <strong data-translate-key="textAccountHolder"
+                  >Chủ tài khoản:</strong
+                >
+                CÔNG TY BẢO HIỂM BẢOHIỂMPRO
+              </p>
+              <p>
+                <strong data-translate-key="textTransferContent"
+                  >Nội dung chuyển khoản:</strong
+                >
+                <span id="paymentReference" class="font-bold"
+                  >BH [Mã đơn hàng]</span
+                >
+                <span data-translate-key="textPleaseEnterCorrectContent"
+                  >(Vui lòng ghi đúng nội dung)</span
+                >
+              </p>
+              <p
+                class="mt-2 text-sm text-red-600"
+                data-translate-key="textUploadReceiptNote"
+              >
+                Sau khi chuyển khoản, vui lòng tải lên biên lai/ảnh chụp màn
+                hình giao dịch thành công.
+              </p>
+              <input type="file" id="uploadReceipt" class="form-input mt-2" />
+            </div>
+
+            <form
+              id="creditCardForm"
+              class="payment-details-form hidden mt-4 space-y-4"
+            >
+              <div>
+                <label
+                  for="cardNumber"
+                  class="form-label"
+                  data-translate-key="labelCardNumber"
+                  >Số Thẻ:</label
+                >
+                <input
+                  type="text"
+                  id="cardNumber"
+                  name="cardNumber"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderCardNumber"
+                  placeholder="•••• •••• •••• ••••"
+                  required
+                />
+              </div>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label
+                    for="cardExpiry"
+                    class="form-label"
+                    data-translate-key="labelCardExpiry"
+                    >Ngày Hết Hạn (MM/YY):</label
+                  >
+                  <input
+                    type="text"
+                    id="cardExpiry"
+                    name="cardExpiry"
+                    class="form-input"
+                    data-translate-placeholder-key="placeholderCardExpiry"
+                    placeholder="MM/YY"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="cardCVC"
+                    class="form-label"
+                    data-translate-key="labelCardCVC"
+                    >CVV/CVC:</label
+                  >
+                  <input
+                    type="text"
+                    id="cardCVC"
+                    name="cardCVC"
+                    class="form-input"
+                    data-translate-placeholder-key="placeholderCardCVC"
+                    placeholder="•••"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="cardHolderName"
+                  class="form-label"
+                  data-translate-key="labelCardHolderName"
+                  >Tên Chủ Thẻ:</label
+                >
+                <input
+                  type="text"
+                  id="cardHolderName"
+                  name="cardHolderName"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderCardHolderName"
+                  placeholder="NGUYEN VAN A"
+                  required
+                />
+              </div>
+              <div class="flex items-center">
+                <input
+                  type="checkbox"
+                  id="saveCardInfo"
+                  name="saveCardInfo"
+                  class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                />
+                <label
+                  for="saveCardInfo"
+                  class="text-sm text-gray-700"
+                  data-translate-key="labelSaveCardInfo"
+                  >Lưu thông tin thẻ cho lần thanh toán sau.</label
+                >
+              </div>
+            </form>
+
+            <div
+              id="ewalletInfo"
+              class="payment-details-form hidden mt-4 p-4 bg-gray-100 rounded-lg text-center"
+            >
+              <p class="mb-2" data-translate-key="textEwalletRedirect">
+                Bạn sẽ được chuyển hướng đến cổng thanh toán của ví điện tử đã
+                chọn.
+              </p>
+              <div class="flex justify-center space-x-4">
+                <img
+                  src="https://placehold.co/80x40/ff0000/ffffff?text=MoMo"
+                  alt="MoMo"
+                  class="h-10"
+                  data-translate-alt-key="altMomo"
+                />
+                <img
+                  src="https://placehold.co/80x40/007aff/ffffff?text=ZaloPay"
+                  alt="ZaloPay"
+                  class="h-10"
+                  data-translate-alt-key="altZalopay"
+                />
+                <img
+                  src="https://placehold.co/80x40/00aeff/ffffff?text=VNPay"
+                  alt="VNPay"
+                  class="h-10"
+                  data-translate-alt-key="altVnpay"
+                />
+              </div>
+            </div>
+
+            <div class="mt-8 text-center">
+              <button
+                type="button"
+                id="submitPaymentBtn"
+                class="btn btn-primary text-lg w-full md:w-auto"
+              >
+                <i class="fas fa-shield-alt mr-2"></i
+                ><span data-translate-key="btnPayNow">Thanh Toán Ngay</span>
+              </button>
+            </div>
+          </section>
+
+          <section
+            id="confirmationStep"
+            class="p-6 md:p-10 bg-white rounded-xl shadow-lg hidden text-center"
+          >
+            <i class="fas fa-check-circle text-6xl text-green-500 mb-6"></i>
+            <h2
+              class="text-2xl md:text-3xl font-bold text-gray-800 mb-3"
+              data-translate-key="titlePaymentSuccess"
+            >
+              Thanh Toán Thành Công!
+            </h2>
+            <p class="text-gray-600 mb-2" data-translate-key="textThankYou">
+              Cảm ơn bạn đã lựa chọn BảoHiểmPRO.
+            </p>
+            <p class="text-gray-600 mb-6">
+              <span data-translate-key="textYourOrderIdIs"
+                >Mã đơn hàng của bạn là:</span
+              >
+              <strong id="orderConfirmationId" class="text-indigo-600"
+                >BH12345XYZ</strong
+              >.
+              <span data-translate-key="textConfirmationEmailSent"
+                >Một email xác nhận đã được gửi đến địa chỉ</span
+              >
+              <strong id="confirmationEmail">email@example.com</strong>.
+            </p>
+            <div class="space-y-3 md:space-y-0 md:space-x-4">
+              <a href="index.html" class="btn btn-primary"
+                ><i class="fas fa-home mr-2"></i
+                ><span data-translate-key="btnBackToHomepage"
+                  >Về Trang Chủ</span
+                ></a
+              >
+              <a href="#" id="viewPolicyDetailsBtn" class="btn btn-outline"
+                ><i class="fas fa-file-alt mr-2"></i
+                ><span data-translate-key="btnViewPolicyDetails"
+                  >Xem Chi Tiết Hợp Đồng</span
+                ></a
+              >
+            </div>
+          </section>
+        </div>
+
+        <aside class="lg:col-span-1">
+          <div class="p-6 bg-white rounded-xl shadow-lg sticky top-24">
+            <h3
+              class="section-title border-b pb-3 mb-4"
+              data-translate-key="titleOrderSummary"
+            >
+              Tóm Tắt Đơn Hàng
+            </h3>
+            <div class="space-y-3 mb-4">
+              <div class="flex justify-between">
+                <span class="text-gray-600" data-translate-key="summaryProduct"
+                  >Sản phẩm:</span
+                >
+                <span id="summaryProductName" class="font-medium"
+                  >Bảo An Toàn Diện Plus</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span
+                  class="text-gray-600"
+                  data-translate-key="summaryBasePremium"
+                  >Phí cơ bản:</span
+                >
+                <span id="summaryBasePremium" class="font-medium"
+                  >15,000,000 VNĐ</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600" data-translate-key="summaryTax"
+                  >Thuế (VAT 10%):</span
+                >
+                <span id="summaryTax" class="font-medium">1,500,000 VNĐ</span>
+              </div>
+              <div class="flex justify-between">
+                <span
+                  class="text-gray-600"
+                  data-translate-key="summaryServiceFee"
+                  >Phí dịch vụ:</span
+                >
+                <span id="summaryServiceFee" class="font-medium"
+                  >50,000 VNĐ</span
+                >
+              </div>
+              <div class="flex justify-between text-green-600">
+                <span class="text-gray-600" data-translate-key="summaryDiscount"
+                  >Giảm giá (KM2025):</span
+                >
+                <span id="summaryDiscount" class="font-medium"
+                  >- 500,000 VNĐ</span
+                >
+              </div>
+            </div>
+            <div class="border-t pt-4">
+              <div
+                class="flex justify-between items-center text-xl font-bold mb-4"
+              >
+                <span data-translate-key="summaryTotal">Tổng Cộng:</span>
+                <span id="summaryTotalAmount" class="text-indigo-600"
+                  >16,050,000 VNĐ</span
+                >
+              </div>
+              <div class="text-xs text-gray-500 mb-4">
+                <p>
+                  <i class="fas fa-lock mr-1"></i>
+                  <span data-translate-key="textSecureTransaction"
+                    >Giao dịch của bạn được bảo mật tuyệt đối.</span
+                  >
+                </p>
+                <p>
+                  <span data-translate-key="textAgreeToTerms"
+                    >Bằng việc nhấn "Thanh Toán Ngay", bạn đồng ý với</span
+                  >
+                  <a
+                    href="#"
+                    class="text-indigo-500 hover:underline"
+                    data-translate-key="linkTermsAndConditions"
+                    >Điều khoản & Điều kiện</a
+                  >
+                  <span data-translate-key="textOurCompany"
+                    >của chúng tôi.</span
+                  >
+                </p>
+              </div>
+              <div class="flex justify-center space-x-2">
+                <img
+                  src="https://placehold.co/50x30/cccccc/000000?text=Visa"
+                  alt="Visa"
+                  class="h-6"
+                  data-translate-alt-key="altVisa"
+                />
+                <img
+                  src="https://placehold.co/50x30/cccccc/000000?text=Master"
+                  alt="Mastercard"
+                  class="h-6"
+                  data-translate-alt-key="altMastercard"
+                />
+                <img
+                  src="https://placehold.co/50x30/cccccc/000000?text=JCB"
+                  alt="JCB"
+                  class="h-6"
+                  data-translate-alt-key="altJcb"
+                />
+                <img
+                  src="https://placehold.co/50x30/cccccc/000000?text=MoMo"
+                  alt="MoMo"
+                  class="h-6"
+                  data-translate-alt-key="altMomo"
+                />
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Thanh Toán - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          navServices: "Dịch Vụ",
+          navProductDetail: "Chi Tiết Sản Phẩm",
+          navCompare: "So Sánh",
+          mainTitle: "Hoàn Tất Thanh Toán",
+          stepInfo: "Thông Tin",
+          stepPayment: "Thanh Toán",
+          stepComplete: "Hoàn Tất",
+          titleCustomerInfo: "Thông Tin Khách Hàng",
+          tabIndividual: "Cá Nhân",
+          tabBusiness: "Doanh Nghiệp",
+          labelFullName: "Họ và Tên:",
+          placeholderFullName: "Nguyễn Văn A",
+          labelEmail: "Email:",
+          placeholderEmail: "email@example.com",
+          labelPhone: "Số Điện Thoại:",
+          placeholderPhone: "090xxxxxxx",
+          labelAddress: "Địa Chỉ:",
+          placeholderAddress:
+            "Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố",
+          labelDob: "Ngày Sinh:",
+          labelIdNumber: "Số CMND/CCCD:",
+          placeholderIdNumber: "XXXXXXXXXXXX",
+          btnContinuePayment: "Tiếp Tục Thanh Toán",
+          labelBusinessName: "Tên Doanh Nghiệp:",
+          placeholderBusinessName: "Công ty TNHH ABC",
+          labelTaxCode: "Mã Số Thuế:",
+          placeholderTaxCode: "XXXXXXXXXX",
+          labelContactPerson: "Người Liên Hệ:",
+          placeholderContactPerson: "Trần Văn B",
+          labelContactEmail: "Email Liên Hệ:",
+          placeholderContactEmail: "contact@company.com",
+          labelBusinessAddress: "Địa Chỉ Đăng Ký Kinh Doanh:",
+          placeholderBusinessAddress: "Địa chỉ công ty",
+          titlePaymentDetails: "Chi Tiết Thanh Toán",
+          btnBackToInfo: "Quay lại thông tin",
+          paymentMethodBank: "Chuyển Khoản Ngân Hàng",
+          paymentMethodBankDesc:
+            "Thực hiện chuyển khoản trực tiếp đến tài khoản của chúng tôi.",
+          paymentMethodCard: "Thẻ Tín Dụng/Ghi Nợ",
+          paymentMethodCardDesc: "Hỗ trợ Visa, Mastercard, JCB.",
+          paymentMethodEwallet: "Ví Điện Tử",
+          paymentMethodEwalletDesc: "Thanh toán qua MoMo, ZaloPay, VNPay.",
+          titleBankTransferInfo: "Thông tin chuyển khoản:",
+          textBankName: "Ngân hàng:",
+          textAccountNumber: "Số tài khoản:",
+          textAccountHolder: "Chủ tài khoản:",
+          textTransferContent: "Nội dung chuyển khoản:",
+          textPleaseEnterCorrectContent: "(Vui lòng ghi đúng nội dung)",
+          textUploadReceiptNote:
+            "Sau khi chuyển khoản, vui lòng tải lên biên lai/ảnh chụp màn hình giao dịch thành công.",
+          labelCardNumber: "Số Thẻ:",
+          placeholderCardNumber: "•••• •••• •••• ••••",
+          labelCardExpiry: "Ngày Hết Hạn (MM/YY):",
+          placeholderCardExpiry: "MM/YY",
+          labelCardCVC: "CVV/CVC:",
+          placeholderCardCVC: "•••",
+          labelCardHolderName: "Tên Chủ Thẻ:",
+          placeholderCardHolderName: "NGUYEN VAN A",
+          labelSaveCardInfo: "Lưu thông tin thẻ cho lần thanh toán sau.",
+          textEwalletRedirect:
+            "Bạn sẽ được chuyển hướng đến cổng thanh toán của ví điện tử đã chọn.",
+          altMomo: "Logo MoMo",
+          altZalopay: "Logo ZaloPay",
+          altVnpay: "Logo VNPay",
+          btnPayNow: "Thanh Toán Ngay",
+          titlePaymentSuccess: "Thanh Toán Thành Công!",
+          textThankYou: "Cảm ơn bạn đã lựa chọn BảoHiểmPRO.",
+          textYourOrderIdIs: "Mã đơn hàng của bạn là:",
+          textConfirmationEmailSent:
+            "Một email xác nhận đã được gửi đến địa chỉ",
+          btnBackToHomepage: "Về Trang Chủ",
+          btnViewPolicyDetails: "Xem Chi Tiết Hợp Đồng",
+          titleOrderSummary: "Tóm Tắt Đơn Hàng",
+          summaryProduct: "Sản phẩm:",
+          summaryBasePremium: "Phí cơ bản:",
+          summaryTax: "Thuế (VAT 10%):",
+          summaryServiceFee: "Phí dịch vụ:",
+          summaryDiscount: "Giảm giá (KM2025):",
+          summaryTotal: "Tổng Cộng:",
+          textSecureTransaction: "Giao dịch của bạn được bảo mật tuyệt đối.",
+          textAgreeToTerms: 'Bằng việc nhấn "Thanh Toán Ngay", bạn đồng ý với',
+          linkTermsAndConditions: "Điều khoản & Điều kiện",
+          textOurCompany: "của chúng tôi.",
+          altVisa: "Logo Visa",
+          altMastercard: "Logo Mastercard",
+          altJcb: "Logo JCB",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          alertChoosePaymentMethod: "Vui lòng chọn phương thức thanh toán.",
+          alertUploadBankReceipt: "Vui lòng tải lên biên lai chuyển khoản.",
+          alertProcessingPayment: "Đang xử lý thanh toán... (Mô phỏng)",
+        },
+        en: {
+          pageTitle: "Checkout - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          navServices: "Services",
+          navProductDetail: "Product Details",
+          navCompare: "Compare",
+          mainTitle: "Complete Payment",
+          stepInfo: "Information",
+          stepPayment: "Payment",
+          stepComplete: "Confirmation",
+          titleCustomerInfo: "Customer Information",
+          tabIndividual: "Individual",
+          tabBusiness: "Business",
+          labelFullName: "Full Name:",
+          placeholderFullName: "Nguyen Van A",
+          labelEmail: "Email:",
+          placeholderEmail: "email@example.com",
+          labelPhone: "Phone Number:",
+          placeholderPhone: "090xxxxxxx",
+          labelAddress: "Address:",
+          placeholderAddress: "Street, ward/commune, district, city/province",
+          labelDob: "Date of Birth:",
+          labelIdNumber: "ID/Citizen ID Number:",
+          placeholderIdNumber: "XXXXXXXXXXXX",
+          btnContinuePayment: "Continue to Payment",
+          labelBusinessName: "Business Name:",
+          placeholderBusinessName: "ABC Co., Ltd.",
+          labelTaxCode: "Tax Code:",
+          placeholderTaxCode: "XXXXXXXXXX",
+          labelContactPerson: "Contact Person:",
+          placeholderContactPerson: "Tran Van B",
+          labelContactEmail: "Contact Email:",
+          placeholderContactEmail: "contact@company.com",
+          labelBusinessAddress: "Registered Business Address:",
+          placeholderBusinessAddress: "Company address",
+          titlePaymentDetails: "Payment Details",
+          btnBackToInfo: "Back to information",
+          paymentMethodBank: "Bank Transfer",
+          paymentMethodBankDesc: "Make a direct bank transfer to our account.",
+          paymentMethodCard: "Credit/Debit Card",
+          paymentMethodCardDesc: "Supports Visa, Mastercard, JCB.",
+          paymentMethodEwallet: "E-wallet",
+          paymentMethodEwalletDesc: "Pay via MoMo, ZaloPay, VNPay.",
+          titleBankTransferInfo: "Bank Transfer Information:",
+          textBankName: "Bank:",
+          textAccountNumber: "Account Number:",
+          textAccountHolder: "Account Holder:",
+          textTransferContent: "Transfer Content:",
+          textPleaseEnterCorrectContent: "(Please enter the correct content)",
+          textUploadReceiptNote:
+            "After transferring, please upload the receipt/screenshot of the successful transaction.",
+          labelCardNumber: "Card Number:",
+          placeholderCardNumber: "•••• •••• •••• ••••",
+          labelCardExpiry: "Expiry Date (MM/YY):",
+          placeholderCardExpiry: "MM/YY",
+          labelCardCVC: "CVV/CVC:",
+          placeholderCardCVC: "•••",
+          labelCardHolderName: "Cardholder Name:",
+          placeholderCardHolderName: "NGUYEN VAN A",
+          labelSaveCardInfo: "Save card information for future payments.",
+          textEwalletRedirect:
+            "You will be redirected to the selected e-wallet payment gateway.",
+          altMomo: "MoMo Logo",
+          altZalopay: "ZaloPay Logo",
+          altVnpay: "VNPay Logo",
+          btnPayNow: "Pay Now",
+          titlePaymentSuccess: "Payment Successful!",
+          textThankYou: "Thank you for choosing BảoHiểmPRO.",
+          textYourOrderIdIs: "Your order ID is:",
+          textConfirmationEmailSent: "A confirmation email has been sent to",
+          btnBackToHomepage: "Back to Homepage",
+          btnViewPolicyDetails: "View Policy Details",
+          titleOrderSummary: "Order Summary",
+          summaryProduct: "Product:",
+          summaryBasePremium: "Base Premium:",
+          summaryTax: "Tax (VAT 10%):",
+          summaryServiceFee: "Service Fee:",
+          summaryDiscount: "Discount (KM2025):",
+          summaryTotal: "Total:",
+          textSecureTransaction: "Your transaction is absolutely secure.",
+          textAgreeToTerms: 'By clicking "Pay Now", you agree to our',
+          linkTermsAndConditions: "Terms & Conditions",
+          textOurCompany: ".",
+          altVisa: "Visa Logo",
+          altMastercard: "Mastercard Logo",
+          altJcb: "JCB Logo",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          alertChoosePaymentMethod: "Please select a payment method.",
+          alertUploadBankReceipt: "Please upload the bank transfer receipt.",
+          alertProcessingPayment: "Processing payment... (Simulation)",
+        },
+      };
+      let currentLang = "vi"; // Default language
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_CheckoutPage_Lang", lang); // Unique key for this page
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              (el.type === "submit" || el.type === "button")
+            ) {
+              el.value = translatedText;
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H1" ||
+                el.tagName === "H2" ||
+                el.tagName === "H3" ||
+                el.tagName === "H4" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE") &&
+              (translatedText.includes("&") ||
+                translatedText.includes("<i class"))
+            ) {
+              if (el.innerHTML.includes("<i")) {
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translatedText.replace(/<i class="[^"]+"><\/i>/, "").trim();
+              } else {
+                el.innerHTML = translatedText;
+              }
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Update dynamic parts if any (e.g. productData if it were dynamic)
+        // calculateTotal(); // Recalculate if currency symbols change, for now it's VND only
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key;
+      }
+
+      // DOM Elements
+      const progressBarSteps = document.querySelectorAll(".progress-step");
+      const customerInfoStep = document.getElementById("customerInfoStep");
+      const paymentDetailsStep = document.getElementById("paymentDetailsStep");
+      const confirmationStep = document.getElementById("confirmationStep");
+
+      const individualCustomerTab = document.getElementById(
+        "individualCustomerTab"
+      );
+      const businessCustomerTab = document.getElementById(
+        "businessCustomerTab"
+      );
+      const individualCustomerForm = document.getElementById(
+        "individualCustomerForm"
+      );
+      const businessCustomerForm = document.getElementById(
+        "businessCustomerForm"
+      );
+
+      const nextToPaymentBtnIndividual = document.getElementById(
+        "nextToPaymentBtnIndividual"
+      );
+      const nextToPaymentBtnBusiness = document.getElementById(
+        "nextToPaymentBtnBusiness"
+      );
+      const backToInfoBtn = document.getElementById("backToInfoBtn");
+      const submitPaymentBtn = document.getElementById("submitPaymentBtn");
+
+      const paymentMethodOptions = document.querySelectorAll(
+        ".payment-method-option"
+      );
+      const paymentDetailsForms = document.querySelectorAll(
+        ".payment-details-form"
+      );
+
+      const summaryProductName = document.getElementById("summaryProductName");
+      const summaryBasePremium = document.getElementById("summaryBasePremium");
+      const summaryTax = document.getElementById("summaryTax");
+      const summaryServiceFee = document.getElementById("summaryServiceFee");
+      const summaryDiscount = document.getElementById("summaryDiscount");
+      const summaryTotalAmount = document.getElementById("summaryTotalAmount");
+      const paymentReference = document.getElementById("paymentReference");
+      const orderConfirmationId = document.getElementById(
+        "orderConfirmationId"
+      );
+      const confirmationEmailEl = document.getElementById("confirmationEmail");
+
+      let currentStep = 1;
+      let selectedPaymentMethod = null;
+      let customerData = {};
+
+      const productData = {
+        name: "Bảo An Toàn Diện Plus", // This could also be a translation key
+        basePremium: 15000000,
+        taxRate: 0.1,
+        serviceFee: 50000,
+        discount: 500000,
+        orderIdPrefix: "BHPRO",
+      };
+      // Add product name to translations if it needs to be dynamic
+      translations.vi.productNameP1 = "Bảo An Toàn Diện Plus";
+      translations.en.productNameP1 = "Comprehensive Security Plus";
+
+      function calculateTotal() {
+        const taxAmount = productData.basePremium * productData.taxRate;
+        const total =
+          productData.basePremium +
+          taxAmount +
+          productData.serviceFee -
+          productData.discount;
+
+        // For product name, if it's dynamic and needs translation:
+        // summaryProductName.textContent = getTranslatedText(productData.nameKey || 'productNameP1');
+        summaryProductName.textContent = productData.name; // Keeping it simple for now
+
+        summaryBasePremium.textContent =
+          productData.basePremium.toLocaleString("vi-VN") + " VNĐ";
+        summaryTax.textContent = taxAmount.toLocaleString("vi-VN") + " VNĐ";
+        summaryServiceFee.textContent =
+          productData.serviceFee.toLocaleString("vi-VN") + " VNĐ";
+        summaryDiscount.textContent = `- ${productData.discount.toLocaleString(
+          "vi-VN"
+        )} VNĐ`;
+        summaryTotalAmount.textContent = total.toLocaleString("vi-VN") + " VNĐ";
+
+        const orderId = `${productData.orderIdPrefix}${Math.floor(
+          Math.random() * 100000
+        )}`;
+        paymentReference.textContent = orderId;
+        orderConfirmationId.textContent = orderId;
+      }
+      calculateTotal();
+
+      function updateProgressBar(step) {
+        progressBarSteps.forEach((s) => {
+          const stepNumber = parseInt(s.dataset.step);
+          s.classList.remove("active", "completed", "pending");
+          if (stepNumber < step) {
+            s.classList.add("completed");
+          } else if (stepNumber === step) {
+            s.classList.add("active");
+          } else {
+            s.classList.add("pending");
+          }
+        });
+      }
+
+      function showStep(stepNumber) {
+        currentStep = stepNumber;
+        customerInfoStep.classList.add("hidden");
+        paymentDetailsStep.classList.add("hidden");
+        confirmationStep.classList.add("hidden");
+
+        if (stepNumber === 1) customerInfoStep.classList.remove("hidden");
+        if (stepNumber === 2) paymentDetailsStep.classList.remove("hidden");
+        if (stepNumber === 3) confirmationStep.classList.remove("hidden");
+
+        updateProgressBar(stepNumber);
+        window.scrollTo(0, 0);
+      }
+
+      individualCustomerTab.addEventListener("click", () => {
+        individualCustomerTab.classList.add("active");
+        businessCustomerTab.classList.remove("active");
+        individualCustomerForm.classList.remove("hidden");
+        businessCustomerForm.classList.add("hidden");
+      });
+
+      businessCustomerTab.addEventListener("click", () => {
+        businessCustomerTab.classList.add("active");
+        individualCustomerTab.classList.remove("active");
+        businessCustomerForm.classList.remove("hidden");
+        individualCustomerForm.classList.add("hidden");
+      });
+
+      function validateAndCollectIndividualForm() {
+        const form = individualCustomerForm;
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return false;
+        }
+        customerData = {
+          type: "individual",
+          fullName: form.individualFullName.value,
+          email: form.individualEmail.value,
+          phone: form.individualPhone.value,
+          address: form.individualAddress.value,
+          dob: form.individualDob.value,
+          idNumber: form.individualIdNumber.value,
+        };
+        confirmationEmailEl.textContent = customerData.email;
+        return true;
+      }
+
+      function validateAndCollectBusinessForm() {
+        const form = businessCustomerForm;
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return false;
+        }
+        customerData = {
+          type: "business",
+          name: form.businessName.value,
+          taxCode: form.businessTaxCode.value,
+          contactPerson: form.businessContactPerson.value,
+          contactEmail: form.businessContactEmail.value,
+          address: form.businessAddress.value,
+        };
+        confirmationEmailEl.textContent = customerData.contactEmail;
+        return true;
+      }
+
+      nextToPaymentBtnIndividual.addEventListener("click", () => {
+        if (validateAndCollectIndividualForm()) {
+          showStep(2);
+        }
+      });
+      nextToPaymentBtnBusiness.addEventListener("click", () => {
+        if (validateAndCollectBusinessForm()) {
+          showStep(2);
+        }
+      });
+
+      backToInfoBtn.addEventListener("click", () => showStep(1));
+
+      submitPaymentBtn.addEventListener("click", () => {
+        if (!selectedPaymentMethod) {
+          alert(getTranslatedText("alertChoosePaymentMethod"));
+          return;
+        }
+        if (selectedPaymentMethod === "credit_card") {
+          const ccForm = document.getElementById("creditCardForm");
+          if (!ccForm.checkValidity()) {
+            ccForm.reportValidity();
+            return;
+          }
+        }
+        if (selectedPaymentMethod === "bank_transfer") {
+          const receiptInput = document.getElementById("uploadReceipt");
+          if (receiptInput.files.length === 0) {
+            alert(getTranslatedText("alertUploadBankReceipt"));
+            return;
+          }
+        }
+        console.log(
+          "Processing payment with data:",
+          customerData,
+          "Method:",
+          selectedPaymentMethod
+        );
+        alert(getTranslatedText("alertProcessingPayment"));
+        setTimeout(() => {
+          showStep(3);
+        }, 1500);
+      });
+
+      paymentMethodOptions.forEach((option) => {
+        option.addEventListener("click", () => {
+          paymentMethodOptions.forEach((opt) => {
+            opt.classList.remove("selected");
+            opt.querySelector(".selected-icon").classList.add("opacity-0");
+          });
+          option.classList.add("selected");
+          option.querySelector(".selected-icon").classList.remove("opacity-0");
+          selectedPaymentMethod = option.dataset.method;
+
+          paymentDetailsForms.forEach((form) => form.classList.add("hidden"));
+          if (selectedPaymentMethod === "bank_transfer") {
+            document
+              .getElementById("bankTransferInfo")
+              .classList.remove("hidden");
+          } else if (selectedPaymentMethod === "credit_card") {
+            document
+              .getElementById("creditCardForm")
+              .classList.remove("hidden");
+          } else if (selectedPaymentMethod === "ewallet") {
+            document.getElementById("ewalletInfo").classList.remove("hidden");
+          }
+        });
+      });
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial language load & setup
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_CheckoutPage_Lang") || "vi";
+        setLanguage(savedLang);
+        showStep(1);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">
+      Bảng Điều Khiển Khách Hàng - BảoHiểmPRO
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f3f4f6; /* Gray 100 */
+      }
+
+      .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem; /* py-3 px-4 */
+        border-radius: 0.375rem; /* rounded-md */
+        color: #4b5563; /* Gray 600 */
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .sidebar-link:hover {
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Gray 800 */
+      }
+
+      .sidebar-link.active {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+        font-weight: 500; /* medium */
+      }
+      .sidebar-link.active i {
+        color: white;
+      }
+
+      .sidebar-link i {
+        margin-right: 0.75rem; /* mr-3 */
+        width: 1.25rem; /* w-5 */
+        text-align: center;
+        color: #6b7280; /* Gray 500 */
+      }
+      .content-section {
+        display: none;
+      }
+      .content-section.active {
+        display: block;
+      }
+      .card {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 1.5rem; /* p-6 */
+      }
+      .table th,
+      .table td {
+        padding: 0.75rem 1rem; /* py-3 px-4 */
+        border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+        text-align: left;
+      }
+      .table th {
+        background-color: #f9fafb; /* Gray 50 */
+        font-weight: 600; /* semibold */
+        color: #374151; /* Gray 700 */
+      }
+      .status-active {
+        background-color: #dcfce7; /* Green 100 */
+        color: #166534; /* Green 800 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem; /* text-xs */
+        font-weight: 500;
+      }
+      .status-expired {
+        background-color: #fee2e2; /* Red 100 */
+        color: #991b1b; /* Red 800 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      .status-pending {
+        background-color: #fef3c7; /* Amber 100 */
+        color: #92400e; /* Amber 800 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      .status-approved {
+        background-color: #dbeafe; /* Blue 100 */
+        color: #1e40af; /* Blue 800 */
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      .btn {
+        padding: 0.625rem 1.25rem; /* py-2.5 px-5 */
+        border-radius: 0.5rem; /* rounded-lg */
+        font-weight: 500; /* medium */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca; /* Indigo 700 */
+      }
+      .btn-secondary {
+        background-color: #10b981; /* Emerald 500 */
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #059669; /* Emerald 600 */
+      }
+      .btn-outline {
+        background-color: transparent;
+        color: #4f46e5;
+        border: 1px solid #4f46e5;
+      }
+      .btn-outline:hover {
+        background-color: #e0e7ff; /* Indigo 100 */
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.375rem; /* rounded-md */
+        border: 1px solid #d1d5db; /* Gray 300 */
+        margin-bottom: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: #4f46e5; /* Indigo 600 */
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        outline: none;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151; /* Gray 700 */
+      }
+      .notification-dot {
+        height: 0.5rem;
+        width: 0.5rem;
+        background-color: #ef4444; /* Red 500 */
+        border-radius: 9999px;
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Darker text */
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6; /* Lighter gray for hover */
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-40">
+      <div
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/indigo/white?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <div class="flex items-center space-x-4">
+          <div class="language-switcher flex items-center space-x-1">
+            <button
+              data-lang="vi"
+              class="lang-switcher-btn px-2 py-1 text-xs rounded-md focus:outline-none"
+            >
+              VIE
+            </button>
+            <span class="text-xs text-gray-400">|</span>
+            <button
+              data-lang="en"
+              class="lang-switcher-btn px-2 py-1 text-xs rounded-md focus:outline-none"
+            >
+              ENG
+            </button>
+          </div>
+          <button
+            id="notificationsBtn"
+            class="relative text-gray-600 hover:text-indigo-600 focus:outline-none"
+          >
+            <i class="fas fa-bell fa-lg"></i>
+            <span class="notification-dot"></span>
+          </button>
+          <div class="relative">
+            <button
+              id="userMenuButton"
+              class="flex items-center space-x-2 focus:outline-none"
+            >
+              <img
+                src="https://placehold.co/40x40/e0e0e0/333?text=User"
+                alt="User Avatar"
+                data-translate-alt-key="altUserAvatar"
+                class="w-8 h-8 rounded-full"
+              />
+              <span
+                id="headerUserName"
+                class="hidden md:inline text-sm font-medium text-gray-700"
+                data-translate-key="textGreetingUser"
+                >Chào, Nguyễn Văn A</span
+              >
+              <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+            </button>
+            <div
+              id="userMenuDropdown"
+              class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl z-50 hidden"
+            >
+              <a
+                href="user-profile-page.html#profile"
+                data-target="profile"
+                class="sidebar-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                data-translate-key="linkMyAccount"
+                >Tài Khoản Của Tôi</a
+              >
+              <a
+                href="user-profile-page.html#settings"
+                data-target="settings"
+                class="sidebar-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                data-translate-key="linkSettings"
+                >Cài Đặt</a
+              >
+              <a
+                href="#"
+                id="logoutButton"
+                class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                data-translate-key="linkLogout"
+                >Đăng Xuất</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mx-auto px-4 md:px-6 py-8">
+      <div class="md:flex md:space-x-6">
+        <aside class="md:w-1/4 lg:w-1/5 mb-8 md:mb-0">
+          <div class="bg-white p-4 rounded-xl shadow-lg">
+            <nav id="sidebarNav" class="space-y-1">
+              <a
+                href="#dashboard"
+                data-target="dashboard"
+                class="sidebar-link active"
+                data-translate-key="sidebarOverview"
+                ><i class="fas fa-tachometer-alt"></i>Tổng Quan</a
+              >
+              <a
+                href="#policies"
+                data-target="policies"
+                class="sidebar-link"
+                data-translate-key="sidebarMyPolicies"
+                ><i class="fas fa-file-contract"></i>Hợp Đồng Của Tôi</a
+              >
+              <a
+                href="#claims"
+                data-target="claims"
+                class="sidebar-link"
+                data-translate-key="sidebarClaims"
+                ><i class="fas fa-headset"></i>Yêu Cầu Bồi Thường</a
+              >
+              <a
+                href="#documents"
+                data-target="documents"
+                class="sidebar-link"
+                data-translate-key="sidebarDocuments"
+                ><i class="fas fa-folder-open"></i>Tài Liệu</a
+              >
+              <a
+                href="#payments"
+                data-target="payments"
+                class="sidebar-link"
+                data-translate-key="sidebarPaymentHistory"
+                ><i class="fas fa-credit-card"></i>Lịch Sử Thanh Toán</a
+              >
+              <a
+                href="#messages"
+                data-target="messages"
+                class="sidebar-link relative"
+                data-translate-key="sidebarMessages"
+                ><i class="fas fa-envelope"></i>Tin Nhắn
+                <span
+                  class="absolute top-1 right-1 text-xs bg-red-500 text-white rounded-full px-1.5 py-0.5"
+                  >3</span
+                ></a
+              >
+              <a
+                href="user-profile-page.html#profile"
+                data-target="profile"
+                class="sidebar-link"
+                data-translate-key="sidebarPersonalInfo"
+                ><i class="fas fa-user-edit"></i>Thông Tin Cá Nhân</a
+              >
+              <a
+                href="knowledge-center-page.html"
+                data-target="knowledgeBase"
+                class="sidebar-link"
+                data-translate-key="sidebarKnowledgeFAQ"
+                ><i class="fas fa-book-open"></i>Kiến Thức & FAQ</a
+              >
+              <a
+                href="user-profile-page.html#settings"
+                data-target="settings"
+                class="sidebar-link"
+                data-translate-key="sidebarAccountSettings"
+                ><i class="fas fa-cog"></i>Cài Đặt Tài Khoản</a
+              >
+            </nav>
+          </div>
+        </aside>
+
+        <main class="md:w-3/4 lg:w-4/5">
+          <section id="dashboard" class="content-section active card">
+            <h2
+              id="dashboardWelcome"
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="dashboardWelcomeUser"
+            >
+              Chào mừng trở lại, Nguyễn Văn A!
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              <div class="bg-indigo-50 p-4 rounded-lg shadow">
+                <h3
+                  class="text-sm font-medium text-indigo-700 mb-1"
+                  data-translate-key="dashboardActivePolicies"
+                >
+                  Hợp Đồng Đang Hiệu Lực
+                </h3>
+                <p class="text-2xl font-bold text-indigo-800">3</p>
+              </div>
+              <div class="bg-green-50 p-4 rounded-lg shadow">
+                <h3
+                  class="text-sm font-medium text-green-700 mb-1"
+                  data-translate-key="dashboardApprovedClaims"
+                >
+                  Yêu Cầu Đã Duyệt
+                </h3>
+                <p class="text-2xl font-bold text-green-800">1</p>
+              </div>
+              <div class="bg-yellow-50 p-4 rounded-lg shadow">
+                <h3
+                  class="text-sm font-medium text-yellow-700 mb-1"
+                  data-translate-key="dashboardNewNotifications"
+                >
+                  Thông Báo Mới
+                </h3>
+                <p class="text-2xl font-bold text-yellow-800">2</p>
+              </div>
+            </div>
+            <div class="mb-6">
+              <h3
+                class="text-xl font-semibold text-gray-700 mb-3"
+                data-translate-key="dashboardImportantNotice"
+              >
+                Thông Báo Quan Trọng
+              </h3>
+              <div
+                class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md"
+                role="alert"
+              >
+                <p
+                  class="font-bold"
+                  data-translate-key="dashboardNoticeContent1"
+                >
+                  Hợp đồng BHNT00123 sắp đến hạn thanh toán (30/05/2025).
+                </p>
+                <p data-translate-key="dashboardNoticeContent2">
+                  Vui lòng thanh toán trước hạn để đảm bảo quyền lợi.
+                </p>
+              </div>
+            </div>
+            <div>
+              <h3
+                class="text-xl font-semibold text-gray-700 mb-3"
+                data-translate-key="dashboardQuickAccess"
+              >
+                Truy Cập Nhanh
+              </h3>
+              <div class="flex flex-wrap gap-3">
+                <button
+                  data-target="policies"
+                  class="btn btn-outline text-sm sidebar-nav-trigger"
+                >
+                  <i class="fas fa-file-contract mr-2"></i
+                  ><span data-translate-key="btnViewContracts"
+                    >Xem Hợp Đồng</span
+                  >
+                </button>
+                <button
+                  data-target="claims"
+                  class="btn btn-outline text-sm sidebar-nav-trigger"
+                >
+                  <i class="fas fa-headset mr-2"></i
+                  ><span data-translate-key="btnCreateNewClaim"
+                    >Tạo Yêu Cầu Mới</span
+                  >
+                </button>
+                <button
+                  data-target="payments"
+                  class="btn btn-outline text-sm sidebar-nav-trigger"
+                >
+                  <i class="fas fa-history mr-2"></i
+                  ><span data-translate-key="btnPaymentHistory"
+                    >Lịch Sử Thanh Toán</span
+                  >
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section id="policies" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titleMyPolicies"
+            >
+              Hợp Đồng Của Tôi
+            </h2>
+            <div class="overflow-x-auto">
+              <table class="min-w-full table">
+                <thead>
+                  <tr>
+                    <th data-translate-key="tablePolicyNo">Số Hợp Đồng</th>
+                    <th data-translate-key="tableProductName">Tên Sản Phẩm</th>
+                    <th data-translate-key="tableEffectiveDate">
+                      Ngày Hiệu Lực
+                    </th>
+                    <th data-translate-key="tableExpiryDate">Ngày Đáo Hạn</th>
+                    <th data-translate-key="tableAnnualFee">Phí (Năm)</th>
+                    <th data-translate-key="tableStatus">Trạng Thái</th>
+                    <th data-translate-key="tableAction">Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>BHNT00123</td>
+                    <td data-translate-key="productNameSample1">
+                      Bảo An Toàn Diện Plus
+                    </td>
+                    <td>01/06/2023</td>
+                    <td>01/06/2043</td>
+                    <td>15,000,000 VNĐ</td>
+                    <td>
+                      <span
+                        class="status-active"
+                        data-translate-key="statusActive"
+                        >Đang hiệu lực</span
+                      >
+                    </td>
+                    <td>
+                      <a
+                        href="product-detail-page.html?id=BHNT00123"
+                        class="text-indigo-600 hover:underline text-sm"
+                        data-translate-key="actionView"
+                        >Xem</a
+                      >
+                      |
+                      <button
+                        class="text-blue-600 hover:underline text-sm download-policy-btn"
+                        data-policy-id="BHNT00123"
+                        data-translate-key="actionDownloadPdf"
+                      >
+                        Tải PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>BHSK00456</td>
+                    <td data-translate-key="productNameSample2">
+                      Sức Khỏe Vàng
+                    </td>
+                    <td>15/03/2024</td>
+                    <td>15/03/2025</td>
+                    <td>8,000,000 VNĐ</td>
+                    <td>
+                      <span
+                        class="status-active"
+                        data-translate-key="statusActive"
+                        >Đang hiệu lực</span
+                      >
+                    </td>
+                    <td>
+                      <a
+                        href="product-detail-page.html?id=BHSK00456"
+                        class="text-indigo-600 hover:underline text-sm"
+                        data-translate-key="actionView"
+                        >Xem</a
+                      >
+                      |
+                      <button
+                        class="text-blue-600 hover:underline text-sm download-policy-btn"
+                        data-policy-id="BHSK00456"
+                        data-translate-key="actionDownloadPdf"
+                      >
+                        Tải PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>BHTS00789</td>
+                    <td data-translate-key="productNameSample3">
+                      An Tâm Nhà Việt
+                    </td>
+                    <td>10/01/2022</td>
+                    <td>10/01/2024</td>
+                    <td>3,500,000 VNĐ</td>
+                    <td>
+                      <span
+                        class="status-expired"
+                        data-translate-key="statusExpired"
+                        >Đã hết hạn</span
+                      >
+                    </td>
+                    <td>
+                      <a
+                        href="product-detail-page.html?id=BHTS00789"
+                        class="text-indigo-600 hover:underline text-sm"
+                        data-translate-key="actionView"
+                        >Xem</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="claims" class="content-section card">
+            <div class="flex justify-between items-center mb-6">
+              <h2
+                class="text-2xl font-semibold text-gray-800"
+                data-translate-key="titleClaims"
+              >
+                Yêu Cầu Bồi Thường
+              </h2>
+              <button id="initiateClaimBtn" class="btn btn-primary">
+                <i class="fas fa-plus-circle mr-2"></i
+                ><span data-translate-key="btnCreateNewClaim"
+                  >Tạo Yêu Cầu Mới</span
+                >
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full table">
+                <thead>
+                  <tr>
+                    <th data-translate-key="tableClaimId">Mã Yêu Cầu</th>
+                    <th data-translate-key="tablePolicyNo">Số Hợp Đồng</th>
+                    <th data-translate-key="tableRequestDate">Ngày Yêu Cầu</th>
+                    <th data-translate-key="tableClaimType">Loại Yêu Cầu</th>
+                    <th data-translate-key="tableAmountRequested">
+                      Số Tiền Yêu Cầu
+                    </th>
+                    <th data-translate-key="tableStatus">Trạng Thái</th>
+                    <th data-translate-key="tableAction">Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>YC001</td>
+                    <td>BHSK00456</td>
+                    <td>05/04/2024</td>
+                    <td data-translate-key="claimTypeHospitalization">
+                      Nằm viện
+                    </td>
+                    <td>5,000,000 VNĐ</td>
+                    <td>
+                      <span
+                        class="status-approved"
+                        data-translate-key="statusApproved"
+                        >Đã duyệt</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="text-indigo-600 hover:underline text-sm view-claim-details-btn"
+                        data-claim-id="YC001"
+                        data-translate-key="actionViewDetails"
+                      >
+                        Xem Chi Tiết
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>YC002</td>
+                    <td>BHNT00123</td>
+                    <td>20/04/2024</td>
+                    <td data-translate-key="claimTypeCriticalIllness">
+                      Bệnh hiểm nghèo
+                    </td>
+                    <td>100,000,000 VNĐ</td>
+                    <td>
+                      <span
+                        class="status-pending"
+                        data-translate-key="statusPending"
+                        >Đang xử lý</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="text-indigo-600 hover:underline text-sm view-claim-details-btn"
+                        data-claim-id="YC002"
+                        data-translate-key="actionViewDetails"
+                      >
+                        Xem Chi Tiết
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="documents" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titleMyDocuments"
+            >
+              Tài Liệu Của Tôi
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div class="border p-4 rounded-lg bg-gray-50">
+                <i class="fas fa-file-pdf fa-2x text-red-500 mb-2"></i>
+                <h4 class="font-medium">Hợp đồng BHNT00123.pdf</h4>
+                <p
+                  class="text-xs text-gray-500"
+                  data-translate-key="textUploadDate"
+                >
+                  Ngày tải lên: 01/06/2023
+                </p>
+                <button
+                  class="text-indigo-600 hover:underline text-sm mt-2 download-doc-btn"
+                  data-doc-id="BHNT00123_contract"
+                  data-translate-key="actionDownload"
+                >
+                  Tải xuống
+                </button>
+              </div>
+              <div class="border p-4 rounded-lg bg-gray-50">
+                <i class="fas fa-file-alt fa-2x text-blue-500 mb-2"></i>
+                <h4 class="font-medium">Giấy chứng nhận BHSK00456.pdf</h4>
+                <p
+                  class="text-xs text-gray-500"
+                  data-translate-key="textUploadDate"
+                >
+                  Ngày tải lên: 15/03/2024
+                </p>
+                <button
+                  class="text-indigo-600 hover:underline text-sm mt-2 download-doc-btn"
+                  data-doc-id="BHSK00456_cert"
+                  data-translate-key="actionDownload"
+                >
+                  Tải xuống
+                </button>
+              </div>
+              <div class="border p-4 rounded-lg bg-gray-50">
+                <i class="fas fa-receipt fa-2x text-green-500 mb-2"></i>
+                <h4 class="font-medium">Biên lai thanh toán Q1-2024.pdf</h4>
+                <p
+                  class="text-xs text-gray-500"
+                  data-translate-key="textUploadDate"
+                >
+                  Ngày tải lên: 01/04/2024
+                </p>
+                <button
+                  class="text-indigo-600 hover:underline text-sm mt-2 download-doc-btn"
+                  data-doc-id="Q12024_receipt"
+                  data-translate-key="actionDownload"
+                >
+                  Tải xuống
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section id="payments" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titlePaymentHistory"
+            >
+              Lịch Sử Thanh Toán
+            </h2>
+            <div class="overflow-x-auto">
+              <table class="min-w-full table">
+                <thead>
+                  <tr>
+                    <th data-translate-key="tableTransactionId">
+                      Mã Giao Dịch
+                    </th>
+                    <th data-translate-key="tablePolicyNo">Số Hợp Đồng</th>
+                    <th data-translate-key="tablePaymentDate">
+                      Ngày Thanh Toán
+                    </th>
+                    <th data-translate-key="tableAmount">Số Tiền</th>
+                    <th data-translate-key="tablePaymentMethod">Phương Thức</th>
+                    <th data-translate-key="tableStatus">Trạng Thái</th>
+                    <th data-translate-key="tableAction">Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>GD00123</td>
+                    <td>BHNT00123</td>
+                    <td>01/06/2023</td>
+                    <td>15,000,000 VNĐ</td>
+                    <td data-translate-key="paymentMethodBankTransfer">
+                      Chuyển khoản
+                    </td>
+                    <td>
+                      <span
+                        class="status-active"
+                        data-translate-key="statusSuccess"
+                        >Thành công</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="text-blue-600 hover:underline text-sm download-receipt-btn"
+                        data-tx-id="GD00123"
+                        data-translate-key="actionDownloadReceipt"
+                      >
+                        Tải biên lai
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>GD00456</td>
+                    <td>BHSK00456</td>
+                    <td>15/03/2024</td>
+                    <td>8,000,000 VNĐ</td>
+                    <td data-translate-key="paymentMethodCreditCard">
+                      Thẻ tín dụng
+                    </td>
+                    <td>
+                      <span
+                        class="status-active"
+                        data-translate-key="statusSuccess"
+                        >Thành công</span
+                      >
+                    </td>
+                    <td>
+                      <button
+                        class="text-blue-600 hover:underline text-sm download-receipt-btn"
+                        data-tx-id="GD00456"
+                        data-translate-key="actionDownloadReceipt"
+                      >
+                        Tải biên lai
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section id="messages" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titleMessagesWithAdvisor"
+            >
+              Tin Nhắn Với Tư Vấn Viên
+            </h2>
+            <div class="border rounded-lg h-96 flex flex-col">
+              <div class="p-4 space-y-3 overflow-y-auto flex-grow bg-gray-50">
+                <div class="flex items-start">
+                  <img
+                    src="https://placehold.co/32x32/6366f1/ffffff?text=TV"
+                    alt="Advisor Avatar"
+                    data-translate-alt-key="altAdvisorAvatar"
+                    class="w-8 h-8 rounded-full mr-3"
+                  />
+                  <div
+                    class="bg-indigo-100 text-indigo-800 p-3 rounded-lg max-w-xs"
+                  >
+                    <p
+                      class="text-sm"
+                      data-translate-key="messageSampleAdvisor1"
+                    >
+                      Chào anh A, em là Mai, tư vấn viên của BảoHiểmPRO. Anh có
+                      câu hỏi nào về hợp đồng BHNT00123 không ạ?
+                    </p>
+                    <p class="text-xs text-indigo-500 mt-1 text-right">
+                      9:30 AM
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start justify-end">
+                  <div
+                    class="bg-green-100 text-green-800 p-3 rounded-lg max-w-xs"
+                  >
+                    <p class="text-sm" data-translate-key="messageSampleUser1">
+                      Chào Mai, anh muốn hỏi về thời hạn đóng phí tiếp theo.
+                    </p>
+                    <p class="text-xs text-green-500 mt-1 text-left">9:32 AM</p>
+                  </div>
+                  <img
+                    src="https://placehold.co/32x32/e0e0e0/333?text=A"
+                    alt="User Avatar"
+                    data-translate-alt-key="altUserAvatarSmall"
+                    class="w-8 h-8 rounded-full ml-3"
+                  />
+                </div>
+                <div class="flex items-start">
+                  <img
+                    src="https://placehold.co/32x32/6366f1/ffffff?text=TV"
+                    alt="Advisor Avatar"
+                    data-translate-alt-key="altAdvisorAvatar"
+                    class="w-8 h-8 rounded-full mr-3"
+                  />
+                  <div
+                    class="bg-indigo-100 text-indigo-800 p-3 rounded-lg max-w-xs"
+                  >
+                    <p
+                      class="text-sm"
+                      data-translate-key="messageSampleAdvisor2"
+                    >
+                      Dạ, kỳ phí tiếp theo của hợp đồng BHNT00123 là ngày
+                      01/06/2025 ạ. Anh có thể thanh toán trực tuyến qua
+                      dashboard này.
+                    </p>
+                    <p class="text-xs text-indigo-500 mt-1 text-right">
+                      9:35 AM
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 border-t">
+                <div class="flex space-x-2">
+                  <input
+                    type="text"
+                    data-translate-placeholder-key="placeholderTypeMessage"
+                    placeholder="Nhập tin nhắn của bạn..."
+                    class="form-input flex-grow !mb-0"
+                  />
+                  <button class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="profile" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titlePersonalInfoSection"
+            >
+              Thông Tin Cá Nhân
+            </h2>
+            <form id="profileUpdateForm" class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="profileFullName"
+                    class="form-label"
+                    data-translate-key="labelFullName"
+                    >Họ và Tên:</label
+                  >
+                  <input
+                    type="text"
+                    id="profileFullName"
+                    name="profileFullName"
+                    class="form-input"
+                    value="Nguyễn Văn A"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="profileDob"
+                    class="form-label"
+                    data-translate-key="labelDateOfBirth"
+                    >Ngày Sinh:</label
+                  >
+                  <input
+                    type="date"
+                    id="profileDob"
+                    name="profileDob"
+                    class="form-input"
+                    value="1985-10-20"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="profileEmail"
+                    class="form-label"
+                    data-translate-key="labelEmail"
+                    >Email:</label
+                  >
+                  <input
+                    type="email"
+                    id="profileEmail"
+                    name="profileEmail"
+                    class="form-input"
+                    value="nguyenvana@example.com"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="profilePhone"
+                    class="form-label"
+                    data-translate-key="labelPhone"
+                    >Số Điện Thoại:</label
+                  >
+                  <input
+                    type="tel"
+                    id="profilePhone"
+                    name="profilePhone"
+                    class="form-input"
+                    value="0901234567"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="profileAddress"
+                  class="form-label"
+                  data-translate-key="labelContactAddress"
+                  >Địa Chỉ Liên Hệ:</label
+                >
+                <input
+                  type="text"
+                  id="profileAddress"
+                  name="profileAddress"
+                  class="form-input"
+                  value="123 Đường ABC, Phường X, Quận Y, TP. HCM"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="profileIdNumber"
+                  class="form-label"
+                  data-translate-key="labelIdNumber"
+                  >Số CMND/CCCD:</label
+                >
+                <input
+                  type="text"
+                  id="profileIdNumber"
+                  name="profileIdNumber"
+                  class="form-input"
+                  value="012345678910"
+                  readonly
+                  disabled
+                  class="bg-gray-100"
+                />
+              </div>
+              <div class="pt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save mr-2"></i
+                  ><span data-translate-key="btnSaveChanges">Lưu Thay Đổi</span>
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section id="knowledgeBase" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titleKnowledgeAndFAQ"
+            >
+              Trung Tâm Hỗ Trợ & Câu Hỏi Thường Gặp
+            </h2>
+            <div class="mb-6">
+              <input
+                type="search"
+                data-translate-placeholder-key="placeholderSearchFAQ"
+                placeholder="Tìm kiếm câu hỏi hoặc thuật ngữ..."
+                class="form-input"
+              />
+            </div>
+            <div class="space-y-3">
+              <details class="bg-gray-50 p-3 rounded-md">
+                <summary
+                  class="font-medium text-gray-700 cursor-pointer hover:text-indigo-600"
+                  data-translate-key="faq1Question"
+                >
+                  Làm thế nào để yêu cầu bồi thường trực tuyến?
+                </summary>
+                <p
+                  class="text-gray-600 text-sm mt-2 pl-4"
+                  data-translate-key="faq1Answer"
+                >
+                  Bạn có thể vào mục "Yêu Cầu Bồi Thường", chọn "Tạo Yêu Cầu
+                  Mới" và làm theo hướng dẫn. Chuẩn bị sẵn các giấy tờ liên quan
+                  như giấy ra viện, hóa đơn, ảnh chụp hiện trường (nếu có).
+                </p>
+              </details>
+              <details class="bg-gray-50 p-3 rounded-md">
+                <summary
+                  class="font-medium text-gray-700 cursor-pointer hover:text-indigo-600"
+                  data-translate-key="faq2Question"
+                >
+                  Thời gian xử lý yêu cầu bồi thường là bao lâu?
+                </summary>
+                <p
+                  class="text-gray-600 text-sm mt-2 pl-4"
+                  data-translate-key="faq2Answer"
+                >
+                  Thời gian xử lý phụ thuộc vào loại yêu cầu và tính đầy đủ của
+                  hồ sơ. Thông thường từ 5-15 ngày làm việc. Bạn có thể theo dõi
+                  trạng thái trong mục "Yêu Cầu Bồi Thường".
+                </p>
+              </details>
+              <details class="bg-gray-50 p-3 rounded-md">
+                <summary
+                  class="font-medium text-gray-700 cursor-pointer hover:text-indigo-600"
+                  data-translate-key="faq3Question"
+                >
+                  Tôi có thể thay đổi thông tin liên hệ ở đâu?
+                </summary>
+                <p
+                  class="text-gray-600 text-sm mt-2 pl-4"
+                  data-translate-key="faq3Answer"
+                >
+                  Bạn có thể cập nhật thông tin email, số điện thoại, địa chỉ
+                  trong mục "Thông Tin Cá Nhân".
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section id="settings" class="content-section card">
+            <h2
+              class="text-2xl font-semibold text-gray-800 mb-6"
+              data-translate-key="titleAccountSettings"
+            >
+              Cài Đặt Tài Khoản
+            </h2>
+            <form id="settingsForm" class="space-y-6">
+              <div>
+                <h3
+                  class="text-lg font-medium text-gray-700 mb-2"
+                  data-translate-key="titleChangePassword"
+                >
+                  Thay Đổi Mật Khẩu
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="currentPassword"
+                      class="form-label"
+                      data-translate-key="labelCurrentPassword"
+                      >Mật Khẩu Hiện Tại:</label
+                    >
+                    <input
+                      type="password"
+                      id="currentPassword"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="newPassword"
+                      class="form-label"
+                      data-translate-key="labelNewPassword"
+                      >Mật Khẩu Mới:</label
+                    >
+                    <input
+                      type="password"
+                      id="newPassword"
+                      class="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="confirmNewPassword"
+                      class="form-label"
+                      data-translate-key="labelConfirmNewPassword"
+                      >Xác Nhận Mật Khẩu Mới:</label
+                    >
+                    <input
+                      type="password"
+                      id="confirmNewPassword"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3
+                  class="text-lg font-medium text-gray-700 mb-2"
+                  data-translate-key="titleNotificationSettings"
+                >
+                  Cài Đặt Thông Báo
+                </h3>
+                <div class="space-y-2">
+                  <div class="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="emailNotifications"
+                      checked
+                      class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                    />
+                    <label
+                      for="emailNotifications"
+                      class="text-sm text-gray-700"
+                      data-translate-key="labelReceiveEmailNotifications"
+                      >Nhận thông báo qua Email</label
+                    >
+                  </div>
+                  <div class="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="smsNotifications"
+                      class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2"
+                    />
+                    <label
+                      for="smsNotifications"
+                      class="text-sm text-gray-700"
+                      data-translate-key="labelReceiveSmsNotifications"
+                      >Nhận thông báo qua SMS (nếu có)</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="pt-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save mr-2"></i
+                  ><span data-translate-key="btnSaveSettings">Lưu Cài Đặt</span>
+                </button>
+              </div>
+            </form>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Bảng Điều Khiển Khách Hàng - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          altUserAvatar: "Ảnh đại diện người dùng",
+          textGreetingUser: "Chào, Nguyễn Văn A",
+          linkMyAccount: "Tài Khoản Của Tôi",
+          linkSettings: "Cài Đặt",
+          linkLogout: "Đăng Xuất",
+          sidebarOverview: '<i class="fas fa-tachometer-alt"></i>Tổng Quan',
+          sidebarMyPolicies:
+            '<i class="fas fa-file-contract"></i>Hợp Đồng Của Tôi',
+          sidebarClaims: '<i class="fas fa-headset"></i>Yêu Cầu Bồi Thường',
+          sidebarDocuments: '<i class="fas fa-folder-open"></i>Tài Liệu',
+          sidebarPaymentHistory:
+            '<i class="fas fa-credit-card"></i>Lịch Sử Thanh Toán',
+          sidebarMessages: '<i class="fas fa-envelope"></i>Tin Nhắn',
+          sidebarPersonalInfo:
+            '<i class="fas fa-user-edit"></i>Thông Tin Cá Nhân',
+          sidebarKnowledgeFAQ:
+            '<i class="fas fa-book-open"></i>Kiến Thức & FAQ',
+          sidebarAccountSettings: '<i class="fas fa-cog"></i>Cài Đặt Tài Khoản',
+          dashboardWelcomeUser: "Chào mừng trở lại, Nguyễn Văn A!",
+          dashboardActivePolicies: "Hợp Đồng Đang Hiệu Lực",
+          dashboardApprovedClaims: "Yêu Cầu Đã Duyệt",
+          dashboardNewNotifications: "Thông Báo Mới",
+          dashboardImportantNotice: "Thông Báo Quan Trọng",
+          dashboardNoticeContent1:
+            "Hợp đồng BHNT00123 sắp đến hạn thanh toán (30/05/2025).",
+          dashboardNoticeContent2:
+            "Vui lòng thanh toán trước hạn để đảm bảo quyền lợi.",
+          dashboardQuickAccess: "Truy Cập Nhanh",
+          btnViewContracts: "Xem Hợp Đồng",
+          btnCreateNewClaim: "Tạo Yêu Cầu Mới",
+          btnPaymentHistory: "Lịch Sử Thanh Toán",
+          titleMyPolicies: "Hợp Đồng Của Tôi",
+          tablePolicyNo: "Số Hợp Đồng",
+          tableProductName: "Tên Sản Phẩm",
+          tableEffectiveDate: "Ngày Hiệu Lực",
+          tableExpiryDate: "Ngày Đáo Hạn",
+          tableAnnualFee: "Phí (Năm)",
+          tableStatus: "Trạng Thái",
+          tableAction: "Hành Động",
+          productNameSample1: "Bảo An Toàn Diện Plus",
+          productNameSample2: "Sức Khỏe Vàng",
+          productNameSample3: "An Tâm Nhà Việt",
+          statusActive: "Đang hiệu lực",
+          statusExpired: "Đã hết hạn",
+          actionView: "Xem",
+          actionDownloadPdf: "Tải PDF",
+          titleClaims: "Yêu Cầu Bồi Thường",
+          tableClaimId: "Mã Yêu Cầu",
+          tableRequestDate: "Ngày Yêu Cầu",
+          tableClaimType: "Loại Yêu Cầu",
+          tableAmountRequested: "Số Tiền Yêu Cầu",
+          claimTypeHospitalization: "Nằm viện",
+          claimTypeCriticalIllness: "Bệnh hiểm nghèo",
+          statusApproved: "Đã duyệt",
+          statusPending: "Đang xử lý",
+          actionViewDetails: "Xem Chi Tiết",
+          titleMyDocuments: "Tài Liệu Của Tôi",
+          textUploadDate: "Ngày tải lên:",
+          actionDownload: "Tải xuống",
+          titlePaymentHistory: "Lịch Sử Thanh Toán",
+          tableTransactionId: "Mã Giao Dịch",
+          tablePaymentDate: "Ngày Thanh Toán",
+          tableAmount: "Số Tiền",
+          tablePaymentMethod: "Phương Thức",
+          paymentMethodBankTransfer: "Chuyển khoản",
+          paymentMethodCreditCard: "Thẻ tín dụng",
+          statusSuccess: "Thành công",
+          actionDownloadReceipt: "Tải biên lai",
+          titleMessagesWithAdvisor: "Tin Nhắn Với Tư Vấn Viên",
+          altAdvisorAvatar: "Ảnh đại diện tư vấn viên",
+          messageSampleAdvisor1:
+            "Chào anh A, em là Mai, tư vấn viên của BảoHiểmPRO. Anh có câu hỏi nào về hợp đồng BHNT00123 không ạ?",
+          messageSampleUser1:
+            "Chào Mai, anh muốn hỏi về thời hạn đóng phí tiếp theo.",
+          altUserAvatarSmall: "Ảnh đại diện người dùng nhỏ",
+          messageSampleAdvisor2:
+            "Dạ, kỳ phí tiếp theo của hợp đồng BHNT00123 là ngày 01/06/2025 ạ. Anh có thể thanh toán trực tuyến qua dashboard này.",
+          placeholderTypeMessage: "Nhập tin nhắn của bạn...",
+          titlePersonalInfoSection: "Thông Tin Cá Nhân",
+          labelFullName: "Họ và Tên:",
+          labelDateOfBirth: "Ngày Sinh:",
+          labelEmail: "Email:",
+          labelPhone: "Số Điện Thoại:",
+          labelContactAddress: "Địa Chỉ Liên Hệ:",
+          labelIdNumber: "Số CMND/CCCD:",
+          btnSaveChanges: "Lưu Thay Đổi",
+          titleKnowledgeAndFAQ: "Trung Tâm Hỗ Trợ & Câu Hỏi Thường Gặp",
+          placeholderSearchFAQ: "Tìm kiếm câu hỏi hoặc thuật ngữ...",
+          faq1Question: "Làm thế nào để yêu cầu bồi thường trực tuyến?",
+          faq1Answer:
+            'Bạn có thể vào mục "Yêu Cầu Bồi Thường", chọn "Tạo Yêu Cầu Mới" và làm theo hướng dẫn. Chuẩn bị sẵn các giấy tờ liên quan như giấy ra viện, hóa đơn, ảnh chụp hiện trường (nếu có).',
+          faq2Question: "Thời gian xử lý yêu cầu bồi thường là bao lâu?",
+          faq2Answer:
+            'Thời gian xử lý phụ thuộc vào loại yêu cầu và tính đầy đủ của hồ sơ. Thông thường từ 5-15 ngày làm việc. Bạn có thể theo dõi trạng thái trong mục "Yêu Cầu Bồi Thường".',
+          faq3Question: "Tôi có thể thay đổi thông tin liên hệ ở đâu?",
+          faq3Answer:
+            'Bạn có thể cập nhật thông tin email, số điện thoại, địa chỉ trong mục "Thông Tin Cá Nhân".',
+          titleAccountSettings: "Cài Đặt Tài Khoản",
+          titleChangePassword: "Thay Đổi Mật Khẩu",
+          labelCurrentPassword: "Mật Khẩu Hiện Tại:",
+          labelNewPassword: "Mật Khẩu Mới:",
+          labelConfirmNewPassword: "Xác Nhận Mật Khẩu Mới:",
+          titleNotificationSettings: "Cài Đặt Thông Báo",
+          labelReceiveEmailNotifications: "Nhận thông báo qua Email",
+          labelReceiveSmsNotifications: "Nhận thông báo qua SMS (nếu có)",
+          btnSaveSettings: "Lưu Cài Đặt",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          // JS Alerts
+          alertNewClaimForm:
+            "Chuyển đến form tạo yêu cầu bồi thường mới (Tính năng đang phát triển).",
+          alertDownloadPolicy:
+            "Đang tải PDF cho hợp đồng {policyId} (Tính năng đang phát triển).",
+          alertViewClaimDetails:
+            "Xem chi tiết yêu cầu {claimId} (Tính năng đang phát triển).",
+          alertDownloadDocument:
+            "Đang tải tài liệu {docId} (Tính năng đang phát triển).",
+          alertDownloadReceipt:
+            "Đang tải biên lai cho giao dịch {txId} (Tính năng đang phát triển).",
+          alertProfileUpdated: "Thông tin cá nhân đã được cập nhật (Mô phỏng).",
+          alertSettingsSaved: "Cài đặt tài khoản đã được lưu (Mô phỏng).",
+          alertLogoutSuccess: "Đăng xuất thành công (Mô phỏng).",
+          alertShowNotifications:
+            "Hiển thị danh sách thông báo (Tính năng đang phát triển).",
+        },
+        en: {
+          pageTitle: "Customer Dashboard - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          altUserAvatar: "User Avatar",
+          textGreetingUser: "Hello, Nguyễn Văn A",
+          linkMyAccount: "My Account",
+          linkSettings: "Settings",
+          linkLogout: "Logout",
+          sidebarOverview: '<i class="fas fa-tachometer-alt"></i>Overview',
+          sidebarMyPolicies: '<i class="fas fa-file-contract"></i>My Policies',
+          sidebarClaims: '<i class="fas fa-headset"></i>Claims',
+          sidebarDocuments: '<i class="fas fa-folder-open"></i>Documents',
+          sidebarPaymentHistory:
+            '<i class="fas fa-credit-card"></i>Payment History',
+          sidebarMessages: '<i class="fas fa-envelope"></i>Messages',
+          sidebarPersonalInfo: '<i class="fas fa-user-edit"></i>Personal Info',
+          sidebarKnowledgeFAQ:
+            '<i class="fas fa-book-open"></i>Knowledge & FAQ',
+          sidebarAccountSettings: '<i class="fas fa-cog"></i>Account Settings',
+          dashboardWelcomeUser: "Welcome back, Nguyễn Văn A!",
+          dashboardActivePolicies: "Active Policies",
+          dashboardApprovedClaims: "Approved Claims",
+          dashboardNewNotifications: "New Notifications",
+          dashboardImportantNotice: "Important Notice",
+          dashboardNoticeContent1:
+            "Policy BHNT00123 is due for payment soon (30/05/2025).",
+          dashboardNoticeContent2:
+            "Please make the payment before the due date to ensure your benefits.",
+          dashboardQuickAccess: "Quick Access",
+          btnViewContracts: "View Policies",
+          btnCreateNewClaim: "Create New Claim",
+          btnPaymentHistory: "Payment History",
+          titleMyPolicies: "My Policies",
+          tablePolicyNo: "Policy No.",
+          tableProductName: "Product Name",
+          tableEffectiveDate: "Effective Date",
+          tableExpiryDate: "Expiry Date",
+          tableAnnualFee: "Fee (Annual)",
+          tableStatus: "Status",
+          tableAction: "Action",
+          productNameSample1: "Comprehensive Security Plus",
+          productNameSample2: "Golden Health",
+          productNameSample3: "Secure Home Vietnam",
+          statusActive: "Active",
+          statusExpired: "Expired",
+          actionView: "View",
+          actionDownloadPdf: "Download PDF",
+          titleClaims: "Claims",
+          tableClaimId: "Claim ID",
+          tableRequestDate: "Request Date",
+          tableClaimType: "Claim Type",
+          tableAmountRequested: "Amount Requested",
+          claimTypeHospitalization: "Hospitalization",
+          claimTypeCriticalIllness: "Critical Illness",
+          statusApproved: "Approved",
+          statusPending: "Pending",
+          actionViewDetails: "View Details",
+          titleMyDocuments: "My Documents",
+          textUploadDate: "Upload Date:",
+          actionDownload: "Download",
+          titlePaymentHistory: "Payment History",
+          tableTransactionId: "Transaction ID",
+          tablePaymentDate: "Payment Date",
+          tableAmount: "Amount",
+          tablePaymentMethod: "Payment Method",
+          paymentMethodBankTransfer: "Bank Transfer",
+          paymentMethodCreditCard: "Credit Card",
+          statusSuccess: "Successful",
+          actionDownloadReceipt: "Download Receipt",
+          titleMessagesWithAdvisor: "Messages with Advisor",
+          altAdvisorAvatar: "Advisor Avatar",
+          messageSampleAdvisor1:
+            "Hello Mr. A, I'm Mai, your advisor from BảoHiểmPRO. Do you have any questions about policy BHNT00123?",
+          messageSampleUser1:
+            "Hi Mai, I'd like to ask about the next premium due date.",
+          altUserAvatarSmall: "Small User Avatar",
+          messageSampleAdvisor2:
+            "Yes, the next premium for policy BHNT00123 is due on 01/06/2025. You can pay online via this dashboard.",
+          placeholderTypeMessage: "Type your message here...",
+          titlePersonalInfoSection: "Personal Information",
+          labelFullName: "Full Name:",
+          labelDateOfBirth: "Date of Birth:",
+          labelEmail: "Email:",
+          labelPhone: "Phone Number:",
+          labelContactAddress: "Contact Address:",
+          labelIdNumber: "ID/Citizen ID No.:",
+          btnSaveChanges: "Save Changes",
+          titleKnowledgeAndFAQ: "Support Center & FAQ",
+          placeholderSearchFAQ: "Search questions or terms...",
+          faq1Question: "How to file a claim online?",
+          faq1Answer:
+            'You can go to the "Claims" section, select "Create New Claim" and follow the instructions. Prepare relevant documents such as hospital discharge papers, invoices, photos of the scene (if any).',
+          faq2Question: "How long does it take to process a claim?",
+          faq2Answer:
+            'Processing time depends on the type of claim and the completeness of the documents. Usually 5-15 working days. You can track the status in the "Claims" section.',
+          faq3Question: "Where can I update my contact information?",
+          faq3Answer:
+            'You can update your email, phone number, and address in the "Personal Info" section.',
+          titleAccountSettings: "Account Settings",
+          titleChangePassword: "Change Password",
+          labelCurrentPassword: "Current Password:",
+          labelNewPassword: "New Password:",
+          labelConfirmNewPassword: "Confirm New Password:",
+          titleNotificationSettings: "Notification Settings",
+          labelReceiveEmailNotifications: "Receive notifications via Email",
+          labelReceiveSmsNotifications:
+            "Receive notifications via SMS (if available)",
+          btnSaveSettings: "Save Settings",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          // JS Alerts
+          alertNewClaimForm:
+            "Redirecting to new claim form (Feature in development).",
+          alertDownloadPolicy:
+            "Downloading PDF for policy {policyId} (Feature in development).",
+          alertViewClaimDetails:
+            "Viewing details for claim {claimId} (Feature in development).",
+          alertDownloadDocument:
+            "Downloading document {docId} (Feature in development).",
+          alertDownloadReceipt:
+            "Downloading receipt for transaction {txId} (Feature in development).",
+          alertProfileUpdated: "Personal information updated (Simulation).",
+          alertSettingsSaved: "Account settings saved (Simulation).",
+          alertLogoutSuccess: "Logged out successfully (Simulation).",
+          alertShowNotifications:
+            "Displaying notification list (Feature in development).",
+        },
+      };
+
+      let currentLang = "vi"; // Default language
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_CustomerDashboard_Lang", lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              (el.type === "submit" || el.type === "button")
+            ) {
+              el.value = translatedText;
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H2" ||
+                el.tagName === "H3" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE" ||
+                el.tagName === "SUMMARY" ||
+                el.tagName === "TH" ||
+                el.tagName === "TD") &&
+              (translatedText.includes("&") ||
+                translatedText.includes("<i class"))
+            ) {
+              if (el.innerHTML.includes("<i")) {
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translatedText.replace(/<i class="[^"]+"><\/i>/, "").trim();
+              } else {
+                el.innerHTML = translatedText;
+              }
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Update dynamic user name in header
+        const userName = "Nguyễn Văn A"; // This would typically come from user data
+        document.getElementById("headerUserName").textContent = `${
+          getTranslatedText("textGreetingUser", lang).split(",")[0]
+        }, ${userName}`;
+        document.getElementById("dashboardWelcome").textContent = `${
+          getTranslatedText("dashboardWelcomeUser", lang).split(",")[0]
+        }, ${userName}!`;
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key;
+      }
+
+      const sidebarLinks = document.querySelectorAll(".sidebar-link");
+      const contentSections = document.querySelectorAll(".content-section");
+      const userMenuButton = document.getElementById("userMenuButton");
+      const userMenuDropdown = document.getElementById("userMenuDropdown");
+      const sidebarNavTriggers = document.querySelectorAll(
+        ".sidebar-nav-trigger"
+      );
+
+      function setActiveSection(targetId) {
+        sidebarLinks.forEach((link) => {
+          link.classList.toggle("active", link.dataset.target === targetId);
+        });
+        contentSections.forEach((section) => {
+          section.classList.toggle("active", section.id === targetId);
+        });
+        window.scrollTo(0, 0);
+      }
+
+      sidebarLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.dataset.target;
+          if (link.href.includes("user-profile-page.html")) {
+            // Redirect for profile page links
+            window.location.href = link.href;
+            return;
+          }
+          if (link.href.includes("knowledge-center-page.html")) {
+            window.location.href = link.href;
+            return;
+          }
+          setActiveSection(targetId);
+          window.location.hash = targetId;
+          if (userMenuDropdown.contains(link)) {
+            userMenuDropdown.classList.add("hidden");
+          }
+        });
+      });
+
+      sidebarNavTriggers.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = button.dataset.target;
+          setActiveSection(targetId);
+          window.location.hash = targetId;
+        });
+      });
+
+      userMenuButton.addEventListener("click", () => {
+        userMenuDropdown.classList.toggle("hidden");
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          !userMenuButton.contains(event.target) &&
+          !userMenuDropdown.contains(event.target)
+        ) {
+          userMenuDropdown.classList.add("hidden");
+        }
+      });
+
+      function handleHashChange() {
+        const hash = window.location.hash.substring(1);
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_CustomerDashboard_Lang") || "vi";
+        if (!currentLang || currentLang !== savedLang) {
+          setLanguage(savedLang);
+        }
+
+        if (hash) {
+          const targetSection = document.getElementById(hash);
+          if (
+            targetSection &&
+            targetSection.classList.contains("content-section")
+          ) {
+            setActiveSection(hash);
+          } else {
+            setActiveSection("dashboard");
+          }
+        } else {
+          setActiveSection("dashboard");
+        }
+      }
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial language load
+      document.addEventListener("DOMContentLoaded", () => {
+        handleHashChange(); // Call on initial load
+      });
+      window.addEventListener("hashchange", handleHashChange);
+
+      // Placeholder actions for buttons
+      document
+        .getElementById("initiateClaimBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertNewClaimForm"))
+        );
+      document.querySelectorAll(".download-policy-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) =>
+          alert(
+            getTranslatedText("alertDownloadPolicy").replace(
+              "{policyId}",
+              e.target.dataset.policyId
+            )
+          )
+        );
+      });
+      document.querySelectorAll(".view-claim-details-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) =>
+          alert(
+            getTranslatedText("alertViewClaimDetails").replace(
+              "{claimId}",
+              e.target.dataset.claimId
+            )
+          )
+        );
+      });
+      document.querySelectorAll(".download-doc-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) =>
+          alert(
+            getTranslatedText("alertDownloadDocument").replace(
+              "{docId}",
+              e.target.dataset.docId
+            )
+          )
+        );
+      });
+      document.querySelectorAll(".download-receipt-btn").forEach((btn) => {
+        btn.addEventListener("click", (e) =>
+          alert(
+            getTranslatedText("alertDownloadReceipt").replace(
+              "{txId}",
+              e.target.dataset.txId
+            )
+          )
+        );
+      });
+      document
+        .getElementById("profileUpdateForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(getTranslatedText("alertProfileUpdated"));
+        });
+      document
+        .getElementById("settingsForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(getTranslatedText("alertSettingsSaved"));
+        });
+      document
+        .getElementById("logoutButton")
+        ?.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert(getTranslatedText("alertLogoutSuccess"));
+          window.location.href = "index.html";
+        });
+      document
+        .getElementById("notificationsBtn")
+        ?.addEventListener("click", () => {
+          alert(getTranslatedText("alertShowNotifications"));
+          document
+            .querySelector("#notificationsBtn .notification-dot")
+            ?.classList.add("hidden");
+        });
+    </script>
+  </body>
+</html>

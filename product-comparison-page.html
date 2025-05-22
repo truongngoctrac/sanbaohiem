@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">
+      So Sánh Sản Phẩm Bảo Hiểm - BảoHiểmPRO
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb; /* Light gray background */
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        border: 1px solid #e5e7eb; /* Gray 200 */
+        padding: 0.75rem; /* p-3 */
+        text-align: left;
+      }
+
+      .comparison-table th {
+        background-color: #f3f4f6; /* Gray 100 */
+        font-weight: 600; /* semibold */
+      }
+
+      .comparison-table .product-header {
+        background-color: #e0e7ff; /* Indigo 100 */
+        text-align: center;
+      }
+
+      .comparison-table .feature-name {
+        font-weight: 500; /* medium */
+        background-color: #f9fafb;
+      }
+
+      .highlight-diff {
+        background-color: #fef9c3; /* Yellow 100 for differences */
+      }
+      .highlight-better {
+        background-color: #dcfce7; /* Green 100 for better value */
+        color: #166534; /* Green 800 */
+      }
+      .highlight-worse {
+        background-color: #fee2e2; /* Red 100 for worse value */
+        color: #991b1b; /* Red 800 */
+      }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: help;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: #374151; /* Gray 700 */
+        color: #fff;
+        text-align: center;
+        border-radius: 0.375rem; /* rounded-md */
+        padding: 0.5rem; /* p-2 */
+        position: absolute;
+        z-index: 10;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -100px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #374151 transparent transparent transparent;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .product-card-selected {
+        border: 2px solid #4f46e5; /* Indigo 600 */
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+      }
+      .filter-section label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .filter-section select,
+      .filter-section input[type="range"],
+      .filter-section input[type="text"] {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        border: 1px solid #d1d5db; /* Gray 300 */
+      }
+      .tab-button.active {
+        border-bottom-width: 2px;
+        border-color: #4f46e5; /* Indigo */
+        color: #4f46e5;
+        font-weight: 600;
+      }
+      .btn {
+        padding: 0.625rem 1.25rem; /* py-2.5 px-5 */
+        border-radius: 0.5rem; /* rounded-lg */
+        font-weight: 500; /* medium */
+        transition: background-color 0.3s ease;
+      }
+      .btn-primary {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca; /* Indigo 700 */
+      }
+      .btn-secondary {
+        background-color: #6b7280; /* Gray 500 */
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #4b5563; /* Gray 600 */
+      }
+      .btn-outline {
+        background-color: transparent;
+        color: #4f46e5;
+        border: 1px solid #4f46e5;
+      }
+      .btn-outline:hover {
+        background-color: #e0e7ff; /* Indigo 100 */
+      }
+      .product-slot {
+        border: 2px dashed #d1d5db;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .product-slot.has-product {
+        border-style: solid;
+        border-color: #a5b4fc; /* Indigo 300 */
+      }
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Darker text */
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6; /* Lighter gray for hover */
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/indigo/white?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html#services"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navServices"
+            >Dịch Vụ</a
+          >
+          <a
+            href="index.html#individuals"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navIndividuals"
+            >Cá Nhân</a
+          >
+          <a
+            href="index.html#businesses"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navBusinesses"
+            >Doanh Nghiệp</a
+          >
+          <a
+            href="product-comparison-page.html"
+            class="text-indigo-600 font-semibold"
+            data-translate-key="navCompareProducts"
+            >So Sánh Sản Phẩm</a
+          >
+        </nav>
+        <div class="language-switcher flex items-center space-x-2">
+          <button
+            data-lang="vi"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            VIE
+          </button>
+          <button
+            data-lang="en"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            ENG
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <h1
+        class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center"
+        data-translate-key="mainTitle"
+      >
+        So Sánh Sản Phẩm Bảo Hiểm
+      </h1>
+
+      <section
+        id="productSelection"
+        class="mb-10 p-6 bg-white rounded-lg shadow"
+      >
+        <h2
+          class="text-2xl font-semibold mb-4 text-gray-700"
+          data-translate-key="selectProductsTitle"
+        >
+          Chọn Sản Phẩm Để So Sánh (Tối đa 5)
+        </h2>
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-6"
+          id="availableProductsList"
+        ></div>
+        <div class="text-center">
+          <button id="startComparisonBtn" class="btn btn-primary text-lg">
+            <i class="fas fa-balance-scale mr-2"></i
+            ><span data-translate-key="btnCompareNow">So Sánh Ngay</span>
+          </button>
+        </div>
+      </section>
+
+      <section
+        id="filtersSection"
+        class="mb-10 p-6 bg-white rounded-lg shadow hidden"
+      >
+        <h2
+          class="text-2xl font-semibold mb-6 text-gray-700"
+          data-translate-key="filtersTitle"
+        >
+          Bộ Lọc Chi Tiết
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div class="filter-section">
+            <label
+              for="coverageTypeFilter"
+              data-translate-key="labelCoverageType"
+              >Loại Hình Bảo Hiểm:</label
+            >
+            <select id="coverageTypeFilter">
+              <option value="" data-translate-key="optionAll">Tất cả</option>
+              <option value="nhan_tho" data-translate-key="optionLifeInsurance">
+                Nhân Thọ
+              </option>
+              <option
+                value="suc_khoe"
+                data-translate-key="optionHealthInsurance"
+              >
+                Sức Khỏe
+              </option>
+              <option
+                value="tai_san"
+                data-translate-key="optionPropertyInsurance"
+              >
+                Tài Sản
+              </option>
+              <option
+                value="xe_co_gioi"
+                data-translate-key="optionVehicleInsurance"
+              >
+                Xe Cơ Giới
+              </option>
+            </select>
+          </div>
+          <div class="filter-section">
+            <label for="priceRangeFilter" data-translate-key="labelPriceRange"
+              >Khoảng Phí (Năm):</label
+            >
+            <span id="priceRangeValue">10,000,000 VNĐ</span>
+            <input
+              type="range"
+              id="priceRangeFilter"
+              min="1000000"
+              max="50000000"
+              step="500000"
+              value="10000000"
+            />
+          </div>
+          <div class="filter-section">
+            <label for="benefitFilter" data-translate-key="labelMainBenefit"
+              >Quyền Lợi Chính:</label
+            >
+            <input
+              type="text"
+              id="benefitFilter"
+              data-translate-placeholder-key="placeholderBenefit"
+              placeholder="VD: Điều trị nội trú, Bảo vệ tử vong..."
+            />
+          </div>
+        </div>
+        <div class="flex justify-center border-b border-gray-300 mb-6">
+          <button
+            data-tab-target="individualFilters"
+            class="tab-button active py-2 px-4 text-gray-600 hover:text-indigo-600 focus:outline-none"
+            data-translate-key="tabForIndividuals"
+          >
+            Dành Cho Cá Nhân
+          </button>
+          <button
+            data-tab-target="businessFilters"
+            class="tab-button py-2 px-4 text-gray-600 hover:text-indigo-600 focus:outline-none"
+            data-translate-key="tabForBusinesses"
+          >
+            Dành Cho Doanh Nghiệp
+          </button>
+        </div>
+        <div id="individualFilters" class="tab-content-filter">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label for="ageFilter" data-translate-key="labelAge"
+                >Độ tuổi:</label
+              >
+              <input
+                type="number"
+                id="ageFilter"
+                data-translate-placeholder-key="placeholderAge"
+                placeholder="VD: 30"
+                class="filter-section"
+              />
+            </div>
+            <div>
+              <label
+                for="healthStatusFilter"
+                data-translate-key="labelHealthStatus"
+                >Tình trạng sức khỏe:</label
+              >
+              <select id="healthStatusFilter" class="filter-section">
+                <option value="" data-translate-key="optionNotRequired">
+                  Không yêu cầu
+                </option>
+                <option value="good" data-translate-key="optionGood">
+                  Tốt
+                </option>
+                <option value="average" data-translate-key="optionAverage">
+                  Trung bình
+                </option>
+                <option
+                  value="pre_existing"
+                  data-translate-key="optionPreExisting"
+                >
+                  Có bệnh nền
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="lifestyleFilter" data-translate-key="labelLifestyle"
+                >Yếu tố lối sống:</label
+              >
+              <input
+                type="text"
+                id="lifestyleFilter"
+                data-translate-placeholder-key="placeholderLifestyle"
+                placeholder="VD: Chơi thể thao mạo hiểm"
+                class="filter-section"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="businessFilters" class="tab-content-filter hidden">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label
+                for="industryTypeFilter"
+                data-translate-key="labelIndustryType"
+                >Loại hình doanh nghiệp:</label
+              >
+              <input
+                type="text"
+                id="industryTypeFilter"
+                data-translate-placeholder-key="placeholderIndustryType"
+                placeholder="VD: Công nghệ thông tin"
+                class="filter-section"
+              />
+            </div>
+            <div>
+              <label
+                for="employeeCountFilter"
+                data-translate-key="labelEmployeeCount"
+                >Số lượng nhân viên:</label
+              >
+              <input
+                type="number"
+                id="employeeCountFilter"
+                data-translate-placeholder-key="placeholderEmployeeCount"
+                placeholder="VD: 50"
+                class="filter-section"
+              />
+            </div>
+            <div>
+              <label for="revenueFilter" data-translate-key="labelAnnualRevenue"
+                >Doanh thu hàng năm:</label
+              >
+              <input
+                type="text"
+                id="revenueFilter"
+                data-translate-placeholder-key="placeholderAnnualRevenue"
+                placeholder="VD: 10 tỷ VNĐ"
+                class="filter-section"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-6">
+          <button id="applyFiltersBtn" class="btn btn-primary">
+            <i class="fas fa-filter mr-2"></i
+            ><span data-translate-key="btnApplyFilters">Áp Dụng Bộ Lọc</span>
+          </button>
+          <button id="resetFiltersBtn" class="btn btn-outline ml-2">
+            <i class="fas fa-undo mr-2"></i
+            ><span data-translate-key="btnResetFilters">Đặt Lại</span>
+          </button>
+        </div>
+      </section>
+
+      <section
+        id="comparisonArea"
+        class="bg-white rounded-lg shadow p-4 md:p-6 hidden"
+      >
+        <div class="flex flex-wrap justify-between items-center mb-6 gap-2">
+          <h2
+            class="text-2xl font-semibold text-gray-700"
+            data-translate-key="comparisonResultsTitle"
+          >
+            Kết Quả So Sánh
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            <button id="saveComparisonBtn" class="btn btn-outline text-sm">
+              <i class="fas fa-save mr-1"></i
+              ><span data-translate-key="btnSaveComparison">Lưu So Sánh</span>
+            </button>
+            <button id="shareComparisonBtn" class="btn btn-outline text-sm">
+              <i class="fas fa-share-alt mr-1"></i
+              ><span data-translate-key="btnShareComparison"
+                >Chia Sẻ (Cá nhân)</span
+              >
+            </button>
+            <button id="exportPdfBtn" class="btn btn-outline text-sm">
+              <i class="fas fa-file-pdf mr-1"></i
+              ><span data-translate-key="btnExportPdf">Xuất PDF (DN)</span>
+            </button>
+            <button id="exportExcelBtn" class="btn btn-outline text-sm">
+              <i class="fas fa-file-excel mr-1"></i
+              ><span data-translate-key="btnExportExcel">Xuất Excel (DN)</span>
+            </button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full comparison-table">
+            <thead id="comparisonTableHead"></thead>
+            <tbody id="comparisonTableBody"></tbody>
+          </table>
+        </div>
+        <div
+          id="noProductsSelected"
+          class="text-center py-10 text-gray-500 hidden"
+        >
+          <i class="fas fa-info-circle fa-3x mb-3"></i>
+          <p class="text-xl" data-translate-key="noProductsSelectedMsg">
+            Vui lòng chọn ít nhất 2 sản phẩm để so sánh.
+          </p>
+        </div>
+      </section>
+      <section
+        id="whatIfSection"
+        class="mt-10 p-6 bg-white rounded-lg shadow hidden"
+      >
+        <h2
+          class="text-2xl font-semibold mb-4 text-gray-700"
+          data-translate-key="whatIfTitle"
+        >
+          Thử Nghiệm "Nếu-Thì" (Dành cho Cá Nhân)
+        </h2>
+        <p class="text-gray-600 mb-4" data-translate-key="whatIfDesc">
+          Điều chỉnh các tùy chọn bảo hiểm để xem phí bảo hiểm thay đổi như thế
+          nào.
+        </p>
+        <div class="text-gray-500" data-translate-key="featureInProgress">
+          Tính năng này đang được phát triển.
+        </div>
+      </section>
+
+      <section
+        id="gapAnalysisSection"
+        class="mt-10 p-6 bg-white rounded-lg shadow hidden"
+      >
+        <h2
+          class="text-2xl font-semibold mb-4 text-gray-700"
+          data-translate-key="gapAnalysisTitle"
+        >
+          Phân Tích Lỗ Hổng Bảo Hiểm (Dành cho Doanh Nghiệp)
+        </h2>
+        <p class="text-gray-600 mb-4" data-translate-key="gapAnalysisDesc">
+          Xem chi tiết sự khác biệt về phạm vi bảo hiểm giữa các sản phẩm đã
+          chọn.
+        </p>
+        <div class="text-gray-500" data-translate-key="featureInProgress">
+          Tính năng này đang được phát triển.
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+        <p class="text-xs mt-2">
+          <a
+            href="#"
+            class="hover:text-indigo-400"
+            data-translate-key="footerPrivacyPolicy"
+            >Chính sách bảo mật</a
+          >
+          |
+          <a
+            href="#"
+            class="hover:text-indigo-400"
+            data-translate-key="footerTermsOfUse"
+            >Điều khoản sử dụng</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "So Sánh Sản Phẩm Bảo Hiểm - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          navServices: "Dịch Vụ",
+          navIndividuals: "Cá Nhân",
+          navBusinesses: "Doanh Nghiệp",
+          navCompareProducts: "So Sánh Sản Phẩm",
+          mainTitle: "So Sánh Sản Phẩm Bảo Hiểm",
+          selectProductsTitle: "Chọn Sản Phẩm Để So Sánh (Tối đa 5)",
+          btnCompareNow: "So Sánh Ngay",
+          filtersTitle: "Bộ Lọc Chi Tiết",
+          labelCoverageType: "Loại Hình Bảo Hiểm:",
+          optionAll: "Tất cả",
+          optionLifeInsurance: "Nhân Thọ",
+          optionHealthInsurance: "Sức Khỏe",
+          optionPropertyInsurance: "Tài Sản",
+          optionVehicleInsurance: "Xe Cơ Giới",
+          labelPriceRange: "Khoảng Phí (Năm):",
+          labelMainBenefit: "Quyền Lợi Chính:",
+          placeholderBenefit: "VD: Điều trị nội trú, Bảo vệ tử vong...",
+          tabForIndividuals: "Dành Cho Cá Nhân",
+          tabForBusinesses: "Dành Cho Doanh Nghiệp",
+          labelAge: "Độ tuổi:",
+          placeholderAge: "VD: 30",
+          labelHealthStatus: "Tình trạng sức khỏe:",
+          optionNotRequired: "Không yêu cầu",
+          optionGood: "Tốt",
+          optionAverage: "Trung bình",
+          optionPreExisting: "Có bệnh nền",
+          labelLifestyle: "Yếu tố lối sống:",
+          placeholderLifestyle: "VD: Chơi thể thao mạo hiểm",
+          labelIndustryType: "Loại hình doanh nghiệp:",
+          placeholderIndustryType: "VD: Công nghệ thông tin",
+          labelEmployeeCount: "Số lượng nhân viên:",
+          placeholderEmployeeCount: "VD: 50",
+          labelAnnualRevenue: "Doanh thu hàng năm:",
+          placeholderAnnualRevenue: "VD: 10 tỷ VNĐ",
+          btnApplyFilters: "Áp Dụng Bộ Lọc",
+          btnResetFilters: "Đặt Lại",
+          comparisonResultsTitle: "Kết Quả So Sánh",
+          btnSaveComparison: "Lưu So Sánh",
+          btnShareComparison: "Chia Sẻ (Cá nhân)",
+          btnExportPdf: "Xuất PDF (DN)",
+          btnExportExcel: "Xuất Excel (DN)",
+          noProductsSelectedMsg: "Vui lòng chọn ít nhất 2 sản phẩm để so sánh.",
+          whatIfTitle: 'Thử Nghiệm "Nếu-Thì" (Dành cho Cá Nhân)',
+          whatIfDesc:
+            "Điều chỉnh các tùy chọn bảo hiểm để xem phí bảo hiểm thay đổi như thế nào.",
+          gapAnalysisTitle:
+            "Phân Tích Lỗ Hổng Bảo Hiểm (Dành cho Doanh Nghiệp)",
+          gapAnalysisDesc:
+            "Xem chi tiết sự khác biệt về phạm vi bảo hiểm giữa các sản phẩm đã chọn.",
+          featureInProgress: "Tính năng này đang được phát triển.",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          footerPrivacyPolicy: "Chính sách bảo mật",
+          footerTermsOfUse: "Điều khoản sử dụng",
+          // Dynamic text in JS
+          productCardSelected: "Đã chọn",
+          productCardSelect: "Chọn",
+          alertMaxProducts: "Bạn chỉ có thể chọn tối đa 5 sản phẩm để so sánh.",
+          alertMinProducts:
+            "Vui lòng chọn ít nhất một sản phẩm để xem chi tiết hoặc nhiều hơn để so sánh.",
+          alertFiltersApplied:
+            "Tính năng lọc đang được phát triển. Dữ liệu hiển thị hiện tại là mẫu.",
+          alertFiltersReset: "Đã đặt lại bộ lọc (giao diện mẫu).",
+          alertSaveComparison: 'Tính năng "Lưu So Sánh" đang được phát triển.',
+          alertShareComparison: 'Tính năng "Chia Sẻ" đang được phát triển.',
+          alertExportPdf: 'Tính năng "Xuất PDF" đang được phát triển.',
+          alertExportExcel: 'Tính năng "Xuất Excel" đang được phát triển.',
+          tableHeaderFeature: "Tính Năng",
+          tableHeaderRemoveProduct: "Bỏ chọn",
+          tooltipExplanation: "Giải thích về {featureName} (placeholder)",
+          // featuresToCompare names
+          featureAnnualPremium: "Phí Bảo Hiểm Hàng Năm",
+          featureCoverageLimit: "Số Tiền Bảo Hiểm Tối Đa",
+          featureDeductible: "Mức Miễn Thường",
+          featureHospitalCoverage: "Quyền Lợi Nằm Viện",
+          featureOutpatientCoverage: "Quyền Lợi Ngoại Trú",
+          featureCriticalIllnessCover: "Bảo Hiểm Bệnh Hiểm Nghèo",
+          featureDentalCoverage: "Quyền Lợi Nha Khoa",
+          featureMaternityCoverage: "Quyền Lợi Thai Sản",
+          featureInvestmentLink: "Liên Kết Đầu Tư",
+          featurePhysicalDamage: "Bảo Hiểm Thân Vỏ (Xe)",
+          featureThirdPartyLiability: "Trách Nhiệm Dân Sự (Xe)",
+          featureRoadsideAssistance: "Hỗ Trợ Ven Đường (Xe)",
+          featureFireExplosion: "Bảo Hiểm Cháy Nổ (Tài sản DN)",
+          featureAllRiskProperty: "Bảo Hiểm Mọi Rủi Ro Tài Sản (DN)",
+          featureBusinessInterruption: "Bảo Hiểm Gián Đoạn Kinh Doanh (DN)",
+          featureRating: "Đánh Giá Khách Hàng",
+          textBooleanYes:
+            '<i class="fas fa-check-circle text-green-500"></i> Có',
+          textBooleanNo:
+            '<i class="fas fa-times-circle text-red-500"></i> Không',
+        },
+        en: {
+          pageTitle: "Compare Insurance Products - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          navServices: "Services",
+          navIndividuals: "For Individuals",
+          navBusinesses: "For Businesses",
+          navCompareProducts: "Compare Products",
+          mainTitle: "Compare Insurance Products",
+          selectProductsTitle: "Select Products to Compare (Max 5)",
+          btnCompareNow: "Compare Now",
+          filtersTitle: "Detailed Filters",
+          labelCoverageType: "Coverage Type:",
+          optionAll: "All",
+          optionLifeInsurance: "Life Insurance",
+          optionHealthInsurance: "Health Insurance",
+          optionPropertyInsurance: "Property Insurance",
+          optionVehicleInsurance: "Vehicle Insurance",
+          labelPriceRange: "Price Range (Annual):",
+          labelMainBenefit: "Main Benefit:",
+          placeholderBenefit: "E.g.: Inpatient treatment, Death benefit...",
+          tabForIndividuals: "For Individuals",
+          tabForBusinesses: "For Businesses",
+          labelAge: "Age:",
+          placeholderAge: "E.g.: 30",
+          labelHealthStatus: "Health Status:",
+          optionNotRequired: "Not required",
+          optionGood: "Good",
+          optionAverage: "Average",
+          optionPreExisting: "Pre-existing conditions",
+          labelLifestyle: "Lifestyle Factors:",
+          placeholderLifestyle: "E.g.: Adventure sports",
+          labelIndustryType: "Business Type:",
+          placeholderIndustryType: "E.g.: Information Technology",
+          labelEmployeeCount: "Number of Employees:",
+          placeholderEmployeeCount: "E.g.: 50",
+          labelAnnualRevenue: "Annual Revenue:",
+          placeholderAnnualRevenue: "E.g.: 10 billion VND",
+          btnApplyFilters: "Apply Filters",
+          btnResetFilters: "Reset",
+          comparisonResultsTitle: "Comparison Results",
+          btnSaveComparison: "Save Comparison",
+          btnShareComparison: "Share (Personal)",
+          btnExportPdf: "Export PDF (Business)",
+          btnExportExcel: "Export Excel (Business)",
+          noProductsSelectedMsg:
+            "Please select at least 2 products to compare.",
+          whatIfTitle: '"What-If" Scenarios (For Individuals)',
+          whatIfDesc: "Adjust coverage options to see how premiums change.",
+          gapAnalysisTitle: "Coverage Gap Analysis (For Businesses)",
+          gapAnalysisDesc:
+            "View detailed differences in coverage between selected products.",
+          featureInProgress: "This feature is under development.",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          footerPrivacyPolicy: "Privacy Policy",
+          footerTermsOfUse: "Terms of Use",
+          // Dynamic text in JS
+          productCardSelected: "Selected",
+          productCardSelect: "Select",
+          alertMaxProducts:
+            "You can only select a maximum of 5 products to compare.",
+          alertMinProducts:
+            "Please select at least one product to view details or more to compare.",
+          alertFiltersApplied:
+            "Filter functionality is under development. Displayed data is currently sample.",
+          alertFiltersReset: "Filters have been reset (sample UI).",
+          alertSaveComparison:
+            '"Save Comparison" feature is under development.',
+          alertShareComparison: '"Share" feature is under development.',
+          alertExportPdf: '"Export PDF" feature is under development.',
+          alertExportExcel: '"Export Excel" feature is under development.',
+          tableHeaderFeature: "Feature",
+          tableHeaderRemoveProduct: "Remove",
+          tooltipExplanation: "Explanation about {featureName} (placeholder)",
+          // featuresToCompare names
+          featureAnnualPremium: "Annual Premium",
+          featureCoverageLimit: "Max Coverage Amount",
+          featureDeductible: "Deductible",
+          featureHospitalCoverage: "Hospitalization Benefit",
+          featureOutpatientCoverage: "Outpatient Benefit",
+          featureCriticalIllnessCover: "Critical Illness Cover",
+          featureDentalCoverage: "Dental Benefit",
+          featureMaternityCoverage: "Maternity Benefit",
+          featureInvestmentLink: "Investment-Linked",
+          featurePhysicalDamage: "Physical Damage (Vehicle)",
+          featureThirdPartyLiability: "Third Party Liability (Vehicle)",
+          featureRoadsideAssistance: "Roadside Assistance (Vehicle)",
+          featureFireExplosion: "Fire & Explosion (Business Property)",
+          featureAllRiskProperty: "All Risk Property (Business)",
+          featureBusinessInterruption: "Business Interruption (Business)",
+          featureRating: "Customer Rating",
+          textBooleanYes:
+            '<i class="fas fa-check-circle text-green-500"></i> Yes',
+          textBooleanNo: '<i class="fas fa-times-circle text-red-500"></i> No',
+        },
+      };
+      let currentLang = "vi"; // Default language
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_ComparePage_Lang", lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              el.type !== "submit" &&
+              el.type !== "button"
+            ) {
+              // For input placeholders, handled by data-translate-placeholder-key
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H1" ||
+                el.tagName === "H2" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE") &&
+              (translatedText.includes("<i class") ||
+                translatedText.includes("&"))
+            ) {
+              el.innerHTML = translatedText;
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Update dynamic parts like table headers and product cards if they are already rendered
+        renderAvailableProducts(); // Re-render product cards with new language
+        if (!comparisonArea.classList.contains("hidden")) {
+          renderComparisonTable(); // Re-render comparison table if visible
+        }
+        // Update price range value display
+        const priceRangeFilterEl = document.getElementById("priceRangeFilter");
+        if (priceRangeFilterEl) {
+          updatePriceRangeDisplay(parseInt(priceRangeFilterEl.value));
+        }
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key;
+      }
+
+      const sampleProducts = [
+        {
+          id: "p1",
+          nameKey: "productNameP1",
+          type: "nhan_tho",
+          price: 15000000,
+          coverageLimit: 1000000000,
+          keyBenefitsKeys: [
+            "benefitDeath",
+            "benefitHospital",
+            "benefitCritical",
+          ],
+          exclusionsKeys: ["exclusionSuicide", "exclusionHiv"],
+          rating: 4.5,
+          logoUrl: "https://placehold.co/100x60/34d399/ffffff?text=An+Toàn",
+          annualPremium: 15000000,
+          deductible: 0,
+          hospitalCoverageKey: "hospitalCoverageP1",
+          outpatientCoverageKey: "outpatientCoverageP1",
+          criticalIllnessCover: "300,000,000 VNĐ",
+        },
+        {
+          id: "p2",
+          nameKey: "productNameP2",
+          type: "suc_khoe",
+          price: 8000000,
+          coverageLimit: 500000000,
+          keyBenefitsKeys: [
+            "benefitInpatient",
+            "benefitOutpatient",
+            "benefitDental",
+          ],
+          exclusionsKeys: ["exclusionCongenital", "exclusionCosmetic"],
+          rating: 4.2,
+          logoUrl: "https://placehold.co/100x60/fbbf24/ffffff?text=Sức+Khỏe",
+          annualPremium: 8000000,
+          deductible: 2000000,
+          hospitalCoverageKey: "hospitalCoverageP2",
+          outpatientCoverageKey: "outpatientCoverageP2",
+          dentalCoverageKey: "dentalCoverageP2",
+        },
+        // Add nameKey and other relevant keys for translation to other products
+        {
+          id: "p3",
+          nameKey: "productNameP3",
+          type: "nhan_tho",
+          price: 20000000,
+          coverageLimit: 1500000000,
+          keyBenefitsKeys: [
+            "benefitComprehensiveDeath",
+            "benefitInvestment",
+            "benefitTerminalIllness",
+          ],
+          exclusionsKeys: ["exclusionDangerousActivity", "exclusionWar"],
+          rating: 4.8,
+          logoUrl: "https://placehold.co/100x60/60a5fa/ffffff?text=An+Tâm",
+          annualPremium: 20000000,
+          deductible: 0,
+          hospitalCoverageKey: "hospitalCoverageP3",
+          criticalIllnessCover: "500,000,000 VNĐ",
+          investmentLinkKey: "investmentLinkYes",
+        },
+        {
+          id: "p4",
+          nameKey: "productNameP4",
+          type: "xe_co_gioi",
+          price: 5000000,
+          coverageLimit: 0,
+          keyBenefitsKeys: [
+            "benefitBodyInsurance",
+            "benefitCompulsoryTNDS",
+            "benefitRoadside247",
+          ],
+          exclusionsKeys: ["exclusionNoLicense", "exclusionIllegalRacing"],
+          rating: 4.0,
+          logoUrl: "https://placehold.co/100x60/f87171/ffffff?text=Xế+Yêu",
+          annualPremium: 5000000,
+          physicalDamageKey: "physicalDamageByValue",
+          thirdPartyLiability: "150,000,000 VNĐ/vụ",
+          roadsideAssistanceKey: "roadsideAssistanceYes",
+        },
+        {
+          id: "p5",
+          nameKey: "productNameP5",
+          type: "tai_san",
+          price: 25000000,
+          coverageLimit: 5000000000,
+          keyBenefitsKeys: [
+            "benefitFireExplosion",
+            "benefitAllRiskProperty",
+            "benefitBusinessInterruption",
+          ],
+          exclusionsKeys: ["exclusionNaturalWear", "exclusionTerrorism"],
+          rating: 4.6,
+          logoUrl:
+            "https://placehold.co/100x60/a78bfa/ffffff?text=Doanh+Nghiệp",
+          annualPremium: 25000000,
+          fireExplosion: "5 tỷ VNĐ",
+          allRiskProperty: "5 tỷ VNĐ",
+          businessInterruption: "1 tỷ VNĐ",
+        },
+        {
+          id: "p6",
+          nameKey: "productNameP6",
+          type: "suc_khoe",
+          price: 12000000,
+          coverageLimit: 1000000000,
+          keyBenefitsKeys: [
+            "benefitIntlHealth",
+            "benefitVipInpatient",
+            "benefitMaternity",
+          ],
+          exclusionsKeys: [
+            "exclusionExperimentalTreatment",
+            "exclusionUndeclaredPreExisting",
+          ],
+          rating: 4.7,
+          logoUrl: "https://placehold.co/100x60/22d3ee/ffffff?text=Toàn+Cầu",
+          annualPremium: 12000000,
+          deductible: 1000000,
+          hospitalCoverageKey: "hospitalCoverageP6",
+          outpatientCoverageKey: "outpatientCoverageP6",
+          maternityCoverage: "50,000,000 VNĐ",
+        },
+      ];
+      // Add translated names to translations object
+      translations.vi.productNameP1 = "Bảo An Toàn Diện";
+      translations.en.productNameP1 = "Comprehensive Security";
+      translations.vi.productNameP2 = "Sức Khỏe Vàng";
+      translations.en.productNameP2 = "Golden Health";
+      translations.vi.productNameP3 = "An Tâm Hạnh Phúc";
+      translations.en.productNameP3 = "Peaceful Happiness";
+      translations.vi.productNameP4 = "Bảo Vệ Xế Yêu";
+      translations.en.productNameP4 = "Protect Your Dear Car";
+      translations.vi.productNameP5 = "Doanh Nghiệp Thịnh Vượng";
+      translations.en.productNameP5 = "Prosperous Enterprise";
+      translations.vi.productNameP6 = "Sức Khỏe Toàn Cầu";
+      translations.en.productNameP6 = "Global Health";
+      // ... add other dynamic text keys for products to translations object
+
+      const featuresToCompare = [
+        {
+          key: "annualPremium",
+          nameKey: "featureAnnualPremium",
+          type: "currency",
+        },
+        {
+          key: "coverageLimit",
+          nameKey: "featureCoverageLimit",
+          type: "currency",
+        },
+        { key: "deductible", nameKey: "featureDeductible", type: "currency" },
+        {
+          key: "hospitalCoverage",
+          nameKey: "featureHospitalCoverage",
+          type: "text",
+        }, // Will use product specific keys
+        {
+          key: "outpatientCoverage",
+          nameKey: "featureOutpatientCoverage",
+          type: "text",
+        }, // Will use product specific keys
+        {
+          key: "criticalIllnessCover",
+          nameKey: "featureCriticalIllnessCover",
+          type: "currency_text",
+        },
+        {
+          key: "dentalCoverage",
+          nameKey: "featureDentalCoverage",
+          type: "currency_text",
+        }, // Will use product specific keys
+        {
+          key: "maternityCoverage",
+          nameKey: "featureMaternityCoverage",
+          type: "currency_text",
+        },
+        {
+          key: "investmentLink",
+          nameKey: "featureInvestmentLink",
+          type: "text_boolean",
+        }, // Will use product specific keys
+        {
+          key: "physicalDamage",
+          nameKey: "featurePhysicalDamage",
+          type: "text",
+        }, // Will use product specific keys
+        {
+          key: "thirdPartyLiability",
+          nameKey: "featureThirdPartyLiability",
+          type: "currency_text",
+        },
+        {
+          key: "roadsideAssistance",
+          nameKey: "featureRoadsideAssistance",
+          type: "text_boolean",
+        }, // Will use product specific keys
+        {
+          key: "fireExplosion",
+          nameKey: "featureFireExplosion",
+          type: "currency_text",
+        },
+        {
+          key: "allRiskProperty",
+          nameKey: "featureAllRiskProperty",
+          type: "currency_text",
+        },
+        {
+          key: "businessInterruption",
+          nameKey: "featureBusinessInterruption",
+          type: "currency_text",
+        },
+        { key: "rating", nameKey: "featureRating", type: "rating" },
+      ];
+
+      let selectedProductIds = [];
+
+      const availableProductsList = document.getElementById(
+        "availableProductsList"
+      );
+      const startComparisonBtn = document.getElementById("startComparisonBtn");
+      const comparisonArea = document.getElementById("comparisonArea");
+      const filtersSection = document.getElementById("filtersSection");
+      const comparisonTableHead = document.getElementById(
+        "comparisonTableHead"
+      );
+      const comparisonTableBody = document.getElementById(
+        "comparisonTableBody"
+      );
+      const noProductsSelectedMsg =
+        document.getElementById("noProductsSelected");
+      const priceRangeFilter = document.getElementById("priceRangeFilter");
+      const priceRangeValue = document.getElementById("priceRangeValue");
+      const whatIfSection = document.getElementById("whatIfSection");
+      const gapAnalysisSection = document.getElementById("gapAnalysisSection");
+
+      function formatCurrency(value, lang = currentLang) {
+        const locale = lang === "vi" ? "vi-VN" : "en-US";
+        const currency = lang === "vi" ? "VND" : "USD"; // Assuming USD for English, adjust if needed
+        if (typeof value === "number") {
+          // For VND, if it's a large number, don't show decimals. For USD, show two.
+          const options = { style: "currency", currency: currency };
+          if (currency === "VND" && value >= 1000) {
+            options.minimumFractionDigits = 0;
+            options.maximumFractionDigits = 0;
+          } else {
+            options.minimumFractionDigits = 2;
+            options.maximumFractionDigits = 2;
+          }
+          return value.toLocaleString(locale, options);
+        }
+        return value || "-";
+      }
+
+      function renderAvailableProducts() {
+        availableProductsList.innerHTML = "";
+        sampleProducts.forEach((product) => {
+          const isSelected = selectedProductIds.includes(product.id);
+          const card = document.createElement("div");
+          card.className = `p-4 border rounded-lg cursor-pointer hover:shadow-md ${
+            isSelected ? "product-card-selected bg-indigo-50" : "bg-white"
+          }`;
+          card.dataset.productId = product.id;
+          const productName = getTranslatedText(product.nameKey);
+          card.innerHTML = `
+                    <img src="${
+                      product.logoUrl
+                    }" alt="${productName}" class="h-12 mx-auto mb-2 object-contain">
+                    <h4 class="font-semibold text-sm text-center text-gray-700">${productName}</h4>
+                    <p class="text-xs text-gray-500 text-center">${formatCurrency(
+                      product.price
+                    )}/${
+            getTranslatedText("textYearSuffix", currentLang) || "năm"
+          }</p>
+                    <div class="text-center mt-2">
+                        ${
+                          isSelected
+                            ? `<span class="text-xs text-indigo-600 font-semibold"><i class="fas fa-check-circle mr-1"></i>${getTranslatedText(
+                                "productCardSelected"
+                              )}</span>`
+                            : `<span class="text-xs text-gray-400"><i class="far fa-circle mr-1"></i>${getTranslatedText(
+                                "productCardSelect"
+                              )}</span>`
+                        }
+                    </div>
+                `;
+          card.addEventListener("click", () =>
+            toggleProductSelection(product.id)
+          );
+          availableProductsList.appendChild(card);
+        });
+      }
+      translations.vi.textYearSuffix = "năm";
+      translations.en.textYearSuffix = "year";
+
+      function toggleProductSelection(productId) {
+        const index = selectedProductIds.indexOf(productId);
+        if (index > -1) {
+          selectedProductIds.splice(index, 1);
+        } else {
+          if (selectedProductIds.length < 5) {
+            selectedProductIds.push(productId);
+          } else {
+            alert(getTranslatedText("alertMaxProducts"));
+            return;
+          }
+        }
+        renderAvailableProducts();
+      }
+
+      function renderComparisonTable() {
+        comparisonTableHead.innerHTML = "";
+        comparisonTableBody.innerHTML = "";
+
+        const productsToCompare = sampleProducts.filter((p) =>
+          selectedProductIds.includes(p.id)
+        );
+
+        if (productsToCompare.length < 1) {
+          comparisonArea.classList.add("hidden");
+          filtersSection.classList.add("hidden");
+          noProductsSelectedMsg.classList.remove("hidden");
+          whatIfSection.classList.add("hidden");
+          gapAnalysisSection.classList.add("hidden");
+          return;
+        }
+
+        noProductsSelectedMsg.classList.add("hidden");
+        comparisonArea.classList.remove("hidden");
+        filtersSection.classList.remove("hidden");
+
+        const isIndividualContext = productsToCompare.some(
+          (p) => p.type === "nhan_tho" || p.type === "suc_khoe"
+        );
+        const isBusinessContext = productsToCompare.some(
+          (p) => p.type === "tai_san" || p.type === "xe_co_gioi"
+        );
+
+        if (isIndividualContext) {
+          whatIfSection.classList.remove("hidden");
+          gapAnalysisSection.classList.add("hidden");
+        } else if (isBusinessContext) {
+          whatIfSection.classList.add("hidden");
+          gapAnalysisSection.classList.remove("hidden");
+        } else {
+          whatIfSection.classList.add("hidden");
+          gapAnalysisSection.classList.add("hidden");
+        }
+
+        let headRowHtml = `<tr><th class="feature-name sticky left-0 z-10 bg-gray-100">${getTranslatedText(
+          "tableHeaderFeature"
+        )}</th>`;
+        productsToCompare.forEach((product) => {
+          const productName = getTranslatedText(product.nameKey);
+          headRowHtml += `
+                    <th class="product-header">
+                        <img src="${
+                          product.logoUrl
+                        }" alt="${productName}" class="h-10 mx-auto mb-1 object-contain">
+                        ${productName}
+                        <div class="text-xs font-normal text-gray-600">${formatCurrency(
+                          product.price
+                        )}/${getTranslatedText("textYearSuffix") || "năm"}</div>
+                        <button class="text-red-500 hover:text-red-700 text-xs mt-1 remove-product-btn" data-product-id="${
+                          product.id
+                        }">
+                            <i class="fas fa-times-circle mr-1"></i>${getTranslatedText(
+                              "tableHeaderRemoveProduct"
+                            )}
+                        </button>
+                    </th>`;
+        });
+        headRowHtml += "</tr>";
+        comparisonTableHead.innerHTML = headRowHtml;
+
+        featuresToCompare.forEach((feature) => {
+          const featureNameTranslated = getTranslatedText(feature.nameKey);
+          let bodyRowHtml = `<tr><td class="feature-name sticky left-0 z-10 bg-gray-50">
+                    ${featureNameTranslated}
+                    <span class="tooltip ml-1">
+                        <i class="far fa-question-circle text-gray-400"></i>
+                        <span class="tooltiptext">${getTranslatedText(
+                          "tooltipExplanation"
+                        ).replace(
+                          "{featureName}",
+                          featureNameTranslated.toLowerCase()
+                        )}</span>
+                    </span>
+                </td>`;
+
+          let values = productsToCompare.map((p) => p[feature.key]);
+
+          productsToCompare.forEach((product, index) => {
+            let value = product[feature.key];
+            let displayValue = "-";
+            let cellClass = "";
+
+            // For features that use product-specific keys (like hospitalCoverageKey)
+            if (product[feature.key + "Key"]) {
+              // e.g. product.hospitalCoverageKey
+              value = getTranslatedText(product[feature.key + "Key"]);
+            }
+
+            switch (feature.type) {
+              case "currency":
+                displayValue = formatCurrency(value);
+                break;
+              case "currency_text":
+                displayValue =
+                  typeof value === "number"
+                    ? formatCurrency(value)
+                    : value || "-";
+                break;
+              case "rating":
+                displayValue = value
+                  ? `${value} <i class="fas fa-star text-yellow-400"></i>`
+                  : "-";
+                break;
+              case "text_boolean":
+                const yesText = getTranslatedText("textBooleanYes");
+                const noText = getTranslatedText("textBooleanNo");
+                displayValue = value
+                  ? value === true ||
+                    (typeof value === "string" &&
+                      value.toLowerCase() === "có") ||
+                    (typeof value === "string" && value.toLowerCase() === "yes")
+                    ? yesText
+                    : value
+                  : noText;
+                break;
+              default: // text
+                displayValue = value || "-";
+            }
+
+            if (
+              productsToCompare.length > 1 &&
+              value !== undefined &&
+              typeof value === "number"
+            ) {
+              // Only compare numbers for highlighting
+              const numericValues = values.filter((v) => typeof v === "number");
+              if (numericValues.length > 0) {
+                if (feature.key === "annualPremium") {
+                  const minPrice = Math.min(...numericValues);
+                  if (value === minPrice) cellClass = "highlight-better";
+                } else if (
+                  ["coverageLimit", "criticalIllnessCover", "rating"].includes(
+                    feature.key
+                  )
+                ) {
+                  const maxVal = Math.max(...numericValues);
+                  if (value === maxVal) cellClass = "highlight-better";
+                }
+              }
+            }
+            bodyRowHtml += `<td class="${cellClass}">${displayValue}</td>`;
+          });
+          bodyRowHtml += "</tr>";
+          comparisonTableBody.innerHTML += bodyRowHtml;
+        });
+
+        document.querySelectorAll(".remove-product-btn").forEach((button) => {
+          button.addEventListener("click", (event) => {
+            const productIdToRemove = event.currentTarget.dataset.productId;
+            toggleProductSelection(productIdToRemove);
+            renderComparisonTable();
+          });
+        });
+      }
+
+      function updatePriceRangeDisplay(value) {
+        if (priceRangeValue) {
+          priceRangeValue.textContent = formatCurrency(value);
+        }
+      }
+
+      startComparisonBtn.addEventListener("click", () => {
+        if (selectedProductIds.length === 0) {
+          alert(getTranslatedText("alertMinProducts"));
+          noProductsSelectedMsg.classList.remove("hidden");
+          comparisonArea.classList.add("hidden");
+          filtersSection.classList.add("hidden");
+          whatIfSection.classList.add("hidden");
+          gapAnalysisSection.classList.add("hidden");
+          return;
+        }
+        if (selectedProductIds.length === 1) {
+          noProductsSelectedMsg.classList.add("hidden");
+        }
+        renderComparisonTable();
+      });
+
+      if (priceRangeFilter) {
+        priceRangeFilter.addEventListener("input", (e) => {
+          updatePriceRangeDisplay(parseInt(e.target.value));
+        });
+      }
+
+      const filterTabButtons = document.querySelectorAll(
+        ".tab-button[data-tab-target]"
+      );
+      const filterTabContents = document.querySelectorAll(
+        ".tab-content-filter"
+      );
+
+      filterTabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          filterTabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          const targetId = button.dataset.tabTarget;
+          filterTabContents.forEach((content) => {
+            content.classList.toggle("hidden", content.id !== targetId);
+          });
+        });
+      });
+
+      document
+        .getElementById("applyFiltersBtn")
+        ?.addEventListener("click", () => {
+          alert(getTranslatedText("alertFiltersApplied"));
+        });
+      document
+        .getElementById("resetFiltersBtn")
+        ?.addEventListener("click", () => {
+          document.getElementById("coverageTypeFilter").value = "";
+          const defaultPrice = 10000000;
+          document.getElementById("priceRangeFilter").value = defaultPrice;
+          updatePriceRangeDisplay(defaultPrice);
+          document.getElementById("benefitFilter").value = "";
+          alert(getTranslatedText("alertFiltersReset"));
+        });
+
+      document
+        .getElementById("saveComparisonBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertSaveComparison"))
+        );
+      document
+        .getElementById("shareComparisonBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertShareComparison"))
+        );
+      document
+        .getElementById("exportPdfBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertExportPdf"))
+        );
+      document
+        .getElementById("exportExcelBtn")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertExportExcel"))
+        );
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial render and language load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_ComparePage_Lang") || "vi";
+        setLanguage(savedLang); // This will also call renderAvailableProducts and updatePriceRangeDisplay
+
+        // Initially hide comparison and filters area
+        comparisonArea.classList.add("hidden");
+        filtersSection.classList.add("hidden");
+        whatIfSection.classList.add("hidden");
+        gapAnalysisSection.classList.add("hidden");
+        noProductsSelectedMsg.classList.remove("hidden");
+      });
+    </script>
+  </body>
+</html>

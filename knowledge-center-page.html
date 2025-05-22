@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">
+      Trung Tâm Kiến Thức - BảoHiểmPRO
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb; /* Gray 50 */
+      }
+      .tab-button.active {
+        border-bottom-width: 3px;
+        border-color: #4f46e5; /* Indigo 600 for general use */
+        color: #4f46e5;
+        font-weight: 600;
+      }
+      .tab-button-sme.active {
+        /* Specific for SME tab if different styling needed */
+        border-color: #059669; /* Emerald 600 for SME */
+        color: #059669;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 1.5rem; /* p-6 */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .article-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .btn {
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca;
+      }
+      .btn-primary-sme {
+        background-color: #059669;
+        color: white;
+      }
+      .btn-primary-sme:hover {
+        background-color: #047857;
+      }
+
+      .form-input,
+      .form-select {
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid #d1d5db;
+      }
+      .form-input:focus,
+      .form-select:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        outline: none;
+      }
+      .category-link {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+        color: #374151; /* Gray 700 */
+      }
+      .category-link:hover {
+        background-color: #f3f4f6; /* Gray 100 */
+        color: #1f2937; /* Gray 800 */
+      }
+      .category-link.active {
+        background-color: #e0e7ff; /* Indigo 100 */
+        color: #4f46e5; /* Indigo 600 */
+        font-weight: 500;
+      }
+      .rating .fa-star {
+        color: #f59e0b; /* Amber 500 */
+      }
+      .rating .fa-star-half-alt {
+        color: #f59e0b;
+      }
+      .rating .far.fa-star {
+        color: #d1d5db; /* Gray 300 */
+      }
+
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Darker text */
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6; /* Lighter gray for hover */
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-40">
+      <div
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/4f46e5/ffffff?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navHome"
+            >Trang Chủ</a
+          >
+          <a
+            href="product-detail-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navProducts"
+            >Sản Phẩm</a
+          >
+          <a
+            href="claims-management-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navClaims"
+            >Bồi Thường</a
+          >
+          <a
+            href="knowledge-center-page.html"
+            class="text-indigo-600 font-semibold"
+            data-translate-key="navKnowledgeCenter"
+            >Trung Tâm Kiến Thức</a
+          >
+          <a
+            href="customer-dashboard-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navIndividualDashboard"
+            >Cá Nhân</a
+          >
+          <a
+            href="business-portal-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navBusinessPortal"
+            >Doanh Nghiệp</a
+          >
+        </nav>
+        <div class="language-switcher flex items-center space-x-2">
+          <button
+            data-lang="vi"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            VIE
+          </button>
+          <button
+            data-lang="en"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            ENG
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <section
+        class="text-center py-8 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl shadow-lg mb-10"
+      >
+        <h1
+          class="text-4xl md:text-5xl font-bold mb-3"
+          data-translate-key="mainTitle"
+        >
+          Trung Tâm Kiến Thức Bảo Hiểm
+        </h1>
+        <p
+          class="text-lg md:text-xl mb-6 max-w-2xl mx-auto"
+          data-translate-key="mainSubtitle"
+        >
+          Tìm hiểu mọi thứ bạn cần biết về bảo hiểm để đưa ra quyết định sáng
+          suốt.
+        </p>
+        <div class="max-w-xl mx-auto px-4">
+          <div class="relative">
+            <input
+              type="search"
+              id="knowledgeSearchInput"
+              class="form-input w-full !py-3 !pl-10 !pr-4 !text-gray-800"
+              data-translate-placeholder-key="searchPlaceholder"
+            />
+            <i
+              class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            ></i>
+          </div>
+        </div>
+      </section>
+
+      <div class="mb-8 border-b border-gray-300">
+        <nav class="flex flex-wrap -mb-px justify-center" aria-label="Tabs">
+          <button
+            data-tab-target="knowledgeIndividual"
+            class="tab-button active py-3 px-6 text-center font-medium text-lg"
+          >
+            <i class="fas fa-user mr-2"></i
+            ><span data-translate-key="tabForIndividuals"
+              >Dành Cho Cá Nhân</span
+            >
+          </button>
+          <button
+            data-tab-target="knowledgeBusiness"
+            class="tab-button tab-button-sme py-3 px-6 text-center font-medium text-lg"
+          >
+            <i class="fas fa-briefcase mr-2"></i
+            ><span data-translate-key="tabForBusinesses"
+              >Dành Cho Doanh Nghiệp</span
+            >
+          </button>
+        </nav>
+      </div>
+
+      <section id="knowledgeIndividual" class="tab-content active">
+        <div class="grid lg:grid-cols-4 gap-8">
+          <aside class="lg:col-span-1 space-y-6">
+            <div class="card">
+              <h3
+                class="text-lg font-semibold mb-3 text-gray-700"
+                data-translate-key="titleIndividualCategories"
+              >
+                Danh Mục Cá Nhân
+              </h3>
+              <nav id="individualCategories" class="space-y-1">
+                <a
+                  href="#"
+                  class="category-link active"
+                  data-category="all"
+                  data-translate-key="catAllTopics"
+                  >Tất cả chủ đề</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="life_insurance"
+                  data-translate-key="catLifeInsurance"
+                  >Bảo hiểm nhân thọ</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="health_insurance"
+                  data-translate-key="catHealthInsurance"
+                  >Bảo hiểm sức khỏe</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="auto_insurance"
+                  data-translate-key="catAutoInsurance"
+                  >Bảo hiểm xe cơ giới</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="home_insurance"
+                  data-translate-key="catHomeInsurance"
+                  >Bảo hiểm nhà cửa</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="travel_insurance"
+                  data-translate-key="catTravelInsurance"
+                  >Bảo hiểm du lịch</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="investment_linked"
+                  data-translate-key="catInvestmentLinked"
+                  >Bảo hiểm liên kết đầu tư</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="claims_guides_individual"
+                  data-translate-key="catClaimsGuidesIndividual"
+                  >Hướng dẫn yêu cầu bồi thường</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="faq_individual"
+                  data-translate-key="catFaqIndividual"
+                  >Câu hỏi thường gặp (Cá nhân)</a
+                >
+              </nav>
+            </div>
+            <div class="card">
+              <h3
+                class="text-lg font-semibold mb-3 text-gray-700"
+                data-translate-key="titleRecommendedForYou"
+              >
+                Đề Xuất Cho Bạn
+              </h3>
+              <div class="text-sm text-gray-600">
+                <p
+                  class="italic"
+                  data-translate-key="textPersonalizationInProgress"
+                >
+                  (Tính năng cá nhân hóa nội dung đang được phát triển)
+                </p>
+                <a
+                  href="#"
+                  class="block mt-2 text-indigo-600 hover:underline"
+                  data-translate-key="linkLearnAbout30Plus"
+                  >&rarr; Tìm hiểu về gói bảo hiểm phù hợp với độ tuổi 30+</a
+                >
+              </div>
+            </div>
+          </aside>
+
+          <div class="lg:col-span-3 space-y-8">
+            <div
+              id="individualArticlesContainer"
+              class="grid md:grid-cols-2 gap-6"
+            ></div>
+            <div class="text-center">
+              <button
+                id="loadMoreIndividual"
+                class="btn btn-primary"
+                data-translate-key="btnLoadMoreArticles"
+              >
+                Xem Thêm Bài Viết
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="knowledgeBusiness" class="tab-content">
+        <div class="grid lg:grid-cols-4 gap-8">
+          <aside class="lg:col-span-1 space-y-6">
+            <div class="card">
+              <h3
+                class="text-lg font-semibold mb-3 text-gray-700"
+                data-translate-key="titleBusinessCategories"
+              >
+                Danh Mục Doanh Nghiệp
+              </h3>
+              <nav id="businessCategories" class="space-y-1">
+                <a
+                  href="#"
+                  class="category-link active"
+                  data-category="all_sme"
+                  data-translate-key="catAllSMETopics"
+                  >Tất cả chủ đề SME</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="property_sme"
+                  data-translate-key="catPropertySME"
+                  >Bảo hiểm tài sản DN</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="liability_sme"
+                  data-translate-key="catLiabilitySME"
+                  >Bảo hiểm trách nhiệm</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="employee_benefits_sme"
+                  data-translate-key="catEmployeeBenefitsSME"
+                  >Phúc lợi nhân viên (Nhóm)</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="cyber_sme"
+                  data-translate-key="catCyberSME"
+                  >Bảo hiểm an ninh mạng</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="risk_management_sme"
+                  data-translate-key="catRiskManagementSME"
+                  >Quản lý rủi ro cho SME</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="case_studies_sme"
+                  data-translate-key="catCaseStudiesSME"
+                  >Case Studies Doanh Nghiệp</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="templates_sme"
+                  data-translate-key="catTemplatesSME"
+                  >Mẫu & Checklist (SME)</a
+                >
+                <a
+                  href="#"
+                  class="category-link"
+                  data-category="faq_sme"
+                  data-translate-key="catFaqSME"
+                  >Câu hỏi thường gặp (SME)</a
+                >
+              </nav>
+            </div>
+            <div class="card">
+              <h3
+                class="text-lg font-semibold mb-3 text-gray-700"
+                data-translate-key="titleByIndustry"
+              >
+                Theo Ngành Nghề
+              </h3>
+              <select id="industryFilterSME" class="form-select w-full">
+                <option value="" data-translate-key="optionSelectIndustry">
+                  Chọn ngành nghề của bạn
+                </option>
+                <option
+                  value="technology"
+                  data-translate-key="industryTechnology"
+                >
+                  Công nghệ
+                </option>
+                <option
+                  value="manufacturing"
+                  data-translate-key="industryManufacturing"
+                >
+                  Sản xuất
+                </option>
+                <option value="retail" data-translate-key="industryRetail">
+                  Bán lẻ
+                </option>
+                <option value="services" data-translate-key="industryServices">
+                  Dịch vụ
+                </option>
+              </select>
+            </div>
+          </aside>
+
+          <div class="lg:col-span-3 space-y-8">
+            <div
+              id="businessArticlesContainer"
+              class="grid md:grid-cols-2 gap-6"
+            ></div>
+            <div class="text-center">
+              <button
+                id="loadMoreBusiness"
+                class="btn btn-primary-sme"
+                data-translate-key="btnLoadMoreDocuments"
+              >
+                Xem Thêm Tài Liệu
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-12">
+        <h2
+          class="text-2xl font-semibold text-gray-800 mb-6 text-center"
+          data-translate-key="titleFeaturedContent"
+        >
+          Nội Dung Nổi Bật
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div id="mostViewedContainer">
+            <h3 class="text-xl font-medium text-gray-700 mb-3">
+              <i class="fas fa-fire mr-2 text-red-500"></i
+              ><span data-translate-key="titleMostViewed">Xem Nhiều Nhất</span>
+            </h3>
+          </div>
+          <div id="recentlyAddedContainer" class="lg:col-span-2">
+            <h3 class="text-xl font-medium text-gray-700 mb-3">
+              <i class="fas fa-history mr-2 text-blue-500"></i
+              ><span data-translate-key="titleRecentlyUpdated"
+                >Mới Cập Nhật</span
+              >
+            </h3>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Trung Tâm Kiến Thức - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          navHome: "Trang Chủ",
+          navProducts: "Sản Phẩm",
+          navClaims: "Bồi Thường",
+          navKnowledgeCenter: "Trung Tâm Kiến Thức",
+          navIndividualDashboard: "Cá Nhân",
+          navBusinessPortal: "Doanh Nghiệp",
+          mainTitle: "Trung Tâm Kiến Thức Bảo Hiểm",
+          mainSubtitle:
+            "Tìm hiểu mọi thứ bạn cần biết về bảo hiểm để đưa ra quyết định sáng suốt.",
+          searchPlaceholder: "Tìm kiếm bài viết, hướng dẫn, FAQ...",
+          tabForIndividuals: "Dành Cho Cá Nhân",
+          tabForBusinesses: "Dành Cho Doanh Nghiệp",
+          titleIndividualCategories: "Danh Mục Cá Nhân",
+          catAllTopics: "Tất cả chủ đề",
+          catLifeInsurance: "Bảo hiểm nhân thọ",
+          catHealthInsurance: "Bảo hiểm sức khỏe",
+          catAutoInsurance: "Bảo hiểm xe cơ giới",
+          catHomeInsurance: "Bảo hiểm nhà cửa",
+          catTravelInsurance: "Bảo hiểm du lịch",
+          catInvestmentLinked: "Bảo hiểm liên kết đầu tư",
+          catClaimsGuidesIndividual: "Hướng dẫn yêu cầu bồi thường",
+          catFaqIndividual: "Câu hỏi thường gặp (Cá nhân)",
+          titleRecommendedForYou: "Đề Xuất Cho Bạn",
+          textPersonalizationInProgress:
+            "(Tính năng cá nhân hóa nội dung đang được phát triển)",
+          linkLearnAbout30Plus:
+            "&rarr; Tìm hiểu về gói bảo hiểm phù hợp với độ tuổi 30+",
+          btnLoadMoreArticles: "Xem Thêm Bài Viết",
+          titleBusinessCategories: "Danh Mục Doanh Nghiệp",
+          catAllSMETopics: "Tất cả chủ đề SME",
+          catPropertySME: "Bảo hiểm tài sản DN",
+          catLiabilitySME: "Bảo hiểm trách nhiệm",
+          catEmployeeBenefitsSME: "Phúc lợi nhân viên (Nhóm)",
+          catCyberSME: "Bảo hiểm an ninh mạng",
+          catRiskManagementSME: "Quản lý rủi ro cho SME",
+          catCaseStudiesSME: "Case Studies Doanh Nghiệp",
+          catTemplatesSME: "Mẫu & Checklist (SME)",
+          catFaqSME: "Câu hỏi thường gặp (SME)",
+          titleByIndustry: "Theo Ngành Nghề",
+          optionSelectIndustry: "Chọn ngành nghề của bạn",
+          industryTechnology: "Công nghệ",
+          industryManufacturing: "Sản xuất",
+          industryRetail: "Bán lẻ",
+          industryServices: "Dịch vụ",
+          btnLoadMoreDocuments: "Xem Thêm Tài Liệu",
+          titleFeaturedContent: "Nội Dung Nổi Bật",
+          titleMostViewed: "Xem Nhiều Nhất",
+          titleRecentlyUpdated: "Mới Cập Nhật",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          // Dynamic content in JS
+          articleTypeArticle: "Bài viết",
+          articleTypeGuide: "Hướng dẫn",
+          articleTypeFAQ: "FAQ",
+          articleTypeTemplate: "Mẫu",
+          articleTypeCaseStudy: "Case Study",
+          articleReadTimeSuffix: "phút",
+          articleDifficultyEasy: "Dễ",
+          articleDifficultyMedium: "Trung bình",
+          articleDifficultyHard: "Khó",
+          btnBookmark: "Lưu lại",
+          alertLoadMoreIndividual:
+            "Tải thêm bài viết cho cá nhân (Tính năng đang phát triển).",
+          alertLoadMoreBusiness:
+            "Tải thêm tài liệu cho doanh nghiệp (Tính năng đang phát triển).",
+          // Sample article titles and descriptions (add keys for all articles)
+          articleTitleInd001: "5 Điều Cần Biết Về Bảo Hiểm Nhân Thọ",
+          articleDescInd001:
+            "Hiểu rõ hơn về các khái niệm cơ bản và lợi ích của bảo hiểm nhân thọ cho cá nhân và gia đình.",
+          articleTitleInd002: "Hướng Dẫn Chọn Gói Bảo Hiểm Sức Khỏe Phù Hợp",
+          articleDescInd002:
+            "Các yếu tố cần cân nhắc khi lựa chọn gói bảo hiểm sức khỏe để đảm bảo quyền lợi tối ưu.",
+          articleTitleInd003: "Quy Trình Yêu Cầu Bồi Thường Bảo Hiểm Xe Ô Tô",
+          articleDescInd003:
+            "Các bước cần thực hiện khi xảy ra sự cố và muốn yêu cầu bồi thường cho xe ô tô của bạn.",
+          articleTitleInd004: "FAQ: Bảo Hiểm Du Lịch Quốc Tế",
+          articleDescInd004:
+            "Giải đáp các câu hỏi thường gặp về bảo hiểm khi đi du lịch nước ngoài.",
+          articleTitleSme001:
+            "Bảo Hiểm Trách Nhiệm Công Cộng Cho Doanh Nghiệp Vừa và Nhỏ",
+          articleDescSme001:
+            "Tại sao bảo hiểm trách nhiệm công cộng lại quan trọng đối với sự phát triển bền vững của SME.",
+          articleTitleSme002: "Checklist Đánh Giá Rủi Ro An Ninh Mạng Cho SME",
+          articleDescSme002:
+            "Tải về checklist giúp doanh nghiệp tự đánh giá các lỗ hổng an ninh mạng tiềm ẩn.",
+          articleTitleSme003:
+            "Case Study: Công Ty Sản Xuất XYZ Giảm Thiểu Rủi Ro Cháy Nổ",
+          articleDescSme003:
+            "Bài học kinh nghiệm từ một doanh nghiệp sản xuất đã thành công trong việc phòng ngừa và giảm thiểu thiệt hại từ rủi ro cháy nổ.",
+          articleTitleSme004:
+            "Xây Dựng Gói Phúc Lợi Nhân Viên Hấp Dẫn Với Bảo Hiểm Nhóm",
+          articleDescSme004:
+            "Hướng dẫn chi tiết cách thiết kế và triển khai các gói bảo hiểm nhóm hiệu quả để thu hút và giữ chân nhân tài.",
+        },
+        en: {
+          pageTitle: "Knowledge Center - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          navHome: "Home",
+          navProducts: "Products",
+          navClaims: "Claims",
+          navKnowledgeCenter: "Knowledge Center",
+          navIndividualDashboard: "Individual",
+          navBusinessPortal: "Business",
+          mainTitle: "Insurance Knowledge Center",
+          mainSubtitle:
+            "Learn everything you need to know about insurance to make informed decisions.",
+          searchPlaceholder: "Search articles, guides, FAQs...",
+          tabForIndividuals: "For Individuals",
+          tabForBusinesses: "For Businesses",
+          titleIndividualCategories: "Individual Categories",
+          catAllTopics: "All Topics",
+          catLifeInsurance: "Life Insurance",
+          catHealthInsurance: "Health Insurance",
+          catAutoInsurance: "Auto Insurance",
+          catHomeInsurance: "Home Insurance",
+          catTravelInsurance: "Travel Insurance",
+          catInvestmentLinked: "Investment-Linked Insurance",
+          catClaimsGuidesIndividual: "Claims Guides (Individual)",
+          catFaqIndividual: "FAQ (Individual)",
+          titleRecommendedForYou: "Recommended For You",
+          textPersonalizationInProgress:
+            "(Content personalization feature is under development)",
+          linkLearnAbout30Plus:
+            "&rarr; Learn about insurance plans suitable for age 30+",
+          btnLoadMoreArticles: "Load More Articles",
+          titleBusinessCategories: "Business Categories",
+          catAllSMETopics: "All SME Topics",
+          catPropertySME: "Business Property Insurance",
+          catLiabilitySME: "Liability Insurance",
+          catEmployeeBenefitsSME: "Employee Benefits (Group)",
+          catCyberSME: "Cybersecurity Insurance",
+          catRiskManagementSME: "Risk Management for SMEs",
+          catCaseStudiesSME: "Business Case Studies",
+          catTemplatesSME: "Templates & Checklists (SME)",
+          catFaqSME: "FAQ (SME)",
+          titleByIndustry: "By Industry",
+          optionSelectIndustry: "Select your industry",
+          industryTechnology: "Technology",
+          industryManufacturing: "Manufacturing",
+          industryRetail: "Retail",
+          industryServices: "Services",
+          btnLoadMoreDocuments: "Load More Documents",
+          titleFeaturedContent: "Featured Content",
+          titleMostViewed: "Most Viewed",
+          titleRecentlyUpdated: "Recently Updated",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          // Dynamic content in JS
+          articleTypeArticle: "Article",
+          articleTypeGuide: "Guide",
+          articleTypeFAQ: "FAQ",
+          articleTypeTemplate: "Template",
+          articleTypeCaseStudy: "Case Study",
+          articleReadTimeSuffix: "min read",
+          articleDifficultyEasy: "Easy",
+          articleDifficultyMedium: "Medium",
+          articleDifficultyHard: "Hard",
+          btnBookmark: "Bookmark",
+          alertLoadMoreIndividual:
+            "Loading more articles for individuals (Feature in development).",
+          alertLoadMoreBusiness:
+            "Loading more documents for businesses (Feature in development).",
+          // Sample article titles and descriptions
+          articleTitleInd001: "5 Things to Know About Life Insurance",
+          articleDescInd001:
+            "Understand the basic concepts and benefits of life insurance for individuals and families.",
+          articleTitleInd002:
+            "Guide to Choosing the Right Health Insurance Plan",
+          articleDescInd002:
+            "Factors to consider when selecting a health insurance plan to ensure optimal benefits.",
+          articleTitleInd003: "Car Insurance Claim Process",
+          articleDescInd003:
+            "Steps to take when an incident occurs and you want to file a claim for your car.",
+          articleTitleInd004: "FAQ: International Travel Insurance",
+          articleDescInd004:
+            "Answers to frequently asked questions about insurance when traveling abroad.",
+          articleTitleSme001: "Public Liability Insurance for SMEs",
+          articleDescSme001:
+            "Why public liability insurance is crucial for the sustainable development of SMEs.",
+          articleTitleSme002:
+            "Cybersecurity Risk Assessment Checklist for SMEs",
+          articleDescSme002:
+            "Download a checklist to help businesses self-assess potential cybersecurity vulnerabilities.",
+          articleTitleSme003:
+            "Case Study: XYZ Manufacturing Co. Mitigates Fire Risk",
+          articleDescSme003:
+            "Lessons learned from a manufacturing company that successfully prevented and minimized fire damage.",
+          articleTitleSme004:
+            "Building Attractive Employee Benefit Packages with Group Insurance",
+          articleDescSme004:
+            "Detailed guide on designing and implementing effective group insurance packages to attract and retain talent.",
+        },
+      };
+      let currentLang = "vi";
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_KnowledgeCenter_Lang", lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              (el.type === "submit" || el.type === "button")
+            ) {
+              el.value = translatedText;
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H1" ||
+                el.tagName === "H2" ||
+                el.tagName === "H3" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE" ||
+                el.tagName === "SUMMARY") &&
+              (translatedText.includes("&") ||
+                translatedText.includes("<i class"))
+            ) {
+              if (el.innerHTML.includes("<i")) {
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translatedText.replace(/<i class="[^"]+"><\/i>/, "").trim();
+              } else {
+                el.innerHTML = translatedText;
+              }
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Re-render dynamic content
+        filterAndRenderIndividualArticles(searchInput.value.toLowerCase());
+        filterAndRenderBusinessArticles(searchInput.value.toLowerCase());
+        renderFeaturedContent();
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key;
+      }
+
+      const allArticles = [
+        {
+          id: "ind001",
+          titleKey: "articleTitleInd001",
+          descriptionKey: "articleDescInd001",
+          typeKey: "articleTypeArticle",
+          category: "life_insurance",
+          audience: "individual",
+          readTimeKey: "5 " + getTranslatedText("articleReadTimeSuffix"),
+          difficultyKey: "articleDifficultyEasy",
+          rating: 4.5,
+          thumbnail:
+            "https://placehold.co/300x200/818cf8/ffffff?text=BH+Nhân+Thọ",
+          publishDate: "2024-05-10",
+        },
+        {
+          id: "ind002",
+          titleKey: "articleTitleInd002",
+          descriptionKey: "articleDescInd002",
+          typeKey: "articleTypeGuide",
+          category: "health_insurance",
+          audience: "individual",
+          readTimeKey: "8 " + getTranslatedText("articleReadTimeSuffix"),
+          difficultyKey: "articleDifficultyMedium",
+          rating: 4.2,
+          thumbnail:
+            "https://placehold.co/300x200/34d399/ffffff?text=BH+Sức+Khỏe",
+          publishDate: "2024-05-15",
+        },
+        {
+          id: "ind003",
+          titleKey: "articleTitleInd003",
+          descriptionKey: "articleDescInd003",
+          typeKey: "articleTypeGuide",
+          category: "claims_guides_individual",
+          audience: "individual",
+          readTimeKey: "6 " + getTranslatedText("articleReadTimeSuffix"),
+          difficultyKey: "articleDifficultyEasy",
+          rating: 4.0,
+          thumbnail: "https://placehold.co/300x200/fbbf24/ffffff?text=BH+Xe",
+          publishDate: "2024-04-20",
+        },
+        {
+          id: "ind004",
+          titleKey: "articleTitleInd004",
+          descriptionKey: "articleDescInd004",
+          typeKey: "articleTypeFAQ",
+          category: "travel_insurance",
+          audience: "individual",
+          readTimeKey: "N/A",
+          difficultyKey: "articleDifficultyEasy",
+          rating: 4.3,
+          thumbnail:
+            "https://placehold.co/300x200/60a5fa/ffffff?text=BH+Du+Lịch",
+          publishDate: "2024-05-01",
+        },
+        {
+          id: "sme001",
+          titleKey: "articleTitleSme001",
+          descriptionKey: "articleDescSme001",
+          typeKey: "articleTypeArticle",
+          category: "liability_sme",
+          audience: "business",
+          readTimeKey: "7 " + getTranslatedText("articleReadTimeSuffix"),
+          difficultyKey: "articleDifficultyMedium",
+          rating: 4.6,
+          thumbnail:
+            "https://placehold.co/300x200/059669/ffffff?text=BH+Trách+Nhiệm+DN",
+          publishDate: "2024-05-12",
+        },
+        {
+          id: "sme002",
+          titleKey: "articleTitleSme002",
+          descriptionKey: "articleDescSme002",
+          typeKey: "articleTypeTemplate",
+          category: "templates_sme",
+          audience: "business",
+          readTimeKey: "N/A",
+          difficultyKey: "articleDifficultyMedium",
+          rating: 4.1,
+          thumbnail:
+            "https://placehold.co/300x200/ec4899/ffffff?text=An+Ninh+Mạng+SME",
+          publishDate: "2024-04-28",
+        },
+        {
+          id: "sme003",
+          titleKey: "articleTitleSme003",
+          descriptionKey: "articleDescSme003",
+          typeKey: "articleTypeCaseStudy",
+          category: "case_studies_sme",
+          audience: "business",
+          readTimeKey: "5 " + getTranslatedText("articleReadTimeSuffix"),
+          difficultyKey: "articleDifficultyEasy",
+          rating: 4.7,
+          thumbnail:
+            "https://placehold.co/300x200/f97316/ffffff?text=Case+Study+Sản+Xuất",
+          publishDate: "2024-05-05",
+        },
+        {
+          id: "sme004",
+          titleKey: "articleTitleSme004",
+          descriptionKey: "articleDescSme004",
+          typeKey: "articleTypeGuide",
+          category: "employee_benefits_sme",
+          audience: "business",
+          readTimeKey: "10 " + getTranslatedText("articleReadTimeSuffix"),
+          difficultyKey: "articleDifficultyMedium",
+          rating: 4.4,
+          thumbnail:
+            "https://placehold.co/300x200/8b5cf6/ffffff?text=Phúc+Lợi+Nhân+Viên",
+          publishDate: "2024-05-18",
+        },
+      ];
+
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const individualCategoriesNav = document.getElementById(
+        "individualCategories"
+      );
+      const businessCategoriesNav =
+        document.getElementById("businessCategories");
+      const individualArticlesContainer = document.getElementById(
+        "individualArticlesContainer"
+      );
+      const businessArticlesContainer = document.getElementById(
+        "businessArticlesContainer"
+      );
+      const mostViewedContainer = document.getElementById(
+        "mostViewedContainer"
+      );
+      const recentlyAddedContainer = document.getElementById(
+        "recentlyAddedContainer"
+      );
+      const searchInput = document.getElementById("knowledgeSearchInput");
+
+      function createArticleCard(article) {
+        const title = getTranslatedText(article.titleKey);
+        const description = getTranslatedText(article.descriptionKey);
+        const type = getTranslatedText(article.typeKey);
+        const readTime =
+          article.readTimeKey === "N/A"
+            ? "N/A"
+            : getTranslatedText(article.readTimeKey);
+        const difficulty = getTranslatedText(article.difficultyKey);
+        const altText =
+          getTranslatedText("altArticleThumbnailPrefix", currentLang) + title;
+
+        return `
+                <div class="article-card card flex flex-col" data-id="${
+                  article.id
+                }" data-category="${article.category}" data-audience="${
+          article.audience
+        }">
+                    <img src="${
+                      article.thumbnail
+                    }" alt="${altText}" class="w-full h-40 object-cover rounded-t-lg mb-4">
+                    <div class="flex-grow">
+                        <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">${type}</span>
+                        <h4 class="text-lg font-semibold my-2 text-gray-800 hover:text-indigo-600 transition-colors">${title}</h4>
+                        <p class="text-sm text-gray-600 mb-3 flex-grow">${description}</p>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-3">
+                        <span><i class="fas fa-clock mr-1"></i>${readTime}</span> | 
+                        <span><i class="fas fa-signal mr-1"></i>${difficulty}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm">
+                        <div class="rating">
+                            ${Array(Math.floor(article.rating))
+                              .fill('<i class="fas fa-star"></i>')
+                              .join("")}
+                            ${
+                              article.rating % 1 !== 0
+                                ? '<i class="fas fa-star-half-alt"></i>'
+                                : ""
+                            }
+                            ${Array(5 - Math.ceil(article.rating))
+                              .fill('<i class="far fa-star"></i>')
+                              .join("")}
+                            <span class="ml-1 text-gray-600">(${
+                              article.rating
+                            })</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-red-500 focus:outline-none bookmark-btn" title="${getTranslatedText(
+                          "btnBookmarkTitle"
+                        )}">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+      }
+      translations.vi.altArticleThumbnailPrefix = "Ảnh bìa của ";
+      translations.en.altArticleThumbnailPrefix = "Thumbnail for ";
+      translations.vi.btnBookmarkTitle = "Lưu lại";
+      translations.en.btnBookmarkTitle = "Bookmark";
+
+      function createSmallArticleItem(article) {
+        const title = getTranslatedText(article.titleKey);
+        const categoryKey =
+          "cat" +
+          article.category
+            .split("_")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join("");
+        const categoryText =
+          getTranslatedText(categoryKey) ||
+          article.category
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase());
+
+        return `
+                <a href="#" class="block p-3 hover:bg-gray-50 rounded-md border-b last:border-b-0">
+                    <h5 class="font-medium text-sm text-gray-700 mb-1 truncate">${title}</h5>
+                    <p class="text-xs text-gray-500">${categoryText} - ${new Date(
+          article.publishDate
+        ).toLocaleDateString(currentLang === "vi" ? "vi-VN" : "en-US")}</p>
+                </a>
+            `;
+      }
+
+      function renderArticles(container, articlesToRender) {
+        container.innerHTML = articlesToRender.map(createArticleCard).join("");
+        addBookmarkListeners();
+      }
+
+      function renderSmallArticles(container, articlesToRender) {
+        // Clear previous small articles before rendering new ones to avoid duplication on language switch
+        const h3Element = container.querySelector("h3");
+        container.innerHTML = ""; // Clear all
+        if (h3Element) container.appendChild(h3Element); // Add back the title
+        container.innerHTML += articlesToRender
+          .map(createSmallArticleItem)
+          .join("");
+      }
+
+      function renderFeaturedContent() {
+        const sortedByViews = [...allArticles].sort(
+          (a, b) =>
+            b.rating * 10 +
+            Math.random() * 5 -
+            (a.rating * 10 + Math.random() * 5)
+        );
+        const sortedByDate = [...allArticles].sort(
+          (a, b) => new Date(b.publishDate) - new Date(a.publishDate)
+        );
+
+        renderSmallArticles(mostViewedContainer, sortedByViews.slice(0, 3));
+        renderSmallArticles(recentlyAddedContainer, sortedByDate.slice(0, 4));
+      }
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          const targetId = button.dataset.tabTarget;
+          tabContents.forEach((content) => {
+            content.classList.toggle("active", content.id === targetId);
+          });
+          if (targetId === "knowledgeIndividual")
+            filterAndRenderIndividualArticles();
+          if (targetId === "knowledgeBusiness")
+            filterAndRenderBusinessArticles();
+        });
+      });
+
+      function setupCategoryFiltering(navElement, audienceType) {
+        navElement.addEventListener("click", (e) => {
+          if (e.target.tagName === "A" || e.target.closest("a")) {
+            e.preventDefault();
+            const clickedLink = e.target.closest("a");
+            navElement
+              .querySelectorAll(".category-link")
+              .forEach((link) => link.classList.remove("active"));
+            clickedLink.classList.add("active");
+            if (audienceType === "individual")
+              filterAndRenderIndividualArticles();
+            if (audienceType === "business") filterAndRenderBusinessArticles();
+          }
+        });
+      }
+      setupCategoryFiltering(individualCategoriesNav, "individual");
+      setupCategoryFiltering(businessCategoriesNav, "business");
+
+      document
+        .getElementById("industryFilterSME")
+        ?.addEventListener("change", filterAndRenderBusinessArticles);
+
+      searchInput.addEventListener("input", (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const activeIndividualTab = document
+          .getElementById("knowledgeIndividual")
+          .classList.contains("active");
+        if (activeIndividualTab) {
+          filterAndRenderIndividualArticles(searchTerm);
+        } else {
+          filterAndRenderBusinessArticles(searchTerm);
+        }
+      });
+
+      function filterAndRenderIndividualArticles(searchTerm = "") {
+        const selectedCategory =
+          individualCategoriesNav.querySelector(".active").dataset.category;
+        let filtered = allArticles.filter(
+          (article) => article.audience === "individual"
+        );
+        if (selectedCategory !== "all") {
+          filtered = filtered.filter(
+            (article) => article.category === selectedCategory
+          );
+        }
+        if (searchTerm) {
+          filtered = filtered.filter(
+            (article) =>
+              getTranslatedText(article.titleKey)
+                .toLowerCase()
+                .includes(searchTerm) ||
+              getTranslatedText(article.descriptionKey)
+                .toLowerCase()
+                .includes(searchTerm)
+          );
+        }
+        renderArticles(individualArticlesContainer, filtered.slice(0, 4));
+      }
+
+      function filterAndRenderBusinessArticles(searchTerm = "") {
+        const selectedCategory =
+          businessCategoriesNav.querySelector(".active").dataset.category;
+        const selectedIndustry =
+          document.getElementById("industryFilterSME").value;
+
+        let filtered = allArticles.filter(
+          (article) => article.audience === "business"
+        );
+        if (selectedCategory !== "all_sme") {
+          filtered = filtered.filter(
+            (article) => article.category === selectedCategory
+          );
+        }
+        if (selectedIndustry) {
+          filtered = filtered.filter(
+            (article) =>
+              getTranslatedText(article.titleKey)
+                .toLowerCase()
+                .includes(
+                  getTranslatedText(
+                    "industry" +
+                      selectedIndustry.charAt(0).toUpperCase() +
+                      selectedIndustry.slice(1)
+                  ).toLowerCase()
+                ) || article.category.includes(selectedIndustry)
+          );
+        }
+        if (searchTerm) {
+          filtered = filtered.filter(
+            (article) =>
+              getTranslatedText(article.titleKey)
+                .toLowerCase()
+                .includes(searchTerm) ||
+              getTranslatedText(article.descriptionKey)
+                .toLowerCase()
+                .includes(searchTerm)
+          );
+        }
+        renderArticles(businessArticlesContainer, filtered.slice(0, 4));
+      }
+
+      document
+        .getElementById("loadMoreIndividual")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertLoadMoreIndividual"))
+        );
+      document
+        .getElementById("loadMoreBusiness")
+        ?.addEventListener("click", () =>
+          alert(getTranslatedText("alertLoadMoreBusiness"))
+        );
+
+      function addBookmarkListeners() {
+        document.querySelectorAll(".bookmark-btn").forEach((button) => {
+          button.addEventListener("click", function () {
+            this.classList.toggle("text-red-500");
+            this.querySelector("i").classList.toggle("far");
+            this.querySelector("i").classList.toggle("fas");
+            const articleId = this.closest(".article-card").dataset.id;
+            // console.log(`Bookmark status changed for article ${articleId}`);
+          });
+        });
+      }
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial language load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_KnowledgeCenter_Lang") || "vi";
+        setLanguage(savedLang); // This will also trigger initial rendering
+      });
+    </script>
+  </body>
+</html>

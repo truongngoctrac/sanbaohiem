@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">Hồ Sơ Người Dùng - BảoHiểmPRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f3f4f6; /* Gray 100 */
+      }
+      .profile-nav-link {
+        display: block;
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        color: #374151; /* Gray 700 */
+        transition: background-color 0.2s ease, color 0.2s ease;
+        font-weight: 500;
+      }
+      .profile-nav-link:hover {
+        background-color: #eef2ff; /* Indigo 50 */
+        color: #4f46e5; /* Indigo 600 */
+      }
+      .profile-nav-link.active {
+        background-color: #4f46e5; /* Indigo 600 */
+        color: white;
+      }
+      .profile-nav-link.active i {
+        /* Ensure icon color changes when link is active */
+        color: white !important;
+      }
+      .profile-nav-link i {
+        margin-right: 0.75rem;
+        color: #6b7280; /* Gray 500 */
+      }
+
+      .content-section {
+        display: none;
+      }
+      .content-section.active {
+        display: block;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 1.5rem; /* p-6 */
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid #d1d5db; /* Gray 300 */
+        margin-bottom: 1rem;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: #4f46e5; /* Indigo 600 */
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        outline: none;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151; /* Gray 700 */
+      }
+      .btn {
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca;
+      }
+      .btn-danger {
+        background-color: #ef4444;
+        color: white;
+      }
+      .btn-danger:hover {
+        background-color: #dc2626;
+      }
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid #4f46e5;
+        color: #4f46e5;
+      }
+      .btn-outline:hover {
+        background-color: #e0e7ff;
+      }
+
+      .alert-incomplete {
+        background-color: #fffbeb; /* Amber 50 */
+        border-left-width: 4px;
+        border-color: #f59e0b; /* Amber 500 */
+        padding: 1rem;
+        color: #b45309; /* Amber 700 */
+      }
+      .document-item {
+        border: 1px solid #e5e7eb;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .lang-switcher-btn.active-lang {
+        font-weight: bold;
+        color: #374151; /* Darker gray for active language */
+        background-color: #e5e7eb; /* Light gray background */
+      }
+      .lang-switcher-btn {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-40">
+      <div
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/4f46e5/ffffff?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navHome"
+            >Trang Chủ</a
+          >
+          <a
+            href="knowledge-center-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navKnowledgeCenter"
+            >Trung Tâm Kiến Thức</a
+          >
+          <a
+            href="contact-support-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navSupport"
+            >Hỗ Trợ</a
+          >
+          <a
+            href="customer-dashboard-page.html"
+            id="dashboardLink"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navDashboard"
+            >Bảng Điều Khiển</a
+          >
+        </nav>
+        <div class="flex items-center space-x-2">
+          <div class="flex items-center space-x-1">
+            <button data-lang="vi" class="lang-switcher-btn text-sm">
+              VIE
+            </button>
+            <span class="text-sm text-gray-400">|</span>
+            <button data-lang="en" class="lang-switcher-btn text-sm">
+              ENG
+            </button>
+          </div>
+          <button
+            id="logoutTopButton"
+            class="ml-4 text-sm text-red-600 hover:underline"
+            data-translate-key="btnLogout"
+          >
+            Đăng Xuất
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <div class="md:flex md:space-x-8">
+        <aside class="md:w-1/4 lg:w-1/5 mb-8 md:mb-0">
+          <div class="card p-4">
+            <div class="text-center mb-4">
+              <img
+                id="profileAvatar"
+                src="https://placehold.co/100x100/e0e7ff/4338ca?text=User"
+                alt="[Ảnh đại diện]"
+                class="w-24 h-24 rounded-full mx-auto mb-2 border-2 border-indigo-300"
+              />
+              <h2
+                id="profileDisplayName"
+                class="text-lg font-semibold text-gray-800"
+              >
+                Nguyễn Văn A
+              </h2>
+              <p id="profileDisplayEmail" class="text-sm text-gray-500">
+                nguyenvana@example.com
+              </p>
+            </div>
+            <nav id="profileNav" class="space-y-1">
+              <a
+                href="#personalDetails"
+                data-target="personalDetails"
+                class="profile-nav-link active"
+                data-translate-key="sidebarPersonalDetails"
+                ><i class="fas fa-user-circle"></i>Thông Tin Cá Nhân</a
+              >
+              <a
+                href="#contactInfo"
+                data-target="contactInfo"
+                class="profile-nav-link"
+                data-translate-key="sidebarContactInfo"
+                ><i class="fas fa-address-book"></i>Thông Tin Liên Hệ</a
+              >
+              <a
+                href="#communicationPrefs"
+                data-target="communicationPrefs"
+                class="profile-nav-link"
+                data-translate-key="sidebarCommPrefs"
+                ><i class="fas fa-envelope-open-text"></i>Tùy Chọn Liên Lạc</a
+              >
+              <a
+                href="#securitySettings"
+                data-target="securitySettings"
+                class="profile-nav-link"
+                data-translate-key="sidebarSecurity"
+                ><i class="fas fa-shield-alt"></i>Bảo Mật Tài Khoản</a
+              >
+              <div id="individualProfileLinks">
+                <a
+                  href="#idDocuments"
+                  data-target="idDocuments"
+                  class="profile-nav-link"
+                  data-translate-key="sidebarIdDocs"
+                  ><i class="fas fa-id-card"></i>Giấy Tờ Tùy Thân</a
+                >
+                <a
+                  href="#beneficiaries"
+                  data-target="beneficiaries"
+                  class="profile-nav-link"
+                  data-translate-key="sidebarBeneficiaries"
+                  ><i class="fas fa-users"></i>Người Thụ Hưởng</a
+                >
+                <a
+                  href="#familyMembers"
+                  data-target="familyMembers"
+                  class="profile-nav-link"
+                  data-translate-key="sidebarFamilyMembers"
+                  ><i class="fas fa-home"></i>Thành Viên Gia Đình</a
+                >
+              </div>
+              <div id="businessProfileLinks" class="hidden">
+                <a
+                  href="#companyInfo"
+                  data-target="companyInfo"
+                  class="profile-nav-link"
+                  data-translate-key="sidebarCompanyInfo"
+                  ><i class="fas fa-building"></i>Thông Tin Công Ty</a
+                >
+                <a
+                  href="#authorizedReps"
+                  data-target="authorizedReps"
+                  class="profile-nav-link"
+                  data-translate-key="sidebarAuthReps"
+                  ><i class="fas fa-user-tie"></i>Người Đại Diện</a
+                >
+                <a
+                  href="#businessDocuments"
+                  data-target="businessDocuments"
+                  class="profile-nav-link"
+                  data-translate-key="sidebarBizDocs"
+                  ><i class="fas fa-file-contract"></i>Tài Liệu Công Ty</a
+                >
+              </div>
+              <a
+                href="#auditLog"
+                data-target="auditLog"
+                class="profile-nav-link"
+                data-translate-key="sidebarAuditLog"
+                ><i class="fas fa-history"></i>Lịch Sử Thay Đổi</a
+              >
+              <a
+                href="#dataExport"
+                data-target="dataExport"
+                class="profile-nav-link"
+                data-translate-key="sidebarDataExport"
+                ><i class="fas fa-download"></i>Xuất Dữ Liệu</a
+              >
+            </nav>
+          </div>
+        </aside>
+
+        <div class="md:w-3/4 lg:w-4/5">
+          <div id="incompleteProfileAlert" class="alert-incomplete mb-6 hidden">
+            <p>
+              <i class="fas fa-exclamation-triangle mr-2"></i
+              ><span data-translate-key="alertIncompleteProfile"
+                >Hồ sơ của bạn chưa hoàn chỉnh. Vui lòng cập nhật thêm thông tin
+                để nhận được dịch vụ tốt nhất.</span
+              >
+            </p>
+          </div>
+
+          <section id="personalDetails" class="content-section active card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titlePersonalDetails"
+            >
+              Thông Tin Cơ Bản
+            </h3>
+            <form id="personalDetailsForm" class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="fullName"
+                    class="form-label"
+                    data-translate-key="labelFullName"
+                    >Họ và Tên Đầy Đủ:</label
+                  >
+                  <input
+                    type="text"
+                    id="fullName"
+                    class="form-input"
+                    value="Nguyễn Văn A"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="dateOfBirth"
+                    class="form-label"
+                    data-translate-key="labelDateOfBirth"
+                    >Ngày Sinh:</label
+                  >
+                  <input
+                    type="date"
+                    id="dateOfBirth"
+                    class="form-input"
+                    value="1990-01-15"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="gender"
+                    class="form-label"
+                    data-translate-key="labelGender"
+                    >Giới Tính:</label
+                  >
+                  <select id="gender" class="form-select">
+                    <option
+                      value="male"
+                      selected
+                      data-translate-key="optionMale"
+                    >
+                      Nam
+                    </option>
+                    <option value="female" data-translate-key="optionFemale">
+                      Nữ
+                    </option>
+                    <option value="other" data-translate-key="optionOther">
+                      Khác
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    for="nationalId"
+                    class="form-label"
+                    data-translate-key="labelNationalId"
+                    >Số CMND/CCCD:</label
+                  >
+                  <input
+                    type="text"
+                    id="nationalId"
+                    class="form-input"
+                    value="012345678910"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="occupation"
+                  class="form-label"
+                  data-translate-key="labelOccupation"
+                  >Nghề Nghiệp:</label
+                >
+                <input
+                  type="text"
+                  id="occupation"
+                  class="form-input"
+                  value="Kỹ sư phần mềm"
+                />
+              </div>
+              <div class="text-right mt-6">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-translate-key="btnSaveChanges"
+                >
+                  Lưu Thay Đổi
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section id="contactInfo" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleContactInfo"
+            >
+              Thông Tin Liên Hệ
+            </h3>
+            <form id="contactInfoForm" class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="emailAddress"
+                    class="form-label"
+                    data-translate-key="labelEmailAddress"
+                    >Địa Chỉ Email:</label
+                  >
+                  <input
+                    type="email"
+                    id="emailAddress"
+                    class="form-input"
+                    value="nguyenvana@example.com"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="phoneNumber"
+                    class="form-label"
+                    data-translate-key="labelPhoneNumber"
+                    >Số Điện Thoại:</label
+                  >
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    class="form-input"
+                    value="0901234567"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="address"
+                  class="form-label"
+                  data-translate-key="labelAddress"
+                  >Địa Chỉ Thường Trú:</label
+                >
+                <input
+                  type="text"
+                  id="address"
+                  class="form-input"
+                  value="123 Đường ABC, Phường X, Quận Y, TP. Z"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="mailingAddress"
+                  class="form-label"
+                  data-translate-key="labelMailingAddress"
+                  >Địa Chỉ Nhận Thư (Nếu khác):</label
+                >
+                <input
+                  type="text"
+                  id="mailingAddress"
+                  class="form-input"
+                  data-translate-placeholder-key="placeholderMailingAddress"
+                  placeholder="Để trống nếu giống địa chỉ thường trú"
+                />
+              </div>
+              <div class="text-right mt-6">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-translate-key="btnSaveContactInfo"
+                >
+                  Lưu Thông Tin Liên Hệ
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section id="communicationPrefs" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleCommPrefs"
+            >
+              Tùy Chọn Liên Lạc
+            </h3>
+            <form id="commPrefsForm" class="space-y-4">
+              <p
+                class="text-sm text-gray-600 mb-2"
+                data-translate-key="descCommPrefs"
+              >
+                Chọn cách bạn muốn chúng tôi liên lạc với bạn:
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="emailNotifications"
+                    class="h-4 w-4 text-indigo-600 border-gray-300 rounded mr-2"
+                    checked
+                  />
+                  <label
+                    for="emailNotifications"
+                    class="form-label !mb-0"
+                    data-translate-key="labelEmailNotifications"
+                    >Nhận thông báo qua Email (Gia hạn, cập nhật chính sách,
+                    v.v.)</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="smsNotifications"
+                    class="h-4 w-4 text-indigo-600 border-gray-300 rounded mr-2"
+                  />
+                  <label
+                    for="smsNotifications"
+                    class="form-label !mb-0"
+                    data-translate-key="labelSmsNotifications"
+                    >Nhận thông báo qua SMS (Thanh toán, nhắc nhở quan
+                    trọng)</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="marketingEmails"
+                    class="h-4 w-4 text-indigo-600 border-gray-300 rounded mr-2"
+                    checked
+                  />
+                  <label
+                    for="marketingEmails"
+                    class="form-label !mb-0"
+                    data-translate-key="labelMarketingEmails"
+                    >Nhận email về sản phẩm mới và chương trình khuyến
+                    mãi</label
+                  >
+                </div>
+              </div>
+              <div class="mt-4">
+                <label
+                  for="preferredLanguage"
+                  class="form-label"
+                  data-translate-key="labelPreferredLanguage"
+                  >Ngôn Ngữ Ưu Tiên:</label
+                >
+                <select
+                  id="preferredLanguage"
+                  class="form-select w-full md:w-1/2"
+                >
+                  <option value="vi" selected data-translate-key="optionLangVi">
+                    Tiếng Việt
+                  </option>
+                  <option value="en" data-translate-key="optionLangEn">
+                    English
+                  </option>
+                </select>
+              </div>
+              <div class="text-right mt-6">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-translate-key="btnSavePreferences"
+                >
+                  Lưu Tùy Chọn
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section id="securitySettings" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleSecuritySettings"
+            >
+              Bảo Mật Tài Khoản
+            </h3>
+            <form id="securityForm" class="space-y-6">
+              <div>
+                <h4
+                  class="text-lg font-medium text-gray-600 mb-2"
+                  data-translate-key="titleChangePassword"
+                >
+                  Đổi Mật Khẩu
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      for="currentPassword"
+                      class="form-label"
+                      data-translate-key="labelCurrentPassword"
+                      >Mật Khẩu Hiện Tại:</label
+                    >
+                    <input
+                      type="password"
+                      id="currentPassword"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 mt-4">
+                  <div>
+                    <label
+                      for="newPassword"
+                      class="form-label"
+                      data-translate-key="labelNewPassword"
+                      >Mật Khẩu Mới:</label
+                    >
+                    <input
+                      type="password"
+                      id="newPassword"
+                      class="form-input"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="confirmNewPassword"
+                      class="form-label"
+                      data-translate-key="labelConfirmNewPassword"
+                      >Xác Nhận Mật Khẩu Mới:</label
+                    >
+                    <input
+                      type="password"
+                      id="confirmNewPassword"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+                <div class="text-right mt-4">
+                  <button
+                    type="button"
+                    id="changePasswordBtn"
+                    class="btn btn-primary"
+                    data-translate-key="btnChangePassword"
+                  >
+                    Đổi Mật Khẩu
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div>
+                <h4
+                  class="text-lg font-medium text-gray-600 mb-2"
+                  data-translate-key="title2FA"
+                >
+                  Xác Thực Hai Yếu Tố (2FA)
+                </h4>
+                <p
+                  class="text-sm text-gray-600 mb-3"
+                  data-translate-key="desc2FA"
+                >
+                  Tăng cường bảo mật cho tài khoản của bạn.
+                </p>
+                <div class="flex items-center">
+                  <span class="mr-4" data-translate-key="text2FAStatus"
+                    >Trạng thái 2FA:</span
+                  >
+                  <strong
+                    id="2faStatus"
+                    class="text-red-600"
+                    data-translate-key="text2FANotActive"
+                    >Chưa kích hoạt</strong
+                  >
+                  <button
+                    type="button"
+                    id="setup2faBtn"
+                    class="btn btn-outline ml-3"
+                    data-translate-key="btnSetup2FA"
+                  >
+                    Thiết Lập 2FA
+                  </button>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <section id="idDocuments" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleIdDocuments"
+            >
+              Giấy Tờ Tùy Thân
+            </h3>
+            <div class="mb-4">
+              <label
+                for="uploadIdDoc"
+                class="form-label"
+                data-translate-key="textUploadNewIdDoc"
+                >Tải Lên Giấy Tờ Mới (CMND/CCCD, Hộ chiếu - PDF, JPG,
+                PNG):</label
+              >
+              <input type="file" id="uploadIdDoc" class="form-input" />
+              <button
+                type="button"
+                class="btn btn-secondary mt-2"
+                data-translate-key="btnUpload"
+              >
+                Tải Lên
+              </button>
+            </div>
+            <h4
+              class="text-lg font-medium text-gray-600 mb-3"
+              data-translate-key="textUploadedIdDocs"
+            >
+              Giấy Tờ Đã Tải Lên:
+            </h4>
+            <div id="uploadedIdDocumentsList" class="space-y-2">
+              <div class="document-item">
+                <span>CMND_MatTruoc.jpg</span>
+                <div>
+                  <button
+                    class="text-blue-500 hover:underline text-sm mr-2"
+                    data-translate-key="textDocView"
+                  >
+                    Xem
+                  </button>
+                  <button
+                    class="text-red-500 hover:underline text-sm"
+                    data-translate-key="textDocDelete"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+              <div class="document-item">
+                <span>HoChieu_Trang2.pdf</span>
+                <div>
+                  <button
+                    class="text-blue-500 hover:underline text-sm mr-2"
+                    data-translate-key="textDocView"
+                  >
+                    Xem
+                  </button>
+                  <button
+                    class="text-red-500 hover:underline text-sm"
+                    data-translate-key="textDocDelete"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+              <p
+                class="text-sm text-gray-500 italic mt-2"
+                data-translate-key="textNoIdDocsUploaded"
+              >
+                Chưa có giấy tờ nào được tải lên.
+              </p>
+            </div>
+          </section>
+
+          <section id="beneficiaries" class="content-section card">
+            <div class="flex justify-between items-center mb-6">
+              <h3
+                class="text-xl font-semibold text-gray-700"
+                data-translate-key="titleBeneficiaries"
+              >
+                Người Thụ Hưởng
+              </h3>
+              <button
+                class="btn btn-primary btn-sm"
+                data-translate-key="btnAddBeneficiary"
+              >
+                <i class="fas fa-plus mr-1"></i>Thêm Người Thụ Hưởng
+              </button>
+            </div>
+            <div id="beneficiariesList" class="space-y-3">
+              <div class="border p-3 rounded-md">
+                <p>
+                  <strong>Họ tên:</strong> Trần Thị B (Vợ) -
+                  <strong>Tỷ lệ:</strong> 50%
+                </p>
+                <p class="text-xs text-gray-500">Hợp đồng: BHNT00123</p>
+                <div class="mt-1">
+                  <button
+                    class="text-blue-500 hover:underline text-xs mr-2"
+                    data-translate-key="textEdit"
+                  >
+                    Sửa
+                  </button>
+                  <button
+                    class="text-red-500 hover:underline text-xs"
+                    data-translate-key="textDelete"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+              <p
+                class="text-sm text-gray-500 italic"
+                data-translate-key="textNoBeneficiaries"
+              >
+                Chưa có thông tin người thụ hưởng.
+              </p>
+            </div>
+          </section>
+
+          <section id="familyMembers" class="content-section card">
+            <div class="flex justify-between items-center mb-6">
+              <h3
+                class="text-xl font-semibold text-gray-700"
+                data-translate-key="titleFamilyMembers"
+              >
+                Quản Lý Thành Viên Gia Đình (Cho gói gia đình)
+              </h3>
+              <button
+                class="btn btn-primary btn-sm"
+                data-translate-key="btnAddFamilyMember"
+              >
+                <i class="fas fa-user-plus mr-1"></i>Thêm Thành Viên
+              </button>
+            </div>
+            <div id="familyMembersList" class="space-y-3">
+              <div class="border p-3 rounded-md">
+                <p>
+                  <strong>Nguyễn Văn C</strong> (Con trai) - Ngày sinh:
+                  10/05/2015
+                </p>
+                <p class="text-xs text-gray-500">
+                  Được bảo hiểm trong hợp đồng: BHSK-GD001
+                </p>
+                <div class="mt-1">
+                  <button
+                    class="text-blue-500 hover:underline text-xs mr-2"
+                    data-translate-key="textEdit"
+                  >
+                    Sửa
+                  </button>
+                  <button
+                    class="text-red-500 hover:underline text-xs"
+                    data-translate-key="textDelete"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+              <p
+                class="text-sm text-gray-500 italic"
+                data-translate-key="textNoFamilyMembers"
+              >
+                Chưa có thành viên gia đình nào được thêm.
+              </p>
+            </div>
+          </section>
+
+          <section id="companyInfo" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleCompanyInfo"
+            >
+              Thông Tin Công Ty
+            </h3>
+            <form id="companyInfoForm" class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="companyName"
+                    class="form-label"
+                    data-translate-key="labelCompanyName"
+                    >Tên Công Ty Đầy Đủ:</label
+                  >
+                  <input
+                    type="text"
+                    id="companyName"
+                    class="form-input"
+                    value="Công Ty TNHH Phát Triển ABC"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="companyTaxCode"
+                    class="form-label"
+                    data-translate-key="labelCompanyTaxCode"
+                    >Mã Số Thuế:</label
+                  >
+                  <input
+                    type="text"
+                    id="companyTaxCode"
+                    class="form-input"
+                    value="0312345678"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="companyIndustry"
+                    class="form-label"
+                    data-translate-key="labelCompanyIndustry"
+                    >Ngành Nghề Kinh Doanh:</label
+                  >
+                  <input
+                    type="text"
+                    id="companyIndustry"
+                    class="form-input"
+                    value="Công nghệ thông tin"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    for="companyRegNumber"
+                    class="form-label"
+                    data-translate-key="labelCompanyRegNumber"
+                    >Số Đăng Ký Kinh Doanh:</label
+                  >
+                  <input
+                    type="text"
+                    id="companyRegNumber"
+                    class="form-input"
+                    value="0102030405"
+                  />
+                </div>
+              </div>
+              <div>
+                <label
+                  for="companyAddress"
+                  class="form-label"
+                  data-translate-key="labelCompanyAddress"
+                  >Địa Chỉ Đăng Ký:</label
+                >
+                <input
+                  type="text"
+                  id="companyAddress"
+                  class="form-input"
+                  value="Tầng 10, Tòa nhà Central Park, 123 Nguyễn Du, Quận 1, TP. HCM"
+                  required
+                />
+              </div>
+              <div class="text-right mt-6">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-translate-key="btnSaveCompanyInfo"
+                >
+                  Lưu Thông Tin Công Ty
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section id="authorizedReps" class="content-section card">
+            <div class="flex justify-between items-center mb-6">
+              <h3
+                class="text-xl font-semibold text-gray-700"
+                data-translate-key="titleAuthorizedReps"
+              >
+                Người Đại Diện Ủy Quyền
+              </h3>
+              <button
+                class="btn btn-primary btn-sm"
+                data-translate-key="btnAddAuthRep"
+              >
+                <i class="fas fa-user-plus mr-1"></i>Thêm Người Đại Diện
+              </button>
+            </div>
+            <div id="authRepsList" class="space-y-3">
+              <div class="border p-3 rounded-md">
+                <p>
+                  <strong>Trần Văn Quản Lý</strong> - Email:
+                  quanly@abc-dev.com.vn
+                </p>
+                <p class="text-xs text-gray-500">
+                  Vai trò: Quản trị viên Portal
+                </p>
+                <div class="mt-1">
+                  <button
+                    class="text-blue-500 hover:underline text-xs mr-2"
+                    data-translate-key="textEditPermissions"
+                  >
+                    Sửa quyền
+                  </button>
+                  <button
+                    class="text-red-500 hover:underline text-xs"
+                    data-translate-key="textDelete"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+              <p
+                class="text-sm text-gray-500 italic"
+                data-translate-key="textNoAuthReps"
+              >
+                Chưa có người đại diện nào được thêm.
+              </p>
+            </div>
+          </section>
+
+          <section id="businessDocuments" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleBusinessDocuments"
+            >
+              Tài Liệu Công Ty
+            </h3>
+            <div class="mb-4">
+              <label
+                for="uploadBizDoc"
+                class="form-label"
+                data-translate-key="textUploadNewBizDoc"
+                >Tải Lên Tài Liệu Mới (GPKD, Chứng nhận, v.v. - PDF,
+                DOCX):</label
+              >
+              <input type="file" id="uploadBizDoc" class="form-input" />
+              <button
+                type="button"
+                class="btn btn-secondary mt-2"
+                data-translate-key="btnUpload"
+              >
+                Tải Lên
+              </button>
+            </div>
+            <h4
+              class="text-lg font-medium text-gray-600 mb-3"
+              data-translate-key="textUploadedBizDocs"
+            >
+              Tài Liệu Đã Tải Lên:
+            </h4>
+            <div id="uploadedBizDocumentsList" class="space-y-2">
+              <div class="document-item">
+                <span>GiayPhepKinhDoanh_ABC.pdf</span>
+                <div>
+                  <button
+                    class="text-blue-500 hover:underline text-sm mr-2"
+                    data-translate-key="textDocView"
+                  >
+                    Xem
+                  </button>
+                  <button
+                    class="text-red-500 hover:underline text-sm"
+                    data-translate-key="textDocDelete"
+                  >
+                    Xóa
+                  </button>
+                </div>
+              </div>
+              <p
+                class="text-sm text-gray-500 italic mt-2"
+                data-translate-key="textNoBizDocsUploaded"
+              >
+                Chưa có tài liệu nào được tải lên.
+              </p>
+            </div>
+          </section>
+
+          <section id="auditLog" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleAuditLog"
+            >
+              Lịch Sử Thay Đổi Hồ Sơ
+            </h3>
+            <div class="max-h-80 overflow-y-auto">
+              <ul class="space-y-3 text-sm">
+                <li class="border-b pb-2">
+                  <p class="text-gray-800">
+                    <strong>20/05/2025 10:15 AM:</strong>
+                    <span data-translate-key="auditLogUpdatePhone"
+                      >Cập nhật số điện thoại thành</span
+                    >
+                    <span class="font-medium">0901234568</span>.
+                  </p>
+                  <p class="text-xs text-gray-500">
+                    <span data-translate-key="auditLogPerformedBy"
+                      >Thực hiện bởi:</span
+                    >
+                    Nguyễn Văn A (IP: 192.168.1.10)
+                  </p>
+                </li>
+                <li class="border-b pb-2">
+                  <p class="text-gray-800">
+                    <strong>15/05/2025 14:30 PM:</strong>
+                    <span data-translate-key="auditLogChangedPassword"
+                      >Thay đổi mật khẩu.</span
+                    >
+                  </p>
+                  <p class="text-xs text-gray-500">
+                    <span data-translate-key="auditLogPerformedBy"
+                      >Thực hiện bởi:</span
+                    >
+                    Nguyễn Văn A (IP: 10.0.0.5)
+                  </p>
+                </li>
+                <li class="pb-2">
+                  <p class="text-gray-800">
+                    <strong>01/01/2025 09:00 AM:</strong>
+                    <span data-translate-key="auditLogProfileCreated"
+                      >Tạo hồ sơ.</span
+                    >
+                  </p>
+                  <p
+                    class="text-xs text-gray-500"
+                    data-translate-key="auditLogSystem"
+                  >
+                    Hệ thống
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="dataExport" class="content-section card">
+            <h3
+              class="text-xl font-semibold text-gray-700 mb-6"
+              data-translate-key="titleDataExport"
+            >
+              Xuất Dữ Liệu Cá Nhân
+            </h3>
+            <p
+              class="text-gray-600 mb-4"
+              data-translate-key="textDataExportDesc"
+            >
+              Bạn có quyền yêu cầu một bản sao dữ liệu cá nhân mà chúng tôi lưu
+              trữ về bạn.
+            </p>
+            <button
+              id="exportDataBtn"
+              class="btn btn-primary"
+              data-translate-key="btnRequestDataExport"
+            >
+              <i class="fas fa-file-export mr-2"></i>Yêu Cầu Xuất Dữ Liệu
+            </button>
+            <p
+              class="text-xs text-gray-500 mt-2"
+              data-translate-key="textDataExportNote"
+            >
+              Yêu cầu của bạn sẽ được xử lý và tệp dữ liệu sẽ được gửi đến email
+              đã đăng ký trong vòng 48 giờ.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm">
+          &copy; 2024
+          <span data-translate-key="footerCompanyName"
+            >Công Ty Bảo Hiểm BảoHiểmPRO</span
+          >.
+          <span data-translate-key="footerRightsReserved"
+            >Bảo lưu mọi quyền.</span
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Hồ Sơ Người Dùng - BảoHiểmPRO",
+          navHome: "Trang Chủ",
+          navKnowledgeCenter: "Trung Tâm Kiến Thức",
+          navSupport: "Hỗ Trợ",
+          navDashboardIndividual: "Bảng Điều Khiển Cá Nhân",
+          navDashboardBusiness: "Cổng Thông Tin Doanh Nghiệp",
+          btnLogout: "Đăng Xuất",
+          // Sidebar
+          sidebarPersonalDetails:
+            '<i class="fas fa-user-circle"></i>Thông Tin Cá Nhân',
+          sidebarContactInfo:
+            '<i class="fas fa-address-book"></i>Thông Tin Liên Hệ',
+          sidebarCommPrefs:
+            '<i class="fas fa-envelope-open-text"></i>Tùy Chọn Liên Lạc',
+          sidebarSecurity: '<i class="fas fa-shield-alt"></i>Bảo Mật Tài Khoản',
+          sidebarIdDocs: '<i class="fas fa-id-card"></i>Giấy Tờ Tùy Thân',
+          sidebarBeneficiaries: '<i class="fas fa-users"></i>Người Thụ Hưởng',
+          sidebarFamilyMembers:
+            '<i class="fas fa-home"></i>Thành Viên Gia Đình',
+          sidebarCompanyInfo:
+            '<i class="fas fa-building"></i>Thông Tin Công Ty',
+          sidebarAuthReps: '<i class="fas fa-user-tie"></i>Người Đại Diện',
+          sidebarBizDocs:
+            '<i class="fas fa-file-contract"></i>Tài Liệu Công Ty',
+          sidebarAuditLog: '<i class="fas fa-history"></i>Lịch Sử Thay Đổi',
+          sidebarDataExport: '<i class="fas fa-download"></i>Xuất Dữ Liệu',
+          // Alert
+          alertIncompleteProfile:
+            "Hồ sơ của bạn chưa hoàn chỉnh. Vui lòng cập nhật thêm thông tin để nhận được dịch vụ tốt nhất.",
+          // Section Titles
+          titlePersonalDetails: "Thông Tin Cơ Bản",
+          titleContactInfo: "Thông Tin Liên Hệ",
+          titleCommPrefs: "Tùy Chọn Liên Lạc",
+          titleSecuritySettings: "Bảo Mật Tài Khoản",
+          titleIdDocuments: "Giấy Tờ Tùy Thân",
+          titleBeneficiaries: "Người Thụ Hưởng",
+          titleFamilyMembers: "Quản Lý Thành Viên Gia Đình (Cho gói gia đình)",
+          titleCompanyInfo: "Thông Tin Công Ty",
+          titleAuthorizedReps: "Người Đại Diện Ủy Quyền",
+          titleBusinessDocuments: "Tài Liệu Công Ty",
+          titleAuditLog: "Lịch Sử Thay Đổi Hồ Sơ",
+          titleDataExport: "Xuất Dữ Liệu Cá Nhân",
+          // Labels
+          labelFullName: "Họ và Tên Đầy Đủ:",
+          labelDateOfBirth: "Ngày Sinh:",
+          labelGender: "Giới Tính:",
+          optionMale: "Nam",
+          optionFemale: "Nữ",
+          optionOther: "Khác",
+          labelNationalId: "Số CMND/CCCD:",
+          labelOccupation: "Nghề Nghiệp:",
+          labelEmailAddress: "Địa Chỉ Email:",
+          labelPhoneNumber: "Số Điện Thoại:",
+          labelAddress: "Địa Chỉ Thường Trú:",
+          labelMailingAddress: "Địa Chỉ Nhận Thư (Nếu khác):",
+          descCommPrefs: "Chọn cách bạn muốn chúng tôi liên lạc với bạn:",
+          labelEmailNotifications:
+            "Nhận thông báo qua Email (Gia hạn, cập nhật chính sách, v.v.)",
+          labelSmsNotifications:
+            "Nhận thông báo qua SMS (Thanh toán, nhắc nhở quan trọng)",
+          labelMarketingEmails:
+            "Nhận email về sản phẩm mới và chương trình khuyến mãi",
+          labelPreferredLanguage: "Ngôn Ngữ Ưu Tiên:",
+          optionLangVi: "Tiếng Việt",
+          optionLangEn: "English",
+          titleChangePassword: "Đổi Mật Khẩu",
+          labelCurrentPassword: "Mật Khẩu Hiện Tại:",
+          labelNewPassword: "Mật Khẩu Mới:",
+          labelConfirmNewPassword: "Xác Nhận Mật Khẩu Mới:",
+          title2FA: "Xác Thực Hai Yếu Tố (2FA)",
+          desc2FA: "Tăng cường bảo mật cho tài khoản của bạn.",
+          text2FAStatus: "Trạng thái 2FA:",
+          text2FANotActive: "Chưa kích hoạt",
+          textUploadNewIdDoc:
+            "Tải Lên Giấy Tờ Mới (CMND/CCCD, Hộ chiếu - PDF, JPG, PNG):",
+          textUploadedIdDocs: "Giấy Tờ Đã Tải Lên:",
+          textNoIdDocsUploaded: "Chưa có giấy tờ nào được tải lên.",
+          textDocView: "Xem",
+          textDocDelete: "Xóa",
+          textNoBeneficiaries: "Chưa có thông tin người thụ hưởng.",
+          textEdit: "Sửa",
+          textNoFamilyMembers: "Chưa có thành viên gia đình nào được thêm.",
+          labelCompanyName: "Tên Công Ty Đầy Đủ:",
+          labelCompanyTaxCode: "Mã Số Thuế:",
+          labelCompanyIndustry: "Ngành Nghề Kinh Doanh:",
+          labelCompanyRegNumber: "Số Đăng Ký Kinh Doanh:",
+          labelCompanyAddress: "Địa Chỉ Đăng Ký:",
+          textEditPermissions: "Sửa quyền",
+          textNoAuthReps: "Chưa có người đại diện nào được thêm.",
+          textUploadNewBizDoc:
+            "Tải Lên Tài Liệu Mới (GPKD, Chứng nhận, v.v. - PDF, DOCX):",
+          textUploadedBizDocs: "Tài Liệu Đã Tải Lên:",
+          textNoBizDocsUploaded: "Chưa có tài liệu nào được tải lên.",
+          auditLogUpdatePhone: "Cập nhật số điện thoại thành",
+          auditLogChangedPassword: "Thay đổi mật khẩu.",
+          auditLogProfileCreated: "Tạo hồ sơ.",
+          auditLogPerformedBy: "Thực hiện bởi:",
+          auditLogSystem: "Hệ thống",
+          textDataExportDesc:
+            "Bạn có quyền yêu cầu một bản sao dữ liệu cá nhân mà chúng tôi lưu trữ về bạn.",
+          textDataExportNote:
+            "Yêu cầu của bạn sẽ được xử lý và tệp dữ liệu sẽ được gửi đến email đã đăng ký trong vòng 48 giờ.",
+          // Buttons
+          btnSaveChanges: "Lưu Thay Đổi",
+          btnSaveContactInfo: "Lưu Thông Tin Liên Hệ",
+          btnSavePreferences: "Lưu Tùy Chọn",
+          btnChangePassword: "Đổi Mật Khẩu",
+          btnSetup2FA: "Thiết Lập 2FA",
+          btnUpload: "Tải Lên",
+          btnAddBeneficiary: "Thêm Người Thụ Hưởng",
+          btnAddFamilyMember: "Thêm Thành Viên",
+          btnSaveCompanyInfo: "Lưu Thông Tin Công Ty",
+          btnAddAuthRep: "Thêm Người Đại Diện",
+          btnRequestDataExport: "Yêu Cầu Xuất Dữ Liệu",
+          // Placeholders
+          placeholderMailingAddress: "Để trống nếu giống địa chỉ thường trú",
+          // Sample data for profile display (can be placeholders)
+          sampleIndividualName: "Nguyễn Văn A",
+          sampleIndividualEmail: "nguyenvana@example.com",
+          sampleCompanyName: "Công Ty TNHH Phát Triển ABC",
+          sampleCompanyEmail: "contact@abc-dev.com.vn",
+          // Footer
+          footerCompanyName: "Công Ty Bảo Hiểm BảoHiểmPRO",
+          footerRightsReserved: "Bảo lưu mọi quyền.",
+          // JS Alerts
+          alertPersonalInfoSaved: "Thông tin cá nhân đã được lưu!",
+          alertContactInfoSaved: "Thông tin liên hệ đã được lưu!",
+          alertCommPrefsSaved: "Tùy chọn liên lạc đã được lưu!",
+          alertPasswordChanged:
+            "Mật khẩu đã được thay đổi! (Trong ứng dụng thực tế, bạn sẽ được đăng xuất).",
+          alert2FASetup:
+            "Bắt đầu quá trình thiết lập Xác thực Hai Yếu Tố (2FA)... (Tính năng đang phát triển).",
+          alertCompanyInfoSaved: "Thông tin công ty đã được lưu!",
+          alertDataExportRequested:
+            "Yêu cầu xuất dữ liệu đã được ghi nhận. Tệp dữ liệu sẽ được gửi đến email của bạn.",
+          alertLogoutSuccess: "Đăng xuất thành công (Mô phỏng).",
+        },
+        en: {
+          pageTitle: "User Profile - BảoHiểmPRO",
+          navHome: "Home",
+          navKnowledgeCenter: "Knowledge Center",
+          navSupport: "Support",
+          navDashboardIndividual: "Customer Dashboard",
+          navDashboardBusiness: "Business Portal",
+          btnLogout: "Logout",
+          // Sidebar
+          sidebarPersonalDetails:
+            '<i class="fas fa-user-circle"></i>Personal Details',
+          sidebarContactInfo:
+            '<i class="fas fa-address-book"></i>Contact Information',
+          sidebarCommPrefs:
+            '<i class="fas fa-envelope-open-text"></i>Communication Preferences',
+          sidebarSecurity: '<i class="fas fa-shield-alt"></i>Account Security',
+          sidebarIdDocs: '<i class="fas fa-id-card"></i>ID Documents',
+          sidebarBeneficiaries: '<i class="fas fa-users"></i>Beneficiaries',
+          sidebarFamilyMembers: '<i class="fas fa-home"></i>Family Members',
+          sidebarCompanyInfo:
+            '<i class="fas fa-building"></i>Company Information',
+          sidebarAuthReps: '<i class="fas fa-user-tie"></i>Authorized Reps',
+          sidebarBizDocs:
+            '<i class="fas fa-file-contract"></i>Business Documents',
+          sidebarAuditLog: '<i class="fas fa-history"></i>Change History',
+          sidebarDataExport: '<i class="fas fa-download"></i>Export Data',
+          // Alert
+          alertIncompleteProfile:
+            "Your profile is incomplete. Please update your information for the best service.",
+          // Section Titles
+          titlePersonalDetails: "Basic Information",
+          titleContactInfo: "Contact Information",
+          titleCommPrefs: "Communication Preferences",
+          titleSecuritySettings: "Account Security",
+          titleIdDocuments: "ID Documents",
+          titleBeneficiaries: "Beneficiaries",
+          titleFamilyMembers: "Manage Family Members (For family plans)",
+          titleCompanyInfo: "Company Information",
+          titleAuthorizedReps: "Authorized Representatives",
+          titleBusinessDocuments: "Company Documents",
+          titleAuditLog: "Profile Change History",
+          titleDataExport: "Export Personal Data",
+          // Labels
+          labelFullName: "Full Name:",
+          labelDateOfBirth: "Date of Birth:",
+          labelGender: "Gender:",
+          optionMale: "Male",
+          optionFemale: "Female",
+          optionOther: "Other",
+          labelNationalId: "National ID/Citizen ID:",
+          labelOccupation: "Occupation:",
+          labelEmailAddress: "Email Address:",
+          labelPhoneNumber: "Phone Number:",
+          labelAddress: "Permanent Address:",
+          labelMailingAddress: "Mailing Address (If different):",
+          descCommPrefs: "Choose how you want us to contact you:",
+          labelEmailNotifications:
+            "Receive notifications via Email (Renewals, policy updates, etc.)",
+          labelSmsNotifications:
+            "Receive notifications via SMS (Payments, important reminders)",
+          labelMarketingEmails:
+            "Receive emails about new products and promotions",
+          labelPreferredLanguage: "Preferred Language:",
+          optionLangVi: "Tiếng Việt",
+          optionLangEn: "English",
+          titleChangePassword: "Change Password",
+          labelCurrentPassword: "Current Password:",
+          labelNewPassword: "New Password:",
+          labelConfirmNewPassword: "Confirm New Password:",
+          title2FA: "Two-Factor Authentication (2FA)",
+          desc2FA: "Enhance your account security.",
+          text2FAStatus: "2FA Status:",
+          text2FANotActive: "Not Active",
+          textUploadNewIdDoc:
+            "Upload New ID Document (ID Card, Passport - PDF, JPG, PNG):",
+          textUploadedIdDocs: "Uploaded ID Documents:",
+          textNoIdDocsUploaded: "No ID documents have been uploaded yet.",
+          textDocView: "View",
+          textDocDelete: "Delete",
+          textNoBeneficiaries: "No beneficiary information available.",
+          textEdit: "Edit",
+          textNoFamilyMembers: "No family members have been added yet.",
+          labelCompanyName: "Full Company Name:",
+          labelCompanyTaxCode: "Tax Code:",
+          labelCompanyIndustry: "Industry:",
+          labelCompanyRegNumber: "Business Registration Number:",
+          labelCompanyAddress: "Registered Address:",
+          textEditPermissions: "Edit Permissions",
+          textNoAuthReps: "No authorized representatives have been added.",
+          textUploadNewBizDoc:
+            "Upload New Document (Business License, Certificate, etc. - PDF, DOCX):",
+          textUploadedBizDocs: "Uploaded Company Documents:",
+          textNoBizDocsUploaded: "No company documents have been uploaded yet.",
+          auditLogUpdatePhone: "Updated phone number to",
+          auditLogChangedPassword: "Password changed.",
+          auditLogProfileCreated: "Profile created.",
+          auditLogPerformedBy: "Performed by:",
+          auditLogSystem: "System",
+          textDataExportDesc:
+            "You have the right to request a copy of the personal data we hold about you.",
+          textDataExportNote:
+            "Your request will be processed, and the data file will be sent to your registered email within 48 hours.",
+          // Buttons
+          btnSaveChanges: "Save Changes",
+          btnSaveContactInfo: "Save Contact Information",
+          btnSavePreferences: "Save Preferences",
+          btnChangePassword: "Change Password",
+          btnSetup2FA: "Set Up 2FA",
+          btnUpload: "Upload",
+          btnAddBeneficiary: "Add Beneficiary",
+          btnAddFamilyMember: "Add Family Member",
+          btnSaveCompanyInfo: "Save Company Information",
+          btnAddAuthRep: "Add Authorized Rep",
+          btnRequestDataExport: "Request Data Export",
+          // Placeholders
+          placeholderMailingAddress: "Leave blank if same as permanent address",
+          // Sample data for profile display
+          sampleIndividualName: "John Doe",
+          sampleIndividualEmail: "johndoe@example.com",
+          sampleCompanyName: "ABC Development LLC",
+          sampleCompanyEmail: "contact@abc-dev.com",
+          // Footer
+          footerCompanyName: "BaoHiemPRO Insurance Company",
+          footerRightsReserved: "All rights reserved.",
+          // JS Alerts
+          alertPersonalInfoSaved: "Personal information saved!",
+          alertContactInfoSaved: "Contact information saved!",
+          alertCommPrefsSaved: "Communication preferences saved!",
+          alertPasswordChanged:
+            "Password changed successfully! (In a real application, you would be logged out).",
+          alert2FASetup:
+            "Starting Two-Factor Authentication (2FA) setup process... (Feature in development).",
+          alertCompanyInfoSaved: "Company information saved!",
+          alertDataExportRequested:
+            "Data export request received. The data file will be sent to your email.",
+          alertLogoutSuccess: "Logged out successfully (Simulation).",
+        },
+      };
+
+      let currentLang = "vi"; // Default language
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_PreferredLanguage", lang);
+        document.documentElement.lang = lang;
+
+        const pageTitleKey = translations[lang].pageTitle;
+        if (pageTitleKey) document.title = pageTitleKey;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang][key]) {
+            if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+              if (el.type === "submit" || el.type === "button") {
+                el.value = translations[lang][key];
+              } else {
+                // Check for specific placeholder key first
+                const placeholderKey = el.dataset.translatePlaceholderKey;
+                if (placeholderKey && translations[lang][placeholderKey]) {
+                  el.placeholder = translations[lang][placeholderKey];
+                } else if (translations[lang][key] && el.placeholder) {
+                  // Fallback to main key if it's a placeholder
+                  el.placeholder = translations[lang][key];
+                }
+              }
+            } else if (el.tagName === "OPTION") {
+              el.textContent = translations[lang][key];
+            } else {
+              // For elements that might contain icons (like sidebar links)
+              if (el.innerHTML.includes("<i")) {
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translations[lang][key]
+                    .replace(/<i class="[^"]+"><\/i>/, "")
+                    .trim(); // Remove icon from translation string if it was included
+              } else {
+                el.textContent = translations[lang][key];
+              }
+            }
+          }
+        });
+
+        // Update dynamic parts
+        updateDashboardLinkText(currentUserType, lang);
+        updateProfileDisplay(currentUserType, lang);
+
+        // Update language switcher buttons active state
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+          btn.classList.toggle("text-gray-500", btn.dataset.lang !== lang);
+          btn.classList.toggle("hover:bg-gray-200", btn.dataset.lang !== lang);
+        });
+      }
+
+      function updateProfileDisplay(userType, lang) {
+        const nameKey =
+          userType === "business"
+            ? "sampleCompanyName"
+            : "sampleIndividualName";
+        const emailKey =
+          userType === "business"
+            ? "sampleCompanyEmail"
+            : "sampleIndividualEmail";
+        document.getElementById("profileDisplayName").textContent =
+          translations[lang][nameKey] ||
+          (userType === "business" ? "Công Ty Mẫu" : "Người Dùng Mẫu");
+        document.getElementById("profileDisplayEmail").textContent =
+          translations[lang][emailKey] || "email@example.com";
+      }
+
+      function updateDashboardLinkText(userType, lang) {
+        const dashboardLinkEl = document.getElementById("dashboardLink");
+        const key =
+          userType === "business"
+            ? "navDashboardBusiness"
+            : "navDashboardIndividual";
+        if (dashboardLinkEl && translations[lang][key]) {
+          dashboardLinkEl.textContent = translations[lang][key];
+        }
+      }
+
+      const profileNavLinks = document.querySelectorAll(".profile-nav-link");
+      const contentSections = document.querySelectorAll(".content-section");
+      const individualProfileLinksDiv = document.getElementById(
+        "individualProfileLinks"
+      );
+      const businessProfileLinksDiv = document.getElementById(
+        "businessProfileLinks"
+      );
+      const dashboardLink = document.getElementById("dashboardLink");
+      const currentUserType = "individual";
+
+      function setupUserProfileView(userType) {
+        const currentActiveLang =
+          localStorage.getItem("BaoHiemPRO_PreferredLanguage") || "vi";
+
+        if (userType === "business") {
+          individualProfileLinksDiv.classList.add("hidden");
+          businessProfileLinksDiv.classList.remove("hidden");
+          document.getElementById("profileAvatar").src =
+            "https://placehold.co/100x100/10b981/ffffff?text=DN";
+          dashboardLink.href = "business-portal-page.html";
+          document.getElementById("personalDetails").classList.add("hidden");
+          document.getElementById("idDocuments").classList.add("hidden");
+          document.getElementById("beneficiaries").classList.add("hidden");
+          document.getElementById("familyMembers").classList.add("hidden");
+          setActiveSection("companyInfo");
+        } else {
+          individualProfileLinksDiv.classList.remove("hidden");
+          businessProfileLinksDiv.classList.add("hidden");
+          document.getElementById("profileAvatar").src =
+            "https://placehold.co/100x100/e0e7ff/4338ca?text=User";
+          dashboardLink.href = "customer-dashboard-page.html";
+          document.getElementById("companyInfo").classList.add("hidden");
+          document.getElementById("authorizedReps").classList.add("hidden");
+          document.getElementById("businessDocuments").classList.add("hidden");
+          setActiveSection("personalDetails");
+        }
+        updateProfileDisplay(userType, currentActiveLang); // Update names based on type and lang
+        updateDashboardLinkText(userType, currentActiveLang); // Update dashboard link text
+      }
+
+      function setActiveSection(targetId) {
+        profileNavLinks.forEach((link) => {
+          link.classList.toggle("active", link.dataset.target === targetId);
+        });
+        contentSections.forEach((section) => {
+          section.classList.toggle("active", section.id === targetId);
+        });
+        window.scrollTo(0, 0);
+      }
+
+      profileNavLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.dataset.target;
+          setActiveSection(targetId);
+          window.location.hash = targetId;
+        });
+      });
+
+      function handleHashChange() {
+        const hash = window.location.hash.substring(1);
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_PreferredLanguage") || "vi";
+        if (!currentLang || currentLang !== savedLang) {
+          // Apply language first if not set or changed
+          setLanguage(savedLang);
+        }
+
+        if (hash) {
+          const targetSection = document.getElementById(hash);
+          if (
+            targetSection &&
+            targetSection.classList.contains("content-section")
+          ) {
+            // Ensure correct profile view is set up before activating section from hash
+            if (
+              !document
+                .getElementById("profileDisplayName")
+                .textContent.startsWith(
+                  translations[savedLang][
+                    currentUserType === "business"
+                      ? "sampleCompanyName"
+                      : "sampleIndividualName"
+                  ]
+                )
+            ) {
+              setupUserProfileView(currentUserType);
+            }
+            setActiveSection(hash);
+          } else {
+            setupUserProfileView(currentUserType);
+          }
+        } else {
+          setupUserProfileView(currentUserType);
+        }
+      }
+
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        handleHashChange(); // Call on initial load
+      });
+      window.addEventListener("hashchange", handleHashChange);
+
+      // Form Submission Simulations
+      document
+        .getElementById("personalDetailsForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(translations[currentLang].alertPersonalInfoSaved);
+          document.getElementById("profileDisplayName").textContent =
+            document.getElementById("fullName").value;
+        });
+      document
+        .getElementById("contactInfoForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(translations[currentLang].alertContactInfoSaved);
+          document.getElementById("profileDisplayEmail").textContent =
+            document.getElementById("emailAddress").value;
+        });
+      document
+        .getElementById("commPrefsForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(translations[currentLang].alertCommPrefsSaved);
+        });
+      document
+        .getElementById("changePasswordBtn")
+        ?.addEventListener("click", () => {
+          alert(translations[currentLang].alertPasswordChanged);
+          document.getElementById("currentPassword").value = "";
+          document.getElementById("newPassword").value = "";
+          document.getElementById("confirmNewPassword").value = "";
+        });
+      document.getElementById("setup2faBtn")?.addEventListener("click", () => {
+        alert(translations[currentLang].alert2FASetup);
+      });
+      document
+        .getElementById("companyInfoForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(translations[currentLang].alertCompanyInfoSaved);
+          document.getElementById("profileDisplayName").textContent =
+            document.getElementById("companyName").value;
+        });
+
+      document
+        .getElementById("exportDataBtn")
+        ?.addEventListener("click", () => {
+          alert(translations[currentLang].alertDataExportRequested);
+        });
+
+      document
+        .getElementById("logoutTopButton")
+        ?.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert(translations[currentLang].alertLogoutSuccess);
+          window.location.href = "index.html";
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">
+      Quản Lý Yêu Cầu Bồi Thường - BảoHiểmPRO
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f3f4f6; /* Gray 100 */
+      }
+      .tab-button.active {
+        border-bottom-width: 3px;
+        border-color: #4f46e5; /* Indigo 600 for general use */
+        color: #4f46e5;
+        font-weight: 600;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 1.5rem; /* p-6 */
+      }
+      .table th,
+      .table td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+        font-size: 0.875rem;
+      }
+      .table th {
+        background-color: #f9fafb;
+        font-weight: 600;
+        color: #374151;
+      }
+      .status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+      } /* Amber */
+      .status-in-review {
+        background-color: #dbeafe;
+        color: #1e40af;
+      } /* Blue */
+      .status-approved {
+        background-color: #dcfce7;
+        color: #166534;
+      } /* Green */
+      .status-denied {
+        background-color: #fee2e2;
+        color: #991b1b;
+      } /* Red */
+      .status-closed {
+        background-color: #e5e7eb;
+        color: #4b5563;
+      } /* Gray */
+      .status-tag {
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        display: inline-block;
+      }
+      .btn {
+        padding: 0.625rem 1.25rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+      } /* Indigo */
+      .btn-primary:hover {
+        background-color: #4338ca;
+      }
+      .btn-primary-sme {
+        background-color: #059669;
+        color: white;
+      } /* Emerald for SME context */
+      .btn-primary-sme:hover {
+        background-color: #047857;
+      }
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid #4f46e5;
+        color: #4f46e5;
+      }
+      .btn-outline:hover {
+        background-color: #e0e7ff;
+      }
+      .btn-outline-sme {
+        background-color: transparent;
+        border: 1px solid #059669;
+        color: #059669;
+      }
+      .btn-outline-sme:hover {
+        background-color: #d1fae5;
+      }
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid #d1d5db;
+        margin-bottom: 1rem;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: #4f46e5; /* Indigo */
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        outline: none;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 50;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        width: 90%;
+        max-width: 700px;
+        position: relative;
+      }
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #9ca3af;
+        cursor: pointer;
+      }
+      .modal-close:hover {
+        color: #1f2937;
+      }
+
+      .timeline {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      .timeline-item {
+        position: relative;
+        padding-left: 2.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .timeline-item:last-child {
+        padding-bottom: 0;
+      }
+      .timeline-marker {
+        position: absolute;
+        left: 0;
+        top: 0.125rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        background-color: #d1d5db;
+        border-radius: 50%;
+        border: 3px solid white;
+      }
+      .timeline-item.active .timeline-marker {
+        background-color: #4f46e5;
+      }
+      .timeline-item.completed .timeline-marker {
+        background-color: #10b981;
+      }
+      .timeline-line {
+        position: absolute;
+        left: 0.5625rem;
+        top: 1.25rem;
+        bottom: -0.75rem;
+        width: 2px;
+        background-color: #e5e7eb;
+      }
+      .timeline-item:last-child .timeline-line {
+        display: none;
+      }
+      .step-input {
+        margin-bottom: 1.5rem;
+      }
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb;
+        color: #1f2937;
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6;
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-40">
+      <div
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/4f46e5/ffffff?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navHome"
+            >Trang Chủ</a
+          >
+          <a
+            href="customer-dashboard-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navCustomerDashboard"
+            >Bảng Điều Khiển Cá Nhân</a
+          >
+          <a
+            href="business-portal-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navBusinessPortal"
+            >Cổng Doanh Nghiệp</a
+          >
+        </nav>
+        <div class="language-switcher flex items-center space-x-2">
+          <button
+            data-lang="vi"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            VIE
+          </button>
+          <button
+            data-lang="en"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            ENG
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <h1
+        class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center"
+        data-translate-key="mainTitle"
+      >
+        Quản Lý Yêu Cầu Bồi Thường
+      </h1>
+
+      <div class="mb-6 border-b border-gray-300">
+        <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
+          <button
+            data-tab-target="individualClaims"
+            class="tab-button active py-3 px-5 text-center font-medium text-base"
+          >
+            <i class="fas fa-user mr-2"></i
+            ><span data-translate-key="tabForIndividuals"
+              >Dành Cho Cá Nhân</span
+            >
+          </button>
+          <button
+            data-tab-target="businessClaims"
+            class="tab-button py-3 px-5 text-center font-medium text-base"
+          >
+            <i class="fas fa-briefcase mr-2"></i
+            ><span data-translate-key="tabForBusinesses"
+              >Dành Cho Doanh Nghiệp (SME)</span
+            >
+          </button>
+        </nav>
+      </div>
+
+      <section id="individualClaims" class="tab-content active">
+        <div class="card">
+          <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+            <h2
+              class="text-xl font-semibold text-gray-700"
+              data-translate-key="titleYourClaims"
+            >
+              Danh Sách Yêu Cầu Của Bạn
+            </h2>
+            <button id="openNewClaimModalIndividual" class="btn btn-primary">
+              <i class="fas fa-plus-circle mr-2"></i
+              ><span data-translate-key="btnSubmitNewClaim"
+                >Gửi Yêu Cầu Mới</span
+              >
+            </button>
+          </div>
+          <div class="mb-4 flex flex-wrap gap-4">
+            <input
+              type="search"
+              class="form-input sm:w-auto flex-grow"
+              data-translate-placeholder-key="placeholderSearchClaimIdPolicyNo"
+              placeholder="Tìm kiếm (Mã YC, Số HĐ...)"
+            />
+            <select class="form-select sm:w-auto">
+              <option value="" data-translate-key="optionFilterByStatus">
+                Lọc theo trạng thái
+              </option>
+              <option value="pending" data-translate-key="statusPending">
+                Đang chờ
+              </option>
+              <option value="in-review" data-translate-key="statusInReview">
+                Đang xem xét
+              </option>
+              <option value="approved" data-translate-key="statusApproved">
+                Đã duyệt
+              </option>
+              <option value="denied" data-translate-key="statusDenied">
+                Bị từ chối
+              </option>
+            </select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full table">
+              <thead>
+                <tr>
+                  <th data-translate-key="tableHeaderClaimId">Mã Yêu Cầu</th>
+                  <th data-translate-key="tableHeaderPolicyNo">Số Hợp Đồng</th>
+                  <th data-translate-key="tableHeaderInsuranceType">
+                    Loại Bảo Hiểm
+                  </th>
+                  <th data-translate-key="tableHeaderSubmissionDate">
+                    Ngày Gửi
+                  </th>
+                  <th data-translate-key="tableHeaderStatus">Trạng Thái</th>
+                  <th data-translate-key="tableHeaderAction">Hành Động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>YCIND00123</td>
+                  <td>BHNT00123</td>
+                  <td data-translate-key="insuranceTypeLife">Nhân thọ</td>
+                  <td>15/05/2024</td>
+                  <td>
+                    <span
+                      class="status-tag status-in-review"
+                      data-translate-key="statusInReview"
+                      >Đang xem xét</span
+                    >
+                  </td>
+                  <td>
+                    <button
+                      class="text-indigo-600 hover:underline text-sm view-claim-details-btn"
+                      data-claim-id="YCIND00123"
+                      data-translate-key="btnViewDetails"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>YCIND00120</td>
+                  <td>BHSK00456</td>
+                  <td data-translate-key="insuranceTypeHealth">Sức khỏe</td>
+                  <td>01/04/2024</td>
+                  <td>
+                    <span
+                      class="status-tag status-approved"
+                      data-translate-key="statusApprovedAndPaid"
+                      >Đã duyệt & Chi trả</span
+                    >
+                  </td>
+                  <td>
+                    <button
+                      class="text-indigo-600 hover:underline text-sm view-claim-details-btn"
+                      data-claim-id="YCIND00120"
+                      data-translate-key="btnViewDetails"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="businessClaims" class="tab-content">
+        <div class="card">
+          <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+            <h2
+              class="text-xl font-semibold text-gray-700"
+              data-translate-key="titleBusinessClaimsList"
+            >
+              Danh Sách Yêu Cầu Của Doanh Nghiệp
+            </h2>
+            <div>
+              <button
+                id="openNewClaimModalBusinessBatch"
+                class="btn btn-outline-sme mr-2"
+              >
+                <i class="fas fa-layer-group mr-2"></i
+                ><span data-translate-key="btnSubmitBatchClaim"
+                  >Gửi Yêu Cầu Hàng Loạt</span
+                >
+              </button>
+              <button
+                id="openNewClaimModalBusiness"
+                class="btn btn-primary-sme"
+              >
+                <i class="fas fa-plus-circle mr-2"></i
+                ><span data-translate-key="btnSubmitNewClaim"
+                  >Gửi Yêu Cầu Mới</span
+                >
+              </button>
+            </div>
+          </div>
+          <div class="mb-4 flex flex-wrap gap-4">
+            <input
+              type="search"
+              class="form-input sm:w-auto flex-grow"
+              data-translate-placeholder-key="placeholderSearchClaimIdPolicyNoEmpName"
+              placeholder="Tìm kiếm (Mã YC, Số HĐ, Tên NV...)"
+            />
+            <select class="form-select sm:w-auto">
+              <option value="" data-translate-key="optionFilterByStatus">
+                Lọc theo trạng thái
+              </option>
+              <option value="pending" data-translate-key="statusPending">
+                Đang chờ
+              </option>
+              <option value="in-review" data-translate-key="statusInReview">
+                Đang xem xét
+              </option>
+              <option value="approved" data-translate-key="statusApproved">
+                Đã duyệt
+              </option>
+              <option value="denied" data-translate-key="statusDenied">
+                Bị từ chối
+              </option>
+            </select>
+            <select class="form-select sm:w-auto">
+              <option value="" data-translate-key="optionFilterByPolicy">
+                Lọc theo hợp đồng
+              </option>
+              <option
+                value="BHSKN-001"
+                data-translate-key="policySampleGroupHealth"
+              >
+                BHSKN-001 (Sức khỏe nhóm)
+              </option>
+              <option
+                value="BHTS-DN-002"
+                data-translate-key="policySampleProperty"
+              >
+                BHTS-DN-002 (Tài sản)
+              </option>
+            </select>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full table">
+              <thead>
+                <tr>
+                  <th data-translate-key="tableHeaderClaimId">Mã Yêu Cầu</th>
+                  <th data-translate-key="tableHeaderPolicyNo">Số Hợp Đồng</th>
+                  <th data-translate-key="tableHeaderEmployeeOptional">
+                    Nhân Viên (Nếu có)
+                  </th>
+                  <th data-translate-key="tableHeaderSubmissionDate">
+                    Ngày Gửi
+                  </th>
+                  <th data-translate-key="tableHeaderStatus">Trạng Thái</th>
+                  <th data-translate-key="tableHeaderAction">Hành Động</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>YCSME005</td>
+                  <td>BHSKN-001</td>
+                  <td>Nguyễn Văn B (NV005)</td>
+                  <td>10/05/2024</td>
+                  <td>
+                    <span
+                      class="status-tag status-pending"
+                      data-translate-key="statusPending"
+                      >Đang chờ</span
+                    >
+                  </td>
+                  <td>
+                    <button
+                      class="text-emerald-600 hover:underline text-sm view-claim-details-btn"
+                      data-claim-id="YCSME005"
+                      data-translate-key="btnViewDetails"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>YCSME004</td>
+                  <td>BHTS-DN-002</td>
+                  <td>N/A</td>
+                  <td>20/04/2024</td>
+                  <td>
+                    <span
+                      class="status-tag status-closed"
+                      data-translate-key="statusClosed"
+                      >Đã đóng</span
+                    >
+                  </td>
+                  <td>
+                    <button
+                      class="text-emerald-600 hover:underline text-sm view-claim-details-btn"
+                      data-claim-id="YCSME004"
+                      data-translate-key="btnViewDetails"
+                    >
+                      Xem chi tiết
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="newClaimModal" class="modal">
+      <div class="modal-content">
+        <span id="closeNewClaimModal" class="modal-close">&times;</span>
+        <h2
+          class="text-2xl font-semibold text-gray-800 mb-6"
+          id="newClaimModalTitle"
+          data-translate-key="modalTitleNewClaimIndividual"
+        >
+          Gửi Yêu Cầu Bồi Thường Mới
+        </h2>
+
+        <div class="flex justify-center space-x-2 mb-6">
+          <span
+            id="stepIndicator1"
+            class="h-2 w-8 bg-indigo-600 rounded-full"
+          ></span>
+          <span
+            id="stepIndicator2"
+            class="h-2 w-8 bg-gray-300 rounded-full"
+          ></span>
+          <span
+            id="stepIndicator3"
+            class="h-2 w-8 bg-gray-300 rounded-full"
+          ></span>
+        </div>
+
+        <form id="newClaimForm">
+          <div id="claimStep1" class="claim-step">
+            <h3
+              class="text-lg font-medium mb-3"
+              data-translate-key="modalStep1Title"
+            >
+              Bước 1: Thông Tin Hợp Đồng & Sự Cố
+            </h3>
+            <div class="step-input">
+              <label
+                for="claimPolicyNumber"
+                class="form-label"
+                data-translate-key="labelPolicyNumberRelated"
+                >Số Hợp Đồng Liên Quan:</label
+              >
+              <input
+                type="text"
+                id="claimPolicyNumber"
+                class="form-input"
+                data-translate-placeholder-key="placeholderPolicyNumberExample"
+                placeholder="VD: BHNT00123"
+                required
+              />
+            </div>
+            <div class="step-input">
+              <label
+                for="claimType"
+                class="form-label"
+                data-translate-key="labelClaimType"
+                >Loại Yêu Cầu:</label
+              >
+              <select id="claimType" class="form-select" required>
+                <option value="" data-translate-key="optionSelectClaimType">
+                  Chọn loại yêu cầu
+                </option>
+                <option
+                  value="health_medical"
+                  data-translate-key="optionClaimTypeHealth"
+                >
+                  Y tế/Sức khỏe
+                </option>
+                <option
+                  value="auto_accident"
+                  data-translate-key="optionClaimTypeAuto"
+                >
+                  Tai nạn xe
+                </option>
+                <option
+                  value="property_damage"
+                  data-translate-key="optionClaimTypeProperty"
+                >
+                  Thiệt hại tài sản
+                </option>
+                <option
+                  value="life_event"
+                  data-translate-key="optionClaimTypeLife"
+                >
+                  Sự kiện nhân thọ
+                </option>
+                <option
+                  value="business_liability"
+                  data-translate-key="optionClaimTypeBusiness"
+                >
+                  Trách nhiệm doanh nghiệp
+                </option>
+                <option value="other" data-translate-key="optionClaimTypeOther">
+                  Khác
+                </option>
+              </select>
+            </div>
+            <div class="step-input business-claim-field hidden">
+              <label
+                for="claimEmployeeName"
+                class="form-label"
+                data-translate-key="labelEmployeeNameOptional"
+                >Tên Nhân Viên (Nếu áp dụng cho nhân viên):</label
+              >
+              <input
+                type="text"
+                id="claimEmployeeName"
+                class="form-input"
+                data-translate-placeholder-key="placeholderEmployeeNameExample"
+                placeholder="Nguyễn Văn A"
+              />
+            </div>
+            <div class="step-input">
+              <label
+                for="claimIncidentDate"
+                class="form-label"
+                data-translate-key="labelIncidentDate"
+                >Ngày Xảy Ra Sự Cố:</label
+              >
+              <input
+                type="date"
+                id="claimIncidentDate"
+                class="form-input"
+                required
+              />
+            </div>
+            <div class="text-right">
+              <button type="button" id="nextStep1" class="btn btn-primary">
+                <span data-translate-key="btnNext">Tiếp Theo</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="claimStep2" class="claim-step hidden">
+            <h3
+              class="text-lg font-medium mb-3"
+              data-translate-key="modalStep2Title"
+            >
+              Bước 2: Mô Tả Chi Tiết & Tài Liệu
+            </h3>
+            <div class="step-input">
+              <label
+                for="claimDescription"
+                class="form-label"
+                data-translate-key="labelDetailedDescription"
+                >Mô Tả Chi Tiết Sự Cố:</label
+              >
+              <textarea
+                id="claimDescription"
+                rows="4"
+                class="form-textarea"
+                data-translate-placeholder-key="placeholderDetailedDescription"
+                placeholder="Mô tả rõ ràng về sự việc, thiệt hại, hoàn cảnh..."
+                required
+              ></textarea>
+            </div>
+            <div class="step-input">
+              <label
+                for="claimDocuments"
+                class="form-label"
+                data-translate-key="labelUploadDocuments"
+                >Tải Lên Tài Liệu (PDF, JPG, PNG, DOCX - Tối đa 5MB/tệp):</label
+              >
+              <input
+                type="file"
+                id="claimDocuments"
+                class="form-input"
+                multiple
+              />
+              <div
+                id="uploadedFilesList"
+                class="mt-2 text-sm text-gray-600"
+              ></div>
+            </div>
+            <div class="flex justify-between">
+              <button type="button" id="prevStep2" class="btn btn-outline">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span data-translate-key="btnBack">Quay Lại</span>
+              </button>
+              <button type="button" id="nextStep2" class="btn btn-primary">
+                <span data-translate-key="btnNext">Tiếp Theo</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="claimStep3" class="claim-step hidden">
+            <h3
+              class="text-lg font-medium mb-3"
+              data-translate-key="modalStep3Title"
+            >
+              Bước 3: Xem Lại & Gửi Yêu Cầu
+            </h3>
+            <div
+              id="claimReviewDetails"
+              class="mb-4 p-4 bg-gray-50 rounded-md space-y-2 text-sm"
+            >
+              <p>
+                <strong data-translate-key="reviewPolicyNumber"
+                  >Số Hợp Đồng:</strong
+                >
+                <span id="reviewPolicyNumber"></span>
+              </p>
+              <p>
+                <strong data-translate-key="reviewClaimType"
+                  >Loại Yêu Cầu:</strong
+                >
+                <span id="reviewClaimType"></span>
+              </p>
+              <p class="business-claim-field-review hidden">
+                <strong data-translate-key="reviewEmployeeName"
+                  >Nhân Viên:</strong
+                >
+                <span id="reviewEmployeeName"></span>
+              </p>
+              <p>
+                <strong data-translate-key="reviewIncidentDate"
+                  >Ngày Sự Cố:</strong
+                >
+                <span id="reviewIncidentDate"></span>
+              </p>
+              <p>
+                <strong data-translate-key="reviewDescription">Mô Tả:</strong>
+                <span
+                  id="reviewDescription"
+                  class="block whitespace-pre-wrap"
+                ></span>
+              </p>
+              <p>
+                <strong data-translate-key="reviewAttachedDocuments"
+                  >Tài Liệu Đính Kèm:</strong
+                >
+                <span id="reviewDocumentCount">0</span>
+                <span data-translate-key="textFiles">tệp</span>
+              </p>
+            </div>
+            <div class="flex items-center mb-4">
+              <input
+                type="checkbox"
+                id="confirmAccuracy"
+                class="h-4 w-4 text-indigo-600 border-gray-300 rounded mr-2"
+                required
+              />
+              <label
+                for="confirmAccuracy"
+                class="text-sm text-gray-700"
+                data-translate-key="labelConfirmAccuracy"
+                >Tôi xác nhận các thông tin trên là chính xác và đầy đủ.</label
+              >
+            </div>
+            <div class="flex justify-between">
+              <button type="button" id="prevStep3" class="btn btn-outline">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span data-translate-key="btnBack">Quay Lại</span>
+              </button>
+              <div>
+                <button
+                  type="button"
+                  id="saveClaimDraft"
+                  class="btn btn-outline mr-2"
+                >
+                  <i class="fas fa-save mr-2"></i
+                  ><span data-translate-key="btnSaveDraft">Lưu Nháp</span>
+                </button>
+                <button type="submit" id="submitClaim" class="btn btn-primary">
+                  <i class="fas fa-paper-plane mr-2"></i
+                  ><span data-translate-key="btnSubmitRequest"
+                    >Gửi Yêu Cầu</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="claimDetailsModal" class="modal">
+      <div class="modal-content">
+        <span id="closeClaimDetailsModal" class="modal-close">&times;</span>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+          <span data-translate-key="modalTitleClaimDetails"
+            >Chi Tiết Yêu Cầu Bồi Thường</span
+          >
+          - <span id="detailsClaimId"></span>
+        </h2>
+
+        <div class="mb-6">
+          <h4
+            class="text-md font-medium mb-3"
+            data-translate-key="titleProcessingTimeline"
+          >
+            Tiến Trình Xử Lý:
+          </h4>
+          <ul class="timeline" id="claimTimeline">
+            <li class="timeline-item completed">
+              <div class="timeline-marker"></div>
+              <div class="timeline-line"></div>
+              <div class="timeline-content">
+                <p
+                  class="font-medium text-gray-700"
+                  data-translate-key="timelineSubmitted"
+                >
+                  Đã gửi yêu cầu
+                </p>
+                <p class="text-xs text-gray-500">15/05/2024 - 10:00 AM</p>
+              </div>
+            </li>
+            <li class="timeline-item active">
+              <div class="timeline-marker"></div>
+              <div class="timeline-line"></div>
+              <div class="timeline-content">
+                <p
+                  class="font-medium text-gray-700"
+                  data-translate-key="timelineReviewing"
+                >
+                  Đang xem xét hồ sơ
+                </p>
+                <p
+                  class="text-xs text-gray-500"
+                  data-translate-key="timelineEta"
+                >
+                  Dự kiến hoàn thành: 20/05/2024
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-line"></div>
+              <div class="timeline-content">
+                <p
+                  class="font-medium text-gray-700"
+                  data-translate-key="timelineAdditionalInfo"
+                >
+                  Yêu cầu bổ sung (nếu có)
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <p
+                  class="font-medium text-gray-700"
+                  data-translate-key="timelineCompletedResult"
+                >
+                  Hoàn tất & Thông báo kết quả
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-6 text-sm">
+          <div>
+            <p>
+              <strong data-translate-key="detailsPolicyNumberLabel"
+                >Số Hợp Đồng:</strong
+              >
+              <span id="detailsPolicyNumber">BHNT00123</span>
+            </p>
+            <p>
+              <strong data-translate-key="detailsClaimTypeLabel"
+                >Loại Yêu Cầu:</strong
+              >
+              <span
+                id="detailsClaimType"
+                data-translate-key="insuranceTypeHealth"
+                >Y tế/Sức khỏe</span
+              >
+            </p>
+            <p>
+              <strong data-translate-key="detailsIncidentDateLabel"
+                >Ngày Sự Cố:</strong
+              >
+              <span id="detailsIncidentDate">10/05/2024</span>
+            </p>
+          </div>
+          <div>
+            <p>
+              <strong data-translate-key="detailsCurrentStatusLabel"
+                >Trạng Thái Hiện Tại:</strong
+              >
+              <span
+                id="detailsClaimStatus"
+                class="status-tag status-in-review"
+                data-translate-key="statusInReview"
+                >Đang xem xét</span
+              >
+            </p>
+            <p>
+              <strong data-translate-key="detailsClaimAmountLabel"
+                >Số Tiền Yêu Cầu (Ước Tính):</strong
+              >
+              <span id="detailsClaimAmount">5,000,000 VNĐ</span>
+            </p>
+            <p>
+              <strong data-translate-key="detailsProcessorLabel"
+                >Người Xử Lý:</strong
+              >
+              <span id="detailsClaimProcessor"
+                >Nguyễn Thị D (Chuyên viên Bồi thường)</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4
+            class="text-md font-medium mb-2"
+            data-translate-key="detailsIncidentDescriptionLabel"
+          >
+            Mô Tả Sự Cố:
+          </h4>
+          <p
+            class="text-sm bg-gray-50 p-3 rounded-md whitespace-pre-wrap"
+            id="detailsClaimDescription"
+            data-translate-key="sampleIncidentDescription"
+          >
+            Khám và điều trị viêm họng cấp tại bệnh viện XYZ.
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <h4
+            class="text-md font-medium mb-2"
+            data-translate-key="detailsAttachedDocumentsLabel"
+          >
+            Tài Liệu Đính Kèm:
+          </h4>
+          <ul
+            id="detailsDocumentList"
+            class="list-disc list-inside text-sm space-y-1"
+          >
+            <li>
+              <a href="#" class="text-indigo-600 hover:underline"
+                >giay_ra_vien.pdf</a
+              >
+              (<span data-translate-key="textUploadedOn">Đã tải lên</span>
+              15/05/2024)
+            </li>
+            <li>
+              <a href="#" class="text-indigo-600 hover:underline"
+                >hoa_don_vien_phi.jpg</a
+              >
+              (<span data-translate-key="textUploadedOn">Đã tải lên</span>
+              15/05/2024)
+            </li>
+          </ul>
+          <button class="btn btn-outline btn-sm mt-2">
+            <i class="fas fa-upload mr-2"></i
+            ><span data-translate-key="btnUploadAdditionalDocs"
+              >Tải Lên Tài Liệu Bổ Sung</span
+            >
+          </button>
+        </div>
+
+        <div>
+          <h4
+            class="text-md font-medium mb-2"
+            data-translate-key="detailsExchangeWithProcessorLabel"
+          >
+            Trao Đổi Với Người Xử Lý:
+          </h4>
+          <div
+            class="border rounded-md p-3 bg-gray-50 max-h-40 overflow-y-auto text-sm mb-2"
+          >
+            <p>
+              <strong data-translate-key="textBaoHiemPro"
+                >BảoHiểmPRO (16/05/2024):</strong
+              >
+              <span data-translate-key="sampleMessageProcessor"
+                >Hồ sơ của quý khách đã được tiếp nhận và đang trong quá trình
+                xử lý.</span
+              >
+            </p>
+            <p>
+              <strong data-translate-key="textYou">Bạn (15/05/2024):</strong>
+              <span data-translate-key="sampleMessageUser"
+                >Tôi đã gửi đầy đủ hồ sơ theo yêu cầu.</span
+              >
+            </p>
+          </div>
+          <textarea
+            rows="2"
+            class="form-textarea !mb-2"
+            data-translate-placeholder-key="placeholderTypeMessage"
+            placeholder="Nhập tin nhắn..."
+          ></textarea>
+          <button class="btn btn-primary btn-sm">
+            <i class="fas fa-paper-plane mr-2"></i
+            ><span data-translate-key="btnSendMessage">Gửi Tin Nhắn</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Quản Lý Yêu Cầu Bồi Thường - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          navHome: "Trang Chủ",
+          navCustomerDashboard: "Bảng Điều Khiển Cá Nhân",
+          navBusinessPortal: "Cổng Doanh Nghiệp",
+          mainTitle: "Quản Lý Yêu Cầu Bồi Thường",
+          tabForIndividuals: "Dành Cho Cá Nhân",
+          tabForBusinesses: "Dành Cho Doanh Nghiệp (SME)",
+          titleYourClaims: "Danh Sách Yêu Cầu Của Bạn",
+          btnSubmitNewClaim: "Gửi Yêu Cầu Mới",
+          placeholderSearchClaimIdPolicyNo: "Tìm kiếm (Mã YC, Số HĐ...)",
+          optionFilterByStatus: "Lọc theo trạng thái",
+          statusPending: "Đang chờ",
+          statusInReview: "Đang xem xét",
+          statusApproved: "Đã duyệt",
+          statusDenied: "Bị từ chối",
+          tableHeaderClaimId: "Mã Yêu Cầu",
+          tableHeaderPolicyNo: "Số Hợp Đồng",
+          tableHeaderInsuranceType: "Loại Bảo Hiểm",
+          tableHeaderSubmissionDate: "Ngày Gửi",
+          tableHeaderStatus: "Trạng Thái",
+          tableHeaderAction: "Hành Động",
+          insuranceTypeLife: "Nhân thọ",
+          insuranceTypeHealth: "Sức khỏe",
+          statusApprovedAndPaid: "Đã duyệt & Chi trả",
+          btnViewDetails: "Xem chi tiết",
+          titleBusinessClaimsList: "Danh Sách Yêu Cầu Của Doanh Nghiệp",
+          btnSubmitBatchClaim: "Gửi Yêu Cầu Hàng Loạt",
+          placeholderSearchClaimIdPolicyNoEmpName:
+            "Tìm kiếm (Mã YC, Số HĐ, Tên NV...)",
+          optionFilterByPolicy: "Lọc theo hợp đồng",
+          policySampleGroupHealth: "BHSKN-001 (Sức khỏe nhóm)",
+          policySampleProperty: "BHTS-DN-002 (Tài sản)",
+          tableHeaderEmployeeOptional: "Nhân Viên (Nếu có)",
+          statusClosed: "Đã đóng",
+          modalTitleNewClaimIndividual: "Gửi Yêu Cầu Bồi Thường Mới (Cá Nhân)",
+          modalTitleNewClaimBusiness:
+            "Gửi Yêu Cầu Bồi Thường Mới (Doanh Nghiệp)",
+          modalStep1Title: "Bước 1: Thông Tin Hợp Đồng & Sự Cố",
+          labelPolicyNumberRelated: "Số Hợp Đồng Liên Quan:",
+          placeholderPolicyNumberExample: "VD: BHNT00123",
+          labelClaimType: "Loại Yêu Cầu:",
+          optionSelectClaimType: "Chọn loại yêu cầu",
+          optionClaimTypeHealth: "Y tế/Sức khỏe",
+          optionClaimTypeAuto: "Tai nạn xe",
+          optionClaimTypeProperty: "Thiệt hại tài sản",
+          optionClaimTypeLife: "Sự kiện nhân thọ",
+          optionClaimTypeBusiness: "Trách nhiệm doanh nghiệp",
+          optionClaimTypeOther: "Khác",
+          labelEmployeeNameOptional:
+            "Tên Nhân Viên (Nếu áp dụng cho nhân viên):",
+          placeholderEmployeeNameExample: "Nguyễn Văn A",
+          labelIncidentDate: "Ngày Xảy Ra Sự Cố:",
+          btnNext: "Tiếp Theo",
+          modalStep2Title: "Bước 2: Mô Tả Chi Tiết & Tài Liệu",
+          labelDetailedDescription: "Mô Tả Chi Tiết Sự Cố:",
+          placeholderDetailedDescription:
+            "Mô tả rõ ràng về sự việc, thiệt hại, hoàn cảnh...",
+          labelUploadDocuments:
+            "Tải Lên Tài Liệu (PDF, JPG, PNG, DOCX - Tối đa 5MB/tệp):",
+          btnBack: "Quay Lại",
+          modalStep3Title: "Bước 3: Xem Lại & Gửi Yêu Cầu",
+          reviewPolicyNumber: "Số Hợp Đồng:",
+          reviewClaimType: "Loại Yêu Cầu:",
+          reviewEmployeeName: "Nhân Viên:",
+          reviewIncidentDate: "Ngày Sự Cố:",
+          reviewDescription: "Mô Tả:",
+          reviewAttachedDocuments: "Tài Liệu Đính Kèm:",
+          textFiles: "tệp",
+          labelConfirmAccuracy:
+            "Tôi xác nhận các thông tin trên là chính xác và đầy đủ.",
+          btnSaveDraft: "Lưu Nháp",
+          btnSubmitRequest: "Gửi Yêu Cầu",
+          modalTitleClaimDetails: "Chi Tiết Yêu Cầu Bồi Thường",
+          titleProcessingTimeline: "Tiến Trình Xử Lý:",
+          timelineSubmitted: "Đã gửi yêu cầu",
+          timelineReviewing: "Đang xem xét hồ sơ",
+          timelineEta: "Dự kiến hoàn thành:",
+          timelineAdditionalInfo: "Yêu cầu bổ sung (nếu có)",
+          timelineCompletedResult: "Hoàn tất & Thông báo kết quả",
+          detailsPolicyNumberLabel: "Số Hợp Đồng:",
+          detailsClaimTypeLabel: "Loại Yêu Cầu:",
+          detailsIncidentDateLabel: "Ngày Sự Cố:",
+          detailsCurrentStatusLabel: "Trạng Thái Hiện Tại:",
+          detailsClaimAmountLabel: "Số Tiền Yêu Cầu (Ước Tính):",
+          detailsProcessorLabel: "Người Xử Lý:",
+          sampleIncidentDescription:
+            "Khám và điều trị viêm họng cấp tại bệnh viện XYZ.",
+          detailsAttachedDocumentsLabel: "Tài Liệu Đính Kèm:",
+          textUploadedOn: "Đã tải lên",
+          btnUploadAdditionalDocs: "Tải Lên Tài Liệu Bổ Sung",
+          detailsExchangeWithProcessorLabel: "Trao Đổi Với Người Xử Lý:",
+          textBaoHiemPro: "BảoHiểmPRO",
+          sampleMessageProcessor:
+            "Hồ sơ của quý khách đã được tiếp nhận và đang trong quá trình xử lý.",
+          textYou: "Bạn",
+          sampleMessageUser: "Tôi đã gửi đầy đủ hồ sơ theo yêu cầu.",
+          placeholderTypeMessage: "Nhập tin nhắn...",
+          btnSendMessage: "Gửi Tin Nhắn",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          alertFillStep1: "Vui lòng điền đầy đủ thông tin ở Bước 1.",
+          alertFillStep2: "Vui lòng điền mô tả chi tiết ở Bước 2.",
+          alertConfirmAccuracy: "Vui lòng xác nhận thông tin là chính xác.",
+          alertClaimSubmitted: "Yêu cầu đã được gửi thành công! (Mô phỏng)",
+          alertDraftSaved: "Yêu cầu đã được lưu nháp! (Mô phỏng)",
+          alertBatchClaimInProgress:
+            "Tính năng gửi yêu cầu hàng loạt đang được phát triển.",
+        },
+        en: {
+          pageTitle: "Claims Management - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          navHome: "Home",
+          navCustomerDashboard: "Customer Dashboard",
+          navBusinessPortal: "Business Portal",
+          mainTitle: "Claims Management",
+          tabForIndividuals: "For Individuals",
+          tabForBusinesses: "For Businesses (SME)",
+          titleYourClaims: "Your Claims List",
+          btnSubmitNewClaim: "Submit New Claim",
+          placeholderSearchClaimIdPolicyNo: "Search (Claim ID, Policy No...)",
+          optionFilterByStatus: "Filter by status",
+          statusPending: "Pending",
+          statusInReview: "In Review",
+          statusApproved: "Approved",
+          statusDenied: "Denied",
+          tableHeaderClaimId: "Claim ID",
+          tableHeaderPolicyNo: "Policy No.",
+          tableHeaderInsuranceType: "Insurance Type",
+          tableHeaderSubmissionDate: "Submission Date",
+          tableHeaderStatus: "Status",
+          tableHeaderAction: "Action",
+          insuranceTypeLife: "Life",
+          insuranceTypeHealth: "Health",
+          statusApprovedAndPaid: "Approved & Paid",
+          btnViewDetails: "View Details",
+          titleBusinessClaimsList: "Business Claims List",
+          btnSubmitBatchClaim: "Submit Batch Claim",
+          placeholderSearchClaimIdPolicyNoEmpName:
+            "Search (Claim ID, Policy No., Emp. Name...)",
+          optionFilterByPolicy: "Filter by policy",
+          policySampleGroupHealth: "BHSKN-001 (Group Health)",
+          policySampleProperty: "BHTS-DN-002 (Property)",
+          tableHeaderEmployeeOptional: "Employee (If any)",
+          statusClosed: "Closed",
+          modalTitleNewClaimIndividual: "Submit New Claim (Individual)",
+          modalTitleNewClaimBusiness: "Submit New Claim (Business)",
+          modalStep1Title: "Step 1: Policy & Incident Info",
+          labelPolicyNumberRelated: "Related Policy Number:",
+          placeholderPolicyNumberExample: "E.g.: BHNT00123",
+          labelClaimType: "Claim Type:",
+          optionSelectClaimType: "Select claim type",
+          optionClaimTypeHealth: "Health/Medical",
+          optionClaimTypeAuto: "Auto Accident",
+          optionClaimTypeProperty: "Property Damage",
+          optionClaimTypeLife: "Life Event",
+          optionClaimTypeBusiness: "Business Liability",
+          optionClaimTypeOther: "Other",
+          labelEmployeeNameOptional: "Employee Name (If applicable):",
+          placeholderEmployeeNameExample: "Nguyen Van A",
+          labelIncidentDate: "Incident Date:",
+          btnNext: "Next",
+          modalStep2Title: "Step 2: Detailed Description & Documents",
+          labelDetailedDescription: "Detailed Incident Description:",
+          placeholderDetailedDescription:
+            "Clearly describe the event, damages, circumstances...",
+          labelUploadDocuments:
+            "Upload Documents (PDF, JPG, PNG, DOCX - Max 5MB/file):",
+          btnBack: "Back",
+          modalStep3Title: "Step 3: Review & Submit",
+          reviewPolicyNumber: "Policy Number:",
+          reviewClaimType: "Claim Type:",
+          reviewEmployeeName: "Employee:",
+          reviewIncidentDate: "Incident Date:",
+          reviewDescription: "Description:",
+          reviewAttachedDocuments: "Attached Documents:",
+          textFiles: "files",
+          labelConfirmAccuracy:
+            "I confirm the above information is accurate and complete.",
+          btnSaveDraft: "Save Draft",
+          btnSubmitRequest: "Submit Claim",
+          modalTitleClaimDetails: "Claim Details",
+          titleProcessingTimeline: "Processing Timeline:",
+          timelineSubmitted: "Claim Submitted",
+          timelineReviewing: "Reviewing Documents",
+          timelineEta: "ETA:",
+          timelineAdditionalInfo: "Additional Info Requested (if any)",
+          timelineCompletedResult: "Completed & Result Notified",
+          detailsPolicyNumberLabel: "Policy Number:",
+          detailsClaimTypeLabel: "Claim Type:",
+          detailsIncidentDateLabel: "Incident Date:",
+          detailsCurrentStatusLabel: "Current Status:",
+          detailsClaimAmountLabel: "Claimed Amount (Est.):",
+          detailsProcessorLabel: "Assigned Processor:",
+          sampleIncidentDescription:
+            "Medical examination and treatment for acute pharyngitis at XYZ hospital.",
+          detailsAttachedDocumentsLabel: "Attached Documents:",
+          textUploadedOn: "Uploaded on",
+          btnUploadAdditionalDocs: "Upload Additional Documents",
+          detailsExchangeWithProcessorLabel: "Exchange with Processor:",
+          textBaoHiemPro: "BảoHiểmPRO",
+          sampleMessageProcessor:
+            "Your documents have been received and are being processed.",
+          textYou: "You",
+          sampleMessageUser: "I have submitted all required documents.",
+          placeholderTypeMessage: "Type your message...",
+          btnSendMessage: "Send Message",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          alertFillStep1: "Please fill in all information in Step 1.",
+          alertFillStep2: "Please provide a detailed description in Step 2.",
+          alertConfirmAccuracy: "Please confirm the information is accurate.",
+          alertClaimSubmitted: "Claim submitted successfully! (Simulation)",
+          alertDraftSaved: "Claim draft saved! (Simulation)",
+          alertBatchClaimInProgress:
+            "Batch claim submission feature is under development.",
+        },
+      };
+      let currentLang = "vi";
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_ClaimsPage_Lang", lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              (el.type === "submit" || el.type === "button")
+            ) {
+              el.value = translatedText;
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H1" ||
+                el.tagName === "H2" ||
+                el.tagName === "H3" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE" ||
+                el.tagName === "SUMMARY" ||
+                el.tagName === "TH" ||
+                el.tagName === "TD") &&
+              (translatedText.includes("&") ||
+                translatedText.includes("<i class"))
+            ) {
+              if (el.innerHTML.includes("<i")) {
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translatedText.replace(/<i class="[^"]+"><\/i>/, "").trim();
+              } else {
+                el.innerHTML = translatedText;
+              }
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Update modal title dynamically based on current language and active tab
+        const activeTab =
+          document.querySelector(".tab-button.active").dataset.tabTarget;
+        const modalTitleEl = document.getElementById("newClaimModalTitle");
+        if (activeTab === "businessClaims") {
+          modalTitleEl.textContent = getTranslatedText(
+            "modalTitleNewClaimBusiness"
+          );
+        } else {
+          modalTitleEl.textContent = getTranslatedText(
+            "modalTitleNewClaimIndividual"
+          );
+        }
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key;
+      }
+
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          const targetId = button.dataset.tabTarget;
+          tabContents.forEach((content) => {
+            content.classList.toggle("active", content.id === targetId);
+          });
+          const modalTitle = document.getElementById("newClaimModalTitle");
+          const businessFields = document.querySelectorAll(
+            ".business-claim-field"
+          );
+          const businessReviewFields = document.querySelectorAll(
+            ".business-claim-field-review"
+          );
+
+          if (targetId === "businessClaims") {
+            modalTitle.textContent = getTranslatedText(
+              "modalTitleNewClaimBusiness"
+            );
+            businessFields.forEach((f) => f.classList.remove("hidden"));
+            businessReviewFields.forEach((f) => f.classList.remove("hidden"));
+          } else {
+            modalTitle.textContent = getTranslatedText(
+              "modalTitleNewClaimIndividual"
+            );
+            businessFields.forEach((f) => f.classList.add("hidden"));
+            businessReviewFields.forEach((f) => f.classList.add("hidden"));
+          }
+          resetNewClaimForm();
+        });
+      });
+
+      const newClaimModal = document.getElementById("newClaimModal");
+      const openNewClaimModalIndividualBtn = document.getElementById(
+        "openNewClaimModalIndividual"
+      );
+      const openNewClaimModalBusinessBtn = document.getElementById(
+        "openNewClaimModalBusiness"
+      );
+      const openNewClaimModalBusinessBatchBtn = document.getElementById(
+        "openNewClaimModalBusinessBatch"
+      );
+      const closeNewClaimModalBtn =
+        document.getElementById("closeNewClaimModal");
+
+      const claimSteps = [
+        document.getElementById("claimStep1"),
+        document.getElementById("claimStep2"),
+        document.getElementById("claimStep3"),
+      ];
+      const stepIndicators = [
+        document.getElementById("stepIndicator1"),
+        document.getElementById("stepIndicator2"),
+        document.getElementById("stepIndicator3"),
+      ];
+      let currentClaimStep = 0;
+
+      function updateStepIndicators() {
+        stepIndicators.forEach((indicator, index) => {
+          indicator.classList.remove("bg-indigo-600", "bg-gray-300");
+          if (index === currentClaimStep) {
+            indicator.classList.add("bg-indigo-600");
+          } else if (index < currentClaimStep) {
+            indicator.classList.add("bg-indigo-600");
+          } else {
+            indicator.classList.add("bg-gray-300");
+          }
+        });
+      }
+
+      function showClaimStep(stepIndex) {
+        claimSteps.forEach((step, index) => {
+          step.classList.toggle("hidden", index !== stepIndex);
+        });
+        currentClaimStep = stepIndex;
+        updateStepIndicators();
+      }
+
+      function resetNewClaimForm() {
+        document.getElementById("newClaimForm").reset();
+        document.getElementById("uploadedFilesList").innerHTML = "";
+        showClaimStep(0);
+      }
+
+      function openModal(isBusiness = false) {
+        const modalTitle = document.getElementById("newClaimModalTitle");
+        const businessFields = document.querySelectorAll(
+          ".business-claim-field"
+        );
+        const businessReviewFields = document.querySelectorAll(
+          ".business-claim-field-review"
+        );
+
+        if (isBusiness) {
+          modalTitle.textContent = getTranslatedText(
+            "modalTitleNewClaimBusiness"
+          );
+          businessFields.forEach((f) => f.classList.remove("hidden"));
+          businessReviewFields.forEach((f) => f.classList.remove("hidden"));
+        } else {
+          modalTitle.textContent = getTranslatedText(
+            "modalTitleNewClaimIndividual"
+          );
+          businessFields.forEach((f) => f.classList.add("hidden"));
+          businessReviewFields.forEach((f) => f.classList.add("hidden"));
+        }
+        resetNewClaimForm();
+        newClaimModal.style.display = "block";
+      }
+
+      openNewClaimModalIndividualBtn?.addEventListener("click", () =>
+        openModal(false)
+      );
+      openNewClaimModalBusinessBtn?.addEventListener("click", () =>
+        openModal(true)
+      );
+      if (openNewClaimModalBusinessBatchBtn) {
+        openNewClaimModalBusinessBatchBtn.addEventListener("click", () =>
+          alert(getTranslatedText("alertBatchClaimInProgress"))
+        );
+      }
+
+      closeNewClaimModalBtn?.addEventListener("click", () => {
+        newClaimModal.style.display = "none";
+      });
+
+      document.getElementById("nextStep1")?.addEventListener("click", () => {
+        if (
+          document.getElementById("claimPolicyNumber").value &&
+          document.getElementById("claimType").value &&
+          document.getElementById("claimIncidentDate").value
+        ) {
+          showClaimStep(1);
+        } else {
+          alert(getTranslatedText("alertFillStep1"));
+        }
+      });
+      document
+        .getElementById("prevStep2")
+        ?.addEventListener("click", () => showClaimStep(0));
+      document.getElementById("nextStep2")?.addEventListener("click", () => {
+        if (document.getElementById("claimDescription").value) {
+          document.getElementById("reviewPolicyNumber").textContent =
+            document.getElementById("claimPolicyNumber").value;
+          document.getElementById("reviewClaimType").textContent =
+            document.getElementById("claimType").selectedOptions[0].text; // Consider translating this if options are dynamic
+          document.getElementById("reviewIncidentDate").textContent =
+            document.getElementById("claimIncidentDate").value;
+          document.getElementById("reviewDescription").textContent =
+            document.getElementById("claimDescription").value;
+
+          const employeeNameInput =
+            document.getElementById("claimEmployeeName");
+          if (employeeNameInput && !employeeNameInput.closest(".hidden")) {
+            document.getElementById("reviewEmployeeName").textContent =
+              employeeNameInput.value || "N/A";
+          }
+
+          const files = document.getElementById("claimDocuments").files;
+          document.getElementById("reviewDocumentCount").textContent =
+            files.length;
+          showClaimStep(2);
+        } else {
+          alert(getTranslatedText("alertFillStep2"));
+        }
+      });
+      document
+        .getElementById("prevStep3")
+        ?.addEventListener("click", () => showClaimStep(1));
+
+      document
+        .getElementById("claimDocuments")
+        ?.addEventListener("change", function (e) {
+          const list = document.getElementById("uploadedFilesList");
+          list.innerHTML = "";
+          if (this.files.length > 0) {
+            for (let i = 0; i < this.files.length; i++) {
+              const listItem = document.createElement("p");
+              listItem.textContent = `- ${this.files[i].name} (${(
+                this.files[i].size / 1024
+              ).toFixed(1)} KB)`;
+              list.appendChild(listItem);
+            }
+          }
+        });
+
+      document
+        .getElementById("newClaimForm")
+        ?.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (!document.getElementById("confirmAccuracy").checked) {
+            alert(getTranslatedText("alertConfirmAccuracy"));
+            return;
+          }
+          alert(getTranslatedText("alertClaimSubmitted"));
+          newClaimModal.style.display = "none";
+          resetNewClaimForm();
+        });
+      document
+        .getElementById("saveClaimDraft")
+        ?.addEventListener("click", () => {
+          alert(getTranslatedText("alertDraftSaved"));
+        });
+
+      const claimDetailsModal = document.getElementById("claimDetailsModal");
+      const closeClaimDetailsModalBtn = document.getElementById(
+        "closeClaimDetailsModal"
+      );
+      const viewClaimDetailsBtns = document.querySelectorAll(
+        ".view-claim-details-btn"
+      );
+
+      viewClaimDetailsBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const claimId = e.target.dataset.claimId;
+          document.getElementById("detailsClaimId").textContent = claimId;
+          claimDetailsModal.style.display = "block";
+        });
+      });
+      closeClaimDetailsModalBtn?.addEventListener("click", () => {
+        claimDetailsModal.style.display = "none";
+      });
+
+      window.onclick = function (event) {
+        if (event.target == newClaimModal) {
+          newClaimModal.style.display = "none";
+        }
+        if (event.target == claimDetailsModal) {
+          claimDetailsModal.style.display = "none";
+        }
+      };
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial language load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_ClaimsPage_Lang") || "vi";
+        setLanguage(savedLang);
+      });
+    </script>
+  </body>
+</html>

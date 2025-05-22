@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-translate-key="pageTitle">Liên Hệ Hỗ Trợ - BảoHiểmPRO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f9fafb; /* Gray 50 */
+      }
+      .tab-button.active {
+        border-bottom-width: 3px;
+        border-color: #4f46e5; /* Indigo 600 */
+        color: #4f46e5;
+        font-weight: 600;
+      }
+      .tab-button-sme.active {
+        border-color: #059669; /* Emerald 600 for SME */
+        color: #059669;
+      }
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        padding: 1.5rem; /* p-6 */
+      }
+      .support-channel-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .support-channel-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background-color: #4f46e5;
+        color: white;
+      }
+      .btn-primary:hover {
+        background-color: #4338ca;
+      }
+      .btn-primary-sme {
+        background-color: #059669;
+        color: white;
+      }
+      .btn-primary-sme:hover {
+        background-color: #047857;
+      }
+      .btn-outline {
+        background-color: transparent;
+        border: 1px solid #4f46e5;
+        color: #4f46e5;
+      }
+      .btn-outline:hover {
+        background-color: #e0e7ff;
+      }
+      .btn-outline-sme {
+        background-color: transparent;
+        border: 1px solid #059669;
+        color: #059669;
+      }
+      .btn-outline-sme:hover {
+        background-color: #d1fae5;
+      }
+
+      .form-input,
+      .form-select,
+      .form-textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid #d1d5db;
+        margin-bottom: 1rem;
+      }
+      .form-input:focus,
+      .form-select:focus,
+      .form-textarea:focus {
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.25);
+        outline: none;
+      }
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #374151;
+      }
+      .status-online {
+        color: #10b981; /* Emerald 500 */
+      }
+      .status-offline {
+        color: #ef4444; /* Red 500 */
+      }
+
+      .language-switcher button.active-lang {
+        font-weight: bold;
+        background-color: #e5e7eb; /* Gray 200 */
+        color: #1f2937; /* Darker text */
+      }
+      .language-switcher button:not(.active-lang):hover {
+        background-color: #f3f4f6; /* Lighter gray for hover */
+      }
+    </style>
+  </head>
+
+  <body class="text-gray-800">
+    <header class="bg-white shadow-md sticky top-0 z-40">
+      <div
+        class="container mx-auto px-6 py-3 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-2xl font-bold text-indigo-600">
+          <img
+            src="https://placehold.co/150x50/4f46e5/ffffff?text=BảoHiểmPRO"
+            alt="Logo BảoHiểmPRO"
+            class="h-10"
+            data-translate-alt-key="altLogo"
+          />
+        </a>
+        <nav class="hidden md:flex space-x-4 items-center">
+          <a
+            href="index.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navHome"
+            >Trang Chủ</a
+          >
+          <a
+            href="knowledge-center-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navKnowledgeCenter"
+            >Trung Tâm Kiến Thức</a
+          >
+          <a
+            href="claims-management-page.html"
+            class="text-gray-600 hover:text-indigo-600"
+            data-translate-key="navClaimsManagement"
+            >Quản Lý Bồi Thường</a
+          >
+          <a
+            href="contact-support-page.html"
+            class="text-indigo-600 font-semibold"
+            data-translate-key="navContactSupport"
+            >Liên Hệ Hỗ Trợ</a
+          >
+        </nav>
+        <div class="language-switcher flex items-center space-x-2">
+          <button
+            data-lang="vi"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            VIE
+          </button>
+          <button
+            data-lang="en"
+            class="lang-switcher-btn px-3 py-1 text-sm rounded-md focus:outline-none"
+          >
+            ENG
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-8">
+      <section
+        class="text-center py-8 bg-gradient-to-r from-sky-500 to-cyan-500 text-white rounded-xl shadow-lg mb-10"
+      >
+        <h1
+          class="text-4xl md:text-5xl font-bold mb-3"
+          data-translate-key="mainTitle"
+        >
+          Chúng Tôi Có Thể Giúp Gì Cho Bạn?
+        </h1>
+        <p
+          class="text-lg md:text-xl mb-6 max-w-2xl mx-auto"
+          data-translate-key="mainSubtitle"
+        >
+          Kết nối với đội ngũ hỗ trợ của BảoHiểmPRO qua các kênh thuận tiện
+          nhất.
+        </p>
+      </section>
+
+      <div class="mb-8 border-b border-gray-300">
+        <nav class="flex flex-wrap -mb-px justify-center" aria-label="Tabs">
+          <button
+            data-tab-target="supportIndividual"
+            class="tab-button active py-3 px-6 text-center font-medium text-lg"
+          >
+            <i class="fas fa-user mr-2"></i
+            ><span data-translate-key="tabIndividualSupport"
+              >Hỗ Trợ Cá Nhân</span
+            >
+          </button>
+          <button
+            data-tab-target="supportBusiness"
+            class="tab-button tab-button-sme py-3 px-6 text-center font-medium text-lg"
+          >
+            <i class="fas fa-briefcase mr-2"></i
+            ><span data-translate-key="tabBusinessSupport"
+              >Hỗ Trợ Doanh Nghiệp</span
+            >
+          </button>
+        </nav>
+      </div>
+
+      <section id="supportIndividual" class="tab-content active">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          <div class="support-channel-card card text-center">
+            <i class="fas fa-comments fa-3x text-indigo-500 mb-4"></i>
+            <h3
+              class="text-xl font-semibold mb-2"
+              data-translate-key="channelLiveChat"
+            >
+              Live Chat
+            </h3>
+            <p
+              class="text-sm text-gray-600 mb-3"
+              data-translate-key="channelLiveChatDesc"
+            >
+              Trò chuyện trực tiếp với chuyên viên hỗ trợ.
+            </p>
+            <p class="text-xs text-gray-500 mb-3">
+              <span data-translate-key="textExpectedResponseTime"
+                >Thời gian phản hồi dự kiến:</span
+              >
+              ~2 <span data-translate-key="textMinutes">phút</span>
+            </p>
+            <button class="btn btn-primary w-full" id="liveChatIndividualBtn">
+              <span data-translate-key="btnStartChat">Bắt Đầu Chat</span>
+              <span
+                id="liveChatIndividualStatus"
+                class="ml-2 status-online"
+                data-translate-key="statusOnline"
+                >(Online)</span
+              >
+            </button>
+          </div>
+          <div class="support-channel-card card text-center">
+            <i class="fas fa-phone-alt fa-3x text-indigo-500 mb-4"></i>
+            <h3
+              class="text-xl font-semibold mb-2"
+              data-translate-key="channelPhoneCall"
+            >
+              Gọi Điện Thoại
+            </h3>
+            <p class="text-sm text-gray-600 mb-3">
+              <span data-translate-key="textIndividualHotline"
+                >Tổng đài hỗ trợ cá nhân:</span
+              >
+              <a
+                href="tel:18001111"
+                class="font-medium text-indigo-600 hover:underline"
+                >1800 1111</a
+              >
+            </p>
+            <p class="text-xs text-gray-500 mb-3">
+              <span data-translate-key="textWorkingHours">Giờ làm việc:</span>
+              8:00 - 20:00 (<span data-translate-key="textMonToSat"
+                >Thứ 2 - Thứ 7</span
+              >)
+            </p>
+            <button
+              class="btn btn-outline w-full"
+              id="scheduleCallbackIndividualBtn"
+              data-translate-key="btnRequestCallback"
+            >
+              Yêu Cầu Gọi Lại
+            </button>
+          </div>
+          <div class="support-channel-card card text-center">
+            <i class="fas fa-question-circle fa-3x text-indigo-500 mb-4"></i>
+            <h3
+              class="text-xl font-semibold mb-2"
+              data-translate-key="channelFAQ"
+            >
+              Câu Hỏi Thường Gặp
+            </h3>
+            <p
+              class="text-sm text-gray-600 mb-3"
+              data-translate-key="channelFAQDesc"
+            >
+              Tìm câu trả lời nhanh cho các vấn đề phổ biến.
+            </p>
+            <p class="text-xs text-gray-500 mb-3 invisible">Placeholder</p>
+            <a
+              href="knowledge-center-page.html#faq_individual"
+              class="btn btn-outline w-full"
+              data-translate-key="btnViewIndividualFAQ"
+              >Xem FAQ Cá Nhân</a
+            >
+          </div>
+        </div>
+
+        <div class="card">
+          <h2
+            class="text-2xl font-semibold text-gray-700 mb-6 text-center"
+            data-translate-key="titleSubmitSupportRequestIndividual"
+          >
+            Gửi Yêu Cầu Hỗ Trợ (Cá Nhân)
+          </h2>
+          <form id="individualSupportForm" class="max-w-lg mx-auto">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="individualName"
+                  class="form-label"
+                  data-translate-key="labelFullName"
+                  >Họ và Tên:</label
+                >
+                <input
+                  type="text"
+                  id="individualName"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="individualEmail"
+                  class="form-label"
+                  data-translate-key="labelEmail"
+                  >Email:</label
+                >
+                <input
+                  type="email"
+                  id="individualEmail"
+                  class="form-input"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                for="individualPhone"
+                class="form-label"
+                data-translate-key="labelPhoneNumber"
+                >Số Điện Thoại:</label
+              >
+              <input type="tel" id="individualPhone" class="form-input" />
+            </div>
+            <div>
+              <label
+                for="individualPolicyNumber"
+                class="form-label"
+                data-translate-key="labelPolicyNumberOptional"
+                >Số Hợp Đồng (Nếu có):</label
+              >
+              <input
+                type="text"
+                id="individualPolicyNumber"
+                class="form-input"
+                data-translate-placeholder-key="placeholderPolicyNumberExample"
+                placeholder="VD: BHNT00123"
+              />
+            </div>
+            <div>
+              <label
+                for="individualIssueCategory"
+                class="form-label"
+                data-translate-key="labelSupportTopic"
+                >Chủ Đề Hỗ Trợ:</label
+              >
+              <select id="individualIssueCategory" class="form-select" required>
+                <option value="" data-translate-key="optionSelectTopic">
+                  Chọn chủ đề
+                </option>
+                <option
+                  value="policy_inquiry"
+                  data-translate-key="optionTopicPolicy"
+                >
+                  Tư vấn hợp đồng
+                </option>
+                <option
+                  value="claims_assistance"
+                  data-translate-key="optionTopicClaims"
+                >
+                  Hỗ trợ bồi thường
+                </option>
+                <option
+                  value="payment_issue"
+                  data-translate-key="optionTopicPayment"
+                >
+                  Vấn đề thanh toán
+                </option>
+                <option
+                  value="technical_support"
+                  data-translate-key="optionTopicTechnical"
+                >
+                  Hỗ trợ kỹ thuật
+                </option>
+                <option value="other" data-translate-key="optionTopicOther">
+                  Khác
+                </option>
+              </select>
+            </div>
+            <div>
+              <label
+                for="individualMessage"
+                class="form-label"
+                data-translate-key="labelRequestContent"
+                >Nội Dung Yêu Cầu:</label
+              >
+              <textarea
+                id="individualMessage"
+                rows="5"
+                class="form-textarea"
+                required
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="individualFileUpload"
+                class="form-label"
+                data-translate-key="labelAttachDocumentOptional"
+                >Tài Liệu Đính Kèm (Nếu có):</label
+              >
+              <input type="file" id="individualFileUpload" class="form-input" />
+            </div>
+            <div class="text-center mt-6">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-translate-key="btnSendRequest"
+              >
+                Gửi Yêu Cầu
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="supportBusiness" class="tab-content">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          <div class="support-channel-card card text-center">
+            <i class="fas fa-headset fa-3x text-emerald-500 mb-4"></i>
+            <h3
+              class="text-xl font-semibold mb-2"
+              data-translate-key="channelChatSME"
+            >
+              Chat Với Chuyên Viên SME
+            </h3>
+            <p
+              class="text-sm text-gray-600 mb-3"
+              data-translate-key="channelChatSMEDesc"
+            >
+              Hỗ trợ chuyên biệt cho khách hàng doanh nghiệp.
+            </p>
+            <p class="text-xs text-gray-500 mb-3">
+              <span data-translate-key="textExpectedResponseTime"
+                >Thời gian phản hồi dự kiến:</span
+              >
+              ~5
+              <span data-translate-key="textMinutesPriority"
+                >phút (Ưu tiên)</span
+              >
+            </p>
+            <button class="btn btn-primary-sme w-full" id="liveChatSMEBtn">
+              <span data-translate-key="btnStartChat">Bắt Đầu Chat</span>
+              <span
+                id="liveChatSMEStatus"
+                class="ml-2 status-online"
+                data-translate-key="statusOnline"
+                >(Online)</span
+              >
+            </button>
+          </div>
+          <div class="support-channel-card card text-center">
+            <i class="fas fa-building fa-3x text-emerald-500 mb-4"></i>
+            <h3
+              class="text-xl font-semibold mb-2"
+              data-translate-key="channelBusinessHotline"
+            >
+              Tổng Đài Doanh Nghiệp
+            </h3>
+            <p class="text-sm text-gray-600 mb-3">
+              <span data-translate-key="textBusinessHotlineLabel"
+                >Hotline hỗ trợ doanh nghiệp:</span
+              >
+              <a
+                href="tel:18002222"
+                class="font-medium text-emerald-600 hover:underline"
+                >1800 2222</a
+              >
+            </p>
+            <p class="text-xs text-gray-500 mb-3">
+              <span data-translate-key="textWorkingHours">Giờ làm việc:</span>
+              8:00 - 18:00 (<span data-translate-key="textMonToFri"
+                >Thứ 2 - Thứ 6</span
+              >)
+            </p>
+            <a
+              href="business-portal-page.html#smeSupport"
+              class="btn btn-outline-sme w-full"
+              data-translate-key="btnGoToSMEPortal"
+              >Cổng Thông Tin SME</a
+            >
+          </div>
+          <div class="support-channel-card card text-center">
+            <i class="fas fa-book-reader fa-3x text-emerald-500 mb-4"></i>
+            <h3
+              class="text-xl font-semibold mb-2"
+              data-translate-key="channelBusinessDocsFAQ"
+            >
+              Tài Liệu & FAQ Doanh Nghiệp
+            </h3>
+            <p
+              class="text-sm text-gray-600 mb-3"
+              data-translate-key="channelBusinessDocsFAQDesc"
+            >
+              Tìm kiếm hướng dẫn, biểu mẫu và câu trả lời cho SME.
+            </p>
+            <p class="text-xs text-gray-500 mb-3 invisible">Placeholder</p>
+            <a
+              href="knowledge-center-page.html#faq_sme"
+              class="btn btn-outline-sme w-full"
+              data-translate-key="btnAccessSMEDocs"
+              >Truy Cập Tài Liệu SME</a
+            >
+          </div>
+        </div>
+        <div class="card">
+          <h2
+            class="text-2xl font-semibold text-gray-700 mb-6 text-center"
+            data-translate-key="titleSubmitSupportRequestBusiness"
+          >
+            Gửi Yêu Cầu Hỗ Trợ (Doanh Nghiệp)
+          </h2>
+          <form id="businessSupportForm" class="max-w-lg mx-auto">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="businessContactName"
+                  class="form-label"
+                  data-translate-key="labelContactPersonName"
+                  >Tên Người Liên Hệ:</label
+                >
+                <input
+                  type="text"
+                  id="businessContactName"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="businessCompanyName"
+                  class="form-label"
+                  data-translate-key="labelCompanyName"
+                  >Tên Công Ty:</label
+                >
+                <input
+                  type="text"
+                  id="businessCompanyName"
+                  class="form-input"
+                  required
+                />
+              </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  for="businessEmail"
+                  class="form-label"
+                  data-translate-key="labelCompanyEmail"
+                  >Email Công Ty:</label
+                >
+                <input
+                  type="email"
+                  id="businessEmail"
+                  class="form-input"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  for="businessPhone"
+                  class="form-label"
+                  data-translate-key="labelCompanyPhone"
+                  >Số Điện Thoại Công Ty:</label
+                >
+                <input type="tel" id="businessPhone" class="form-input" />
+              </div>
+            </div>
+            <div>
+              <label
+                for="businessPolicyNumber"
+                class="form-label"
+                data-translate-key="labelPolicyNumberOptional"
+                >Số Hợp Đồng (Nếu có):</label
+              >
+              <input
+                type="text"
+                id="businessPolicyNumber"
+                class="form-input"
+                data-translate-placeholder-key="placeholderPolicyNumberSME"
+                placeholder="VD: BHSKN-001"
+              />
+            </div>
+            <div>
+              <label
+                for="businessIssueCategory"
+                class="form-label"
+                data-translate-key="labelSupportTopicBusiness"
+                >Chủ Đề Hỗ Trợ Doanh Nghiệp:</label
+              >
+              <select id="businessIssueCategory" class="form-select" required>
+                <option value="" data-translate-key="optionSelectTopic">
+                  Chọn chủ đề
+                </option>
+                <option
+                  value="group_policy_management"
+                  data-translate-key="optionTopicGroupPolicy"
+                >
+                  Quản lý hợp đồng nhóm
+                </option>
+                <option
+                  value="employee_coverage"
+                  data-translate-key="optionTopicEmployeeCoverage"
+                >
+                  Bảo hiểm nhân viên
+                </option>
+                <option
+                  value="billing_invoice_sme"
+                  data-translate-key="optionTopicBillingSME"
+                >
+                  Thanh toán & Hóa đơn SME
+                </option>
+                <option
+                  value="bulk_claims_sme"
+                  data-translate-key="optionTopicBulkClaims"
+                >
+                  Bồi thường hàng loạt
+                </option>
+                <option
+                  value="portal_access_sme"
+                  data-translate-key="optionTopicPortalAccess"
+                >
+                  Truy cập Cổng Doanh Nghiệp
+                </option>
+                <option
+                  value="other_sme"
+                  data-translate-key="optionTopicOtherSME"
+                >
+                  Khác
+                </option>
+              </select>
+            </div>
+            <div>
+              <label
+                for="businessMessage"
+                class="form-label"
+                data-translate-key="labelDetailedRequestContent"
+                >Nội Dung Yêu Cầu Chi Tiết:</label
+              >
+              <textarea
+                id="businessMessage"
+                rows="5"
+                class="form-textarea"
+                required
+              ></textarea>
+            </div>
+            <div>
+              <label
+                for="businessFileUpload"
+                class="form-label"
+                data-translate-key="labelAttachDocumentMultiple"
+                >Tài Liệu Đính Kèm (Hỗ trợ nhiều tệp):</label
+              >
+              <input
+                type="file"
+                id="businessFileUpload"
+                class="form-input"
+                multiple
+              />
+            </div>
+            <div class="text-center mt-6">
+              <button
+                type="submit"
+                class="btn btn-primary-sme"
+                data-translate-key="btnSendBusinessRequest"
+              >
+                Gửi Yêu Cầu Doanh Nghiệp
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="mt-12 card">
+        <h2
+          class="text-2xl font-semibold text-gray-700 mb-6 text-center"
+          data-translate-key="titleTrackSupportRequest"
+        >
+          Theo Dõi Yêu Cầu Hỗ Trợ Đã Gửi
+        </h2>
+        <div class="max-w-md mx-auto">
+          <label
+            for="ticketNumberInput"
+            class="form-label"
+            data-translate-key="labelEnterTicketId"
+            >Nhập Mã Số Yêu Cầu (Ticket ID):</label
+          >
+          <div class="flex space-x-2">
+            <input
+              type="text"
+              id="ticketNumberInput"
+              class="form-input flex-grow !mb-0"
+              data-translate-placeholder-key="placeholderTicketIdExample"
+              placeholder="VD: TICKET123XYZ"
+            />
+            <button
+              id="trackTicketBtn"
+              class="btn btn-primary"
+              data-translate-key="btnCheckStatus"
+            >
+              Kiểm Tra
+            </button>
+          </div>
+          <div
+            id="ticketStatusResult"
+            class="mt-4 p-4 bg-gray-100 rounded-md text-sm hidden"
+          >
+            <p>
+              <strong data-translate-key="textTicketIdResult"
+                >Mã Yêu Cầu:</strong
+              >
+              <span id="resultTicketId"></span>
+            </p>
+            <p>
+              <strong data-translate-key="textStatusResult">Trạng Thái:</strong>
+              <span id="resultTicketStatus" class="font-medium"></span>
+            </p>
+            <p>
+              <strong data-translate-key="textLastUpdateResult"
+                >Cập Nhật Cuối:</strong
+              >
+              <span id="resultTicketLastUpdate"></span>
+            </p>
+            <p id="resultTicketMessage" class="mt-2"></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-12 mt-16">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm" data-translate-key="footerCopyright">
+          Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        vi: {
+          pageTitle: "Liên Hệ Hỗ Trợ - BảoHiểmPRO",
+          altLogo: "Logo BảoHiểmPRO",
+          navHome: "Trang Chủ",
+          navKnowledgeCenter: "Trung Tâm Kiến Thức",
+          navClaimsManagement: "Quản Lý Bồi Thường",
+          navContactSupport: "Liên Hệ Hỗ Trợ",
+          mainTitle: "Chúng Tôi Có Thể Giúp Gì Cho Bạn?",
+          mainSubtitle:
+            "Kết nối với đội ngũ hỗ trợ của BảoHiểmPRO qua các kênh thuận tiện nhất.",
+          tabIndividualSupport: "Hỗ Trợ Cá Nhân",
+          tabBusinessSupport: "Hỗ Trợ Doanh Nghiệp",
+          channelLiveChat: "Live Chat",
+          channelLiveChatDesc: "Trò chuyện trực tiếp với chuyên viên hỗ trợ.",
+          textExpectedResponseTime: "Thời gian phản hồi dự kiến:",
+          textMinutes: "phút",
+          btnStartChat: "Bắt Đầu Chat",
+          statusOnline: "(Online)",
+          statusOffline: "(Offline)",
+          channelPhoneCall: "Gọi Điện Thoại",
+          textIndividualHotline: "Tổng đài hỗ trợ cá nhân:",
+          textWorkingHours: "Giờ làm việc:",
+          textMonToSat: "Thứ 2 - Thứ 7",
+          btnRequestCallback: "Yêu Cầu Gọi Lại",
+          channelFAQ: "Câu Hỏi Thường Gặp",
+          channelFAQDesc: "Tìm câu trả lời nhanh cho các vấn đề phổ biến.",
+          btnViewIndividualFAQ: "Xem FAQ Cá Nhân",
+          titleSubmitSupportRequestIndividual: "Gửi Yêu Cầu Hỗ Trợ (Cá Nhân)",
+          labelFullName: "Họ và Tên:",
+          labelEmail: "Email:",
+          labelPhoneNumber: "Số Điện Thoại:",
+          labelPolicyNumberOptional: "Số Hợp Đồng (Nếu có):",
+          placeholderPolicyNumberExample: "VD: BHNT00123",
+          labelSupportTopic: "Chủ Đề Hỗ Trợ:",
+          optionSelectTopic: "Chọn chủ đề",
+          optionTopicPolicy: "Tư vấn hợp đồng",
+          optionTopicClaims: "Hỗ trợ bồi thường",
+          optionTopicPayment: "Vấn đề thanh toán",
+          optionTopicTechnical: "Hỗ trợ kỹ thuật",
+          optionTopicOther: "Khác",
+          labelRequestContent: "Nội Dung Yêu Cầu:",
+          labelAttachDocumentOptional: "Tài Liệu Đính Kèm (Nếu có):",
+          btnSendRequest: "Gửi Yêu Cầu",
+          channelChatSME: "Chat Với Chuyên Viên SME",
+          channelChatSMEDesc: "Hỗ trợ chuyên biệt cho khách hàng doanh nghiệp.",
+          textMinutesPriority: "phút (Ưu tiên)",
+          channelBusinessHotline: "Tổng Đài Doanh Nghiệp",
+          textBusinessHotlineLabel: "Hotline hỗ trợ doanh nghiệp:",
+          textMonToFri: "Thứ 2 - Thứ 6",
+          btnGoToSMEPortal: "Cổng Thông Tin SME",
+          channelBusinessDocsFAQ: "Tài Liệu & FAQ Doanh Nghiệp",
+          channelBusinessDocsFAQDesc:
+            "Tìm kiếm hướng dẫn, biểu mẫu và câu trả lời cho SME.",
+          btnAccessSMEDocs: "Truy Cập Tài Liệu SME",
+          titleSubmitSupportRequestBusiness:
+            "Gửi Yêu Cầu Hỗ Trợ (Doanh Nghiệp)",
+          labelContactPersonName: "Tên Người Liên Hệ:",
+          labelCompanyName: "Tên Công Ty:",
+          labelCompanyEmail: "Email Công Ty:",
+          labelCompanyPhone: "Số Điện Thoại Công Ty:",
+          placeholderPolicyNumberSME: "VD: BHSKN-001",
+          labelSupportTopicBusiness: "Chủ Đề Hỗ Trợ Doanh Nghiệp:",
+          optionTopicGroupPolicy: "Quản lý hợp đồng nhóm",
+          optionTopicEmployeeCoverage: "Bảo hiểm nhân viên",
+          optionTopicBillingSME: "Thanh toán & Hóa đơn SME",
+          optionTopicBulkClaims: "Bồi thường hàng loạt",
+          optionTopicPortalAccess: "Truy cập Cổng Doanh Nghiệp",
+          optionTopicOtherSME: "Khác",
+          labelDetailedRequestContent: "Nội Dung Yêu Cầu Chi Tiết:",
+          labelAttachDocumentMultiple: "Tài Liệu Đính Kèm (Hỗ trợ nhiều tệp):",
+          btnSendBusinessRequest: "Gửi Yêu Cầu Doanh Nghiệp",
+          titleTrackSupportRequest: "Theo Dõi Yêu Cầu Hỗ Trợ Đã Gửi",
+          labelEnterTicketId: "Nhập Mã Số Yêu Cầu (Ticket ID):",
+          placeholderTicketIdExample: "VD: TICKET123XYZ",
+          btnCheckStatus: "Kiểm Tra",
+          textTicketIdResult: "Mã Yêu Cầu:",
+          textStatusResult: "Trạng Thái:",
+          textLastUpdateResult: "Cập Nhật Cuối:",
+          footerCopyright:
+            "Bản quyền &copy; 2024 Công Ty Bảo Hiểm BảoHiểmPRO. Bảo lưu mọi quyền.",
+          // JS Alerts
+          alertRequestSent:
+            "Yêu cầu của bạn đã được gửi với mã số: {ticketId}. Chúng tôi sẽ phản hồi sớm nhất có thể.",
+          alertBusinessRequestSent:
+            "Yêu cầu của doanh nghiệp đã được gửi với mã số: {ticketId}. Đội ngũ hỗ trợ SME sẽ liên hệ bạn.",
+          alertScheduleCallback:
+            "Chuyển đến trang đặt lịch hẹn gọi lại (Tính năng đang phát triển).",
+          alertEnterTicketNumber: "Vui lòng nhập mã số yêu cầu.",
+          alertOpenLiveChatIndividual:
+            "Mở cửa sổ Live Chat cho khách hàng cá nhân (Tính năng đang phát triển).",
+          alertLiveChatIndividualOffline:
+            "Live Chat hiện đang Offline. Vui lòng thử lại sau hoặc chọn kênh hỗ trợ khác.",
+          alertOpenLiveChatSME:
+            "Mở cửa sổ Live Chat cho khách hàng doanh nghiệp (Tính năng đang phát triển).",
+          alertLiveChatSMEOffline:
+            "Live Chat SME hiện đang Offline. Vui lòng thử lại sau hoặc chọn kênh hỗ trợ khác.",
+          // Ticket statuses
+          ticketStatusPending: "Đang chờ xử lý",
+          ticketStatusReviewing: "Chuyên viên đang xem xét",
+          ticketStatusResolved: "Đã giải quyết",
+          ticketStatusClosed: "Đã đóng",
+          ticketStatusNeedInfo: "Cần thêm thông tin",
+          ticketMessageNeedInfo:
+            "Vui lòng kiểm tra email hoặc mục tin nhắn trong tài khoản của bạn để cung cấp thông tin bổ sung.",
+          ticketMessageResolved:
+            "Yêu cầu của bạn đã được giải quyết. Vui lòng kiểm tra email để biết thêm chi tiết.",
+        },
+        en: {
+          pageTitle: "Contact Support - BảoHiểmPRO",
+          altLogo: "BảoHiểmPRO Logo",
+          navHome: "Home",
+          navKnowledgeCenter: "Knowledge Center",
+          navClaimsManagement: "Claims Management",
+          navContactSupport: "Contact Support",
+          mainTitle: "How Can We Help You?",
+          mainSubtitle:
+            "Connect with BảoHiểmPRO's support team through the most convenient channels.",
+          tabIndividualSupport: "Individual Support",
+          tabBusinessSupport: "Business Support",
+          channelLiveChat: "Live Chat",
+          channelLiveChatDesc: "Chat directly with a support specialist.",
+          textExpectedResponseTime: "Expected response time:",
+          textMinutes: "minutes",
+          btnStartChat: "Start Chat",
+          statusOnline: "(Online)",
+          statusOffline: "(Offline)",
+          channelPhoneCall: "Phone Call",
+          textIndividualHotline: "Individual support hotline:",
+          textWorkingHours: "Working hours:",
+          textMonToSat: "Mon - Sat",
+          btnRequestCallback: "Request Callback",
+          channelFAQ: "Frequently Asked Questions",
+          channelFAQDesc: "Find quick answers to common issues.",
+          btnViewIndividualFAQ: "View Individual FAQ",
+          titleSubmitSupportRequestIndividual:
+            "Submit Support Request (Individual)",
+          labelFullName: "Full Name:",
+          labelEmail: "Email:",
+          labelPhoneNumber: "Phone Number:",
+          labelPolicyNumberOptional: "Policy Number (Optional):",
+          placeholderPolicyNumberExample: "E.g.: BHNT00123",
+          labelSupportTopic: "Support Topic:",
+          optionSelectTopic: "Select topic",
+          optionTopicPolicy: "Policy Inquiry",
+          optionTopicClaims: "Claims Assistance",
+          optionTopicPayment: "Payment Issue",
+          optionTopicTechnical: "Technical Support",
+          optionTopicOther: "Other",
+          labelRequestContent: "Request Content:",
+          labelAttachDocumentOptional: "Attach Document (Optional):",
+          btnSendRequest: "Send Request",
+          channelChatSME: "Chat With SME Specialist",
+          channelChatSMEDesc: "Dedicated support for business customers.",
+          textMinutesPriority: "minutes (Priority)",
+          channelBusinessHotline: "Business Hotline",
+          textBusinessHotlineLabel: "Business support hotline:",
+          textMonToFri: "Mon - Fri",
+          btnGoToSMEPortal: "SME Portal",
+          channelBusinessDocsFAQ: "Business Documents & FAQ",
+          channelBusinessDocsFAQDesc:
+            "Find guides, forms, and answers for SMEs.",
+          btnAccessSMEDocs: "Access SME Documents",
+          titleSubmitSupportRequestBusiness:
+            "Submit Support Request (Business)",
+          labelContactPersonName: "Contact Person Name:",
+          labelCompanyName: "Company Name:",
+          labelCompanyEmail: "Company Email:",
+          labelCompanyPhone: "Company Phone:",
+          placeholderPolicyNumberSME: "E.g.: BHSKN-001",
+          labelSupportTopicBusiness: "Business Support Topic:",
+          optionTopicGroupPolicy: "Group Policy Management",
+          optionTopicEmployeeCoverage: "Employee Coverage",
+          optionTopicBillingSME: "SME Billing & Invoice",
+          optionTopicBulkClaims: "Bulk Claims",
+          optionTopicPortalAccess: "Business Portal Access",
+          optionTopicOtherSME: "Other (SME)",
+          labelDetailedRequestContent: "Detailed Request Content:",
+          labelAttachDocumentMultiple:
+            "Attach Documents (Multiple files supported):",
+          btnSendBusinessRequest: "Send Business Request",
+          titleTrackSupportRequest: "Track Submitted Support Requests",
+          labelEnterTicketId: "Enter Ticket ID:",
+          placeholderTicketIdExample: "E.g.: TICKET123XYZ",
+          btnCheckStatus: "Check Status",
+          textTicketIdResult: "Ticket ID:",
+          textStatusResult: "Status:",
+          textLastUpdateResult: "Last Update:",
+          footerCopyright:
+            "Copyright &copy; 2024 BảoHiểmPRO Insurance Company. All rights reserved.",
+          // JS Alerts
+          alertRequestSent:
+            "Your request has been sent with ticket ID: {ticketId}. We will respond as soon as possible.",
+          alertBusinessRequestSent:
+            "The business request has been sent with ticket ID: {ticketId}. The SME support team will contact you.",
+          alertScheduleCallback:
+            "Redirecting to callback scheduling page (Feature in development).",
+          alertEnterTicketNumber: "Please enter the ticket ID.",
+          alertOpenLiveChatIndividual:
+            "Opening Live Chat for individual customers (Feature in development).",
+          alertLiveChatIndividualOffline:
+            "Live Chat is currently Offline. Please try again later or choose another support channel.",
+          alertOpenLiveChatSME:
+            "Opening Live Chat for business customers (Feature in development).",
+          alertLiveChatSMEOffline:
+            "SME Live Chat is currently Offline. Please try again later or choose another support channel.",
+          // Ticket statuses
+          ticketStatusPending: "Pending",
+          ticketStatusReviewing: "Under Review",
+          ticketStatusResolved: "Resolved",
+          ticketStatusClosed: "Closed",
+          ticketStatusNeedInfo: "Need More Information",
+          ticketMessageNeedInfo:
+            "Please check your email or account messages to provide additional information.",
+          ticketMessageResolved:
+            "Your request has been resolved. Please check your email for details.",
+        },
+      };
+      let currentLang = "vi";
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("BaoHiemPRO_ContactSupport_Lang", lang);
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.dataset.translateKey;
+          if (translations[lang] && translations[lang][key]) {
+            const translatedText = translations[lang][key];
+            if (
+              el.tagName === "INPUT" &&
+              (el.type === "submit" || el.type === "button")
+            ) {
+              el.value = translatedText;
+            } else if (
+              (el.tagName === "SPAN" ||
+                el.tagName === "P" ||
+                el.tagName === "BUTTON" ||
+                el.tagName === "A" ||
+                el.tagName === "H1" ||
+                el.tagName === "H2" ||
+                el.tagName === "H3" ||
+                el.tagName === "LABEL" ||
+                el.tagName === "OPTION" ||
+                el.tagName === "TITLE") &&
+              (translatedText.includes("&") ||
+                translatedText.includes("<i class"))
+            ) {
+              if (el.innerHTML.includes("<i")) {
+                const iconHTML = el.querySelector("i")?.outerHTML || "";
+                el.innerHTML =
+                  iconHTML +
+                  translatedText.replace(/<i class="[^"]+"><\/i>/, "").trim();
+              } else {
+                el.innerHTML = translatedText;
+              }
+            } else {
+              el.textContent = translatedText;
+            }
+          }
+        });
+        document
+          .querySelectorAll("[data-translate-placeholder-key]")
+          .forEach((el) => {
+            const key = el.dataset.translatePlaceholderKey;
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+        document.querySelectorAll("[data-translate-alt-key]").forEach((el) => {
+          const key = el.dataset.translateAltKey;
+          if (translations[lang] && translations[lang][key]) {
+            el.alt = translations[lang][key];
+          }
+        });
+
+        // Update dynamic chat status text
+        simulateChatStatus("liveChatIndividualStatus");
+        simulateChatStatus("liveChatSMEStatus");
+
+        document.querySelectorAll(".lang-switcher-btn").forEach((btn) => {
+          btn.classList.toggle("active-lang", btn.dataset.lang === lang);
+        });
+      }
+
+      function getTranslatedText(key, langToUse = currentLang) {
+        return translations[langToUse] && translations[langToUse][key]
+          ? translations[langToUse][key]
+          : key;
+      }
+
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          const targetId = button.dataset.tabTarget;
+          tabContents.forEach((content) => {
+            content.classList.toggle("active", content.id === targetId);
+          });
+        });
+      });
+
+      function simulateChatStatus(statusElementId) {
+        const statusEl = document.getElementById(statusElementId);
+        if (statusEl) {
+          const isOnline = Math.random() > 0.3;
+          if (isOnline) {
+            statusEl.textContent = getTranslatedText("statusOnline");
+            statusEl.classList.remove("status-offline");
+            statusEl.classList.add("status-online");
+          } else {
+            statusEl.textContent = getTranslatedText("statusOffline");
+            statusEl.classList.remove("status-online");
+            statusEl.classList.add("status-offline");
+          }
+        }
+      }
+
+      document
+        .getElementById("individualSupportForm")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const ticketId =
+            "IND" + Math.random().toString(36).substr(2, 7).toUpperCase();
+          alert(
+            getTranslatedText("alertRequestSent").replace(
+              "{ticketId}",
+              ticketId
+            )
+          );
+          this.reset();
+        });
+
+      document
+        .getElementById("businessSupportForm")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const ticketId =
+            "SME" + Math.random().toString(36).substr(2, 7).toUpperCase();
+          alert(
+            getTranslatedText("alertBusinessRequestSent").replace(
+              "{ticketId}",
+              ticketId
+            )
+          );
+          this.reset();
+        });
+
+      document
+        .getElementById("scheduleCallbackIndividualBtn")
+        ?.addEventListener("click", () => {
+          alert(getTranslatedText("alertScheduleCallback"));
+        });
+
+      const trackTicketBtn = document.getElementById("trackTicketBtn");
+      const ticketStatusResultDiv =
+        document.getElementById("ticketStatusResult");
+      const resultTicketId = document.getElementById("resultTicketId");
+      const resultTicketStatus = document.getElementById("resultTicketStatus");
+      const resultTicketLastUpdate = document.getElementById(
+        "resultTicketLastUpdate"
+      );
+      const resultTicketMessage = document.getElementById(
+        "resultTicketMessage"
+      );
+
+      trackTicketBtn?.addEventListener("click", () => {
+        const ticketNumber = document
+          .getElementById("ticketNumberInput")
+          .value.trim();
+        if (!ticketNumber) {
+          alert(getTranslatedText("alertEnterTicketNumber"));
+          return;
+        }
+
+        resultTicketId.textContent = ticketNumber;
+        const statuses = [
+          "ticketStatusPending",
+          "ticketStatusReviewing",
+          "ticketStatusResolved",
+          "ticketStatusClosed",
+          "ticketStatusNeedInfo",
+        ];
+        const randomStatusKey =
+          statuses[Math.floor(Math.random() * statuses.length)];
+        const randomStatusText = getTranslatedText(randomStatusKey);
+
+        resultTicketStatus.textContent = randomStatusText;
+        resultTicketStatus.className = "font-medium";
+        if (randomStatusKey === "ticketStatusPending")
+          resultTicketStatus.classList.add("text-amber-600");
+        else if (randomStatusKey === "ticketStatusReviewing")
+          resultTicketStatus.classList.add("text-blue-600");
+        else if (
+          randomStatusKey === "ticketStatusResolved" ||
+          randomStatusKey === "ticketStatusClosed"
+        )
+          resultTicketStatus.classList.add("text-green-600");
+        else resultTicketStatus.classList.add("text-red-600");
+
+        const randomDate = new Date(
+          Date.now() - Math.floor(Math.random() * 1000000000)
+        );
+        resultTicketLastUpdate.textContent =
+          randomDate.toLocaleDateString(
+            currentLang === "vi" ? "vi-VN" : "en-US"
+          ) +
+          " " +
+          randomDate.toLocaleTimeString(
+            currentLang === "vi" ? "vi-VN" : "en-US"
+          );
+
+        if (randomStatusKey === "ticketStatusNeedInfo") {
+          resultTicketMessage.textContent = getTranslatedText(
+            "ticketMessageNeedInfo"
+          );
+        } else if (randomStatusKey === "ticketStatusResolved") {
+          resultTicketMessage.textContent = getTranslatedText(
+            "ticketMessageResolved"
+          );
+        } else {
+          resultTicketMessage.textContent = "";
+        }
+
+        ticketStatusResultDiv.classList.remove("hidden");
+      });
+
+      document
+        .getElementById("liveChatIndividualBtn")
+        ?.addEventListener("click", () => {
+          if (
+            document
+              .getElementById("liveChatIndividualStatus")
+              .textContent.includes(getTranslatedText("statusOnline"))
+          ) {
+            alert(getTranslatedText("alertOpenLiveChatIndividual"));
+          } else {
+            alert(getTranslatedText("alertLiveChatIndividualOffline"));
+          }
+        });
+      document
+        .getElementById("liveChatSMEBtn")
+        ?.addEventListener("click", () => {
+          if (
+            document
+              .getElementById("liveChatSMEStatus")
+              .textContent.includes(getTranslatedText("statusOnline"))
+          ) {
+            alert(getTranslatedText("alertOpenLiveChatSME"));
+          } else {
+            alert(getTranslatedText("alertLiveChatSMEOffline"));
+          }
+        });
+
+      // Language switcher functionality
+      document.querySelectorAll(".lang-switcher-btn").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          setLanguage(e.target.dataset.lang);
+        });
+      });
+
+      // Initial language load
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedLang =
+          localStorage.getItem("BaoHiemPRO_ContactSupport_Lang") || "vi";
+        setLanguage(savedLang);
+      });
+    </script>
+  </body>
+</html>
