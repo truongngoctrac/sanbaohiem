@@ -1,0 +1,47 @@
+body {
+    font-family: "Inter", sans-serif;
+  }
+  
+  .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("https://placehold.co/1920x1080/667eea/3c366b?text=Ảnh+Nền+Bảo+Hiểm")
+        no-repeat center center;
+    background-size: cover;
+  }
+  
+  .cta-button {
+    transition: all 0.3s ease;
+    cursor: pointer; /* Thêm lại thuộc tính cursor: pointer; */
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  .testimonial-card,
+  .case-study-card {
+    background-color: #f9fafb; /* Light gray background */
+  }
+  .tab-button.active {
+    border-bottom-width: 2px;
+    border-color: #4f46e5; /* Indigo */
+    color: #4f46e5;
+  }
+  .language-switcher button.active-lang {
+    font-weight: bold;
+    background-color: #e5e7eb; /* Gray 200 for active language */
+    color: #1f2937; /* Darker text for active language */
+  }
+  .language-switcher button:not(.active-lang):hover {
+    background-color: #f3f4f6; /* Lighter gray for hover on non-active */
+  }
+  
