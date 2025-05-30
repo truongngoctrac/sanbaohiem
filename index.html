@@ -1254,6 +1254,17 @@
         const savedLang =
           localStorage.getItem("BaoHiemPRO_Homepage_Lang") || "vi";
         setLanguage(savedLang);
+
+        // Find the button with the text 'Yêu Cầu Báo Giá' and add an event listener
+        const quoteButton = Array.from(
+          document.querySelectorAll(".cta-button")
+        ).find((button) => button.textContent.trim() === "Yêu Cầu Báo Giá");
+
+        if (quoteButton) {
+          quoteButton.addEventListener("click", () => {
+            window.location.href = "contact-support-page.html";
+          });
+        }
       });
     </script>
   </body>
